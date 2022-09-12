@@ -32,6 +32,31 @@ li {
   }
 }
 
+.main-4 {
+  background-color: #00eadc;
+  .btns {
+    button {
+      border: none;
+      padding: 6px 18px;
+      background-color: #454545;
+      font-weight: 600;
+      &.active {
+        background-color: #fff;
+        color: #454545;
+      }
+    }
+  }
+  .contents {
+    width: 70%;
+    margin: 0 auto;
+    article {
+      display: none;
+      .row {
+        height: 500px;
+      }
+    }
+  }
+}
 .main-5 {
   background: url("../images/main_5.png") no-repeat center;
   li {

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import TopBanner from "@/components/TopBanner.vue";
+import TopBanner from "@/components/Banner/TopBanner.vue";
 export default {
   name: "Header",
   components: { TopBanner },

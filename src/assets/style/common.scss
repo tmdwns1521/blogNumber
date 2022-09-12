@@ -32,6 +32,32 @@ li {
   }
 }
 
+.main-3 {
+  .row {
+    align-items: center;
+    p {
+      font-size: 25px;
+      font-weight: 600;
+      margin-bottom: 24px;
+    }
+    .bg-img {
+      height: 400px;
+      background-repeat: no-repeat;
+      &.img1 {
+        background-image: url("../images/main_3_1.png");
+      }
+      &.img2 {
+        background-image: url("../images/main_3_2.png");
+      }
+      &.img3 {
+        background-image: url("../images/main_3_3.png");
+      }
+      &.img4 {
+        background-image: url("../images/main_3_4.png");
+      }
+    }
+  }
+}
 .main-4 {
   background-color: #00eadc;
   .btns {

@@ -3,7 +3,56 @@
     <main>
       <article>1</article>
       <article>2</article>
-      <article>3</article>
+      <!-- main 3 -->
+      <article class="main-3">
+        <b-container class="py-5">
+          <div class="m-auto text-center">
+            <b-row>
+              <b-col cols="4">
+                <p>
+                  마케팅 경험이 전무하다면 <br />
+                  디지털 마케팅 자동화 솔루션 <br />더 쉽게 광고를 셋팅 합니다.
+                </p>
+                <span
+                  >고객님의 눈높이에 맞춘 1:1 설계, <br />꼭 필요한 요소만 알기
+                  쉽게 제공합니다.</span
+                >
+              </b-col>
+              <b-col class="bg-secondary bg-img img1"></b-col>
+            </b-row>
+            <b-row>
+              <b-col class="bg-secondary bg-img img2"></b-col>
+              <b-col>
+                <p>
+                  어떤 브랜드/제품/업장이라도 <br />
+                  항상 최고의 효율을 낼 수 있는 <br />
+                  맞춤 솔루션.
+                </p>
+                <span>
+                  마케팅 전문 담당(AE)가 원팀이 되어 <br />
+                  24/7 사업의 매출 성장을 도와드립니다.
+                </span>
+              </b-col>
+              <b-col class="bg-secondary bg-img img3"></b-col>
+            </b-row>
+            <b-row>
+              <b-col class="bg-secondary bg-img img4"></b-col>
+              <b-col cols="4">
+                <p>
+                  브랜드의 성장 가능성을 열어드리고, <br />
+                  매출 상승의 가속화를 <br />
+                  직접 경험하세요.
+                </p>
+                <span>
+                  직원관리도 힘드신데 대표님은 일만 하세요. <br />
+                  진짜 광고는 오늘의 픽이 책임지겠습니다.
+                </span>
+              </b-col>
+            </b-row>
+          </div>
+        </b-container>
+      </article>
+      <!-- main 4 -->
       <article class="main-4">
         <b-container class="py-5">
           <p class="text-center text-white fw-600 text-30 mb-4">
@@ -85,6 +134,7 @@
           </div>
         </b-container>
       </article>
+      <!-- main 5 -->
       <article class="main-5">
         <b-container class="py-5">
           <p class="text-center text-white text-30 mb-4">

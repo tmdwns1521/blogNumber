@@ -149,6 +149,7 @@
           head-variant="dark"
           bordered
           responsive
+          hover
           :sticky-header="true"
           :items="items"
           :fields="fields"
@@ -240,7 +241,7 @@ export default {
           label: "상호명",
           stickyColumn: true,
           thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          tdClass: "text-nowrap table-primary",
         },
         {
           key: "owner",

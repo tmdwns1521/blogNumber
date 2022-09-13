@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header :topBanner="false" />
-    <b-container class="border-start border-end">
+    <div class="w-90 m-auto">
       <b-row style="min-height: 900px">
         <b-col cols="2">
           <Left />
@@ -10,7 +10,7 @@
           <router-view />
         </b-col>
       </b-row>
-    </b-container>
+    </div>
     <Footer />
   </div>
 </template>

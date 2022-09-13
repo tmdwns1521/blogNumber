@@ -1,5 +1,5 @@
 <template>
-  <div class="top-banner banner">
+  <div class="top-banner banner" v-if="show">
     <b-container class="h-100">
       <b-row class="h-100 m-auto align-items-center">
         <b-col class="text-center text-lg-start" lg="4">
@@ -16,6 +16,9 @@
 <script>
 export default {
   name: "TopBanner",
+  props: {
+    show: Boolean,
+  },
 };
 </script>
 

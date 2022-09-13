@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header />
+    <Header :topBanner="true" />
     <router-view />
     <Footer />
   </div>

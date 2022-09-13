@@ -1,17 +1,17 @@
 <template>
-  <nav class="left-nav">
+  <nav class="left-nav p-4">
     <b-navbar-nav>
       <b-nav-item
         to="/manage/sales"
         :class="path.includes('/sales') ? 'active' : ''"
       >
-        <span class="text-black">매출관리</span>
+        <span>매출관리</span>
       </b-nav-item>
       <b-nav-item
         to="/manage/order"
         :class="path.includes('/order') ? 'active' : ''"
       >
-        <span class="text-black">주문관리</span>
+        <span>주문관리</span>
       </b-nav-item>
     </b-navbar-nav>
   </nav>

@@ -6,7 +6,7 @@
         <b-col cols="2">
           <Left />
         </b-col>
-        <b-col cols="10" style="background: #f3f8f7">
+        <b-col cols="10" style="background: #f3f8f7" class="p-4">
           <router-view />
         </b-col>
       </b-row>

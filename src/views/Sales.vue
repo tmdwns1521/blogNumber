@@ -5,118 +5,134 @@
         <h1 class="text-25 m-0">매출관리</h1>
       </b-col>
     </b-row>
-    <b-row>
-      <!-- 매출정보 -->
-      <b-col cols="4">
-        <div
-          class="text-center h-100 bg-white border"
-          style="border-radius: 10px"
-        >
-          <div class="d-flex align-items-center h-100">
-            <div class="w-100 p-4">
-              <b-card-title class="fw-900 border-bottom pb-4">
-                {{ user.name }}
-              </b-card-title>
-              <b-row class="mt-4">
-                <b-col class="text-18">
-                  <strong class="">예상 총매출</strong>
-                  <p class="opacity-50 m-0">
-                    <span>\</span
-                    >{{ user.salesPrice.predict.toLocaleString("ko-KR") }}
-                  </p>
-                </b-col>
-                <b-col class="text-18">
-                  <strong>확정 매출</strong>
-                  <p class="opacity-50 m-0">
-                    <span>\</span
-                    >{{ user.salesPrice.confirm.toLocaleString("ko-KR") }}
-                  </p>
-                </b-col>
-              </b-row>
-              <b-row class="mt-4">
-                <b-col class="text-18">
-                  <strong>취소 매출</strong>
-                  <p class="opacity-50 m-0">
-                    <span>\</span
-                    >{{ user.salesPrice.cancel.toLocaleString("ko-KR") }}
-                  </p>
-                </b-col>
-                <b-col class="text-18">
-                  <strong>합계</strong>
-                  <p class="opacity-50 m-0">
-                    <span>\</span
-                    >{{ user.salesPrice.total.toLocaleString("ko-KR") }}
-                  </p>
-                </b-col>
-              </b-row>
-            </div>
+    <div style="max-width: 1500px">
+      <!-- 담당자 매출정보 -->
+      <b-row class="mb-4">
+        <b-col>
+          <div
+            class="text-center h-100 bg-white border p-4"
+            style="border-radius: 10px"
+          >
+            <b-row class="justify-content-between align-items-center">
+              <b-col class="text-18 border-end">
+                <b-card-title class="fw-900">
+                  {{ currentData.name }}
+                </b-card-title>
+              </b-col>
+              <b-col class="text-18 border-end">
+                <strong class="">예상 총매출</strong>
+                <p class="opacity-50 m-0">
+                  <span>\</span
+                  >{{ currentData.salesPrice.predict.toLocaleString("ko-KR") }}
+                </p>
+              </b-col>
+              <b-col class="text-18 border-end">
+                <strong>확정 매출</strong>
+                <p class="opacity-50 m-0">
+                  <span>\</span
+                  >{{ currentData.salesPrice.confirm.toLocaleString("ko-KR") }}
+                </p>
+              </b-col>
+              <b-col class="text-18 border-end">
+                <strong>취소 매출</strong>
+                <p class="opacity-50 m-0">
+                  <span>\</span
+                  >{{ currentData.salesPrice.cancel.toLocaleString("ko-KR") }}
+                </p>
+              </b-col>
+              <b-col class="text-18">
+                <strong>합계</strong>
+                <p class="opacity-50 m-0">
+                  <span>\</span
+                  >{{ currentData.salesPrice.total.toLocaleString("ko-KR") }}
+                </p>
+              </b-col>
+            </b-row>
           </div>
-        </div>
-      </b-col>
-      <!-- 회원정보 -->
-      <b-col cols="8">
-        <table class="user-info-table bg-white">
-          <tr>
-            <th>담당자</th>
-            <td>{{ user.name }}</td>
-            <th>아이디/비밀번호</th>
-            <td>{{ user.userId }} / {{ user.password }}</td>
-          </tr>
-          <tr>
-            <th>상호명</th>
-            <td>{{ user.shopName }}</td>
-            <th>연락처</th>
-            <td>{{ user.phone }}</td>
-          </tr>
-          <tr>
-            <th>대표자</th>
-            <td>{{ user.owner }}</td>
-            <th>사업자등록번호</th>
-            <td>{{ user.businessNumber }}</td>
-          </tr>
-          <tr>
-            <th>URL</th>
-            <td>{{ user.url }}</td>
-            <th>이메일</th>
-            <td>{{ user.email }}</td>
-          </tr>
-          <tr>
-            <th>계약상품</th>
-            <td>{{ user.serviceType }}</td>
-            <th>주소</th>
-            <td>{{ user.address }}</td>
-          </tr>
-          <tr>
-            <th>결제방법</th>
-            <td>{{ user.payKind }}</td>
-            <th>카드 정보</th>
-            <td>
-              {{ user.cardInfo.name }} / {{ user.cardInfo.cardName }} /
-              {{ user.cardInfo.cardNumber }}
-            </td>
-          </tr>
-          <tr>
-            <th>결제금액</th>
-            <td>{{ user.payPrice }}</td>
-            <th>카드 유효기간</th>
-            <td>{{ user.cardInfo.expiryDate }}</td>
-          </tr>
-          <tr>
-            <th>계약기간</th>
-            <td>{{ user.payMonth }}</td>
-            <th>할부개월</th>
-            <td>{{ user.cardInfo.installmentMonth }}</td>
-          </tr>
-        </table>
-      </b-col>
-    </b-row>
-    <b-row class="justify-content-between align-items-center my-3">
-      <b-col class="text-end">
-        <b-btn>수정</b-btn>
-        <b-btn variant="dark" class="ms-2">완료</b-btn>
-      </b-col>
-    </b-row>
+        </b-col>
+      </b-row>
+      <!-- 확인/수정/등록 데이터정보 -->
+      <b-row class="mb-4">
+        <b-col>
+          <b-table-simple small bordered fixed class="currentTable">
+            <b-tbody>
+              <b-tr>
+                <b-th>담당자</b-th>
+                <b-td>{{ currentData.name }}</b-td>
+                <b-th>상호명</b-th>
+                <b-td>{{ currentData.shopName }}</b-td>
+                <b-th>대표자</b-th>
+                <b-td>{{ currentData.owner }}</b-td>
+              </b-tr>
+              <b-tr>
+                <b-th>URL</b-th>
+                <b-td>{{ currentData.url }}</b-td>
+
+                <b-th>아이디</b-th>
+                <b-td>{{ currentData.userId }}</b-td>
+                <b-th>비밀번호</b-th>
+                <b-td>{{ currentData.password }}</b-td>
+              </b-tr>
+              <b-tr>
+                <b-th>사업자등록번호</b-th>
+                <b-td>{{ currentData.businessNumber }}</b-td>
+                <b-th>연락처</b-th>
+                <b-td>{{ currentData.phone }}</b-td>
+                <b-th>이메일</b-th>
+                <b-td>{{ currentData.email }}</b-td>
+              </b-tr>
+              <b-tr>
+                <b-th>주소</b-th>
+                <b-td>{{ currentData.address }}</b-td>
+                <b-th>결제방법</b-th>
+                <b-td>{{ currentData.payKind }}</b-td>
+                <b-th>결제금액</b-th>
+                <b-td
+                  >{{ currentData.payPrice.toLocaleString("ko-KR") }} 원</b-td
+                >
+              </b-tr>
+              <b-tr>
+                <b-th>카드사</b-th>
+                <b-td>{{ currentData.cardInfo.cardName }}</b-td>
+                <b-th>카드소유자</b-th>
+                <b-td>{{ currentData.cardInfo.name }}</b-td>
+                <b-th>카드번호</b-th>
+                <b-td>{{ currentData.cardInfo.cardNumber }}</b-td>
+              </b-tr>
+              <b-tr>
+                <b-th>카드유효기간</b-th>
+                <b-td>{{ currentData.cardInfo.expiryDate }}</b-td>
+                <b-th>카드승인번호</b-th>
+                <b-td>{{ currentData.cardInfo.approvalNumber }}</b-td>
+
+                <b-th>할부개월</b-th>
+                <b-td>{{ currentData.cardInfo.installmentMonth }} 개월</b-td>
+              </b-tr>
+              <b-tr>
+                <b-th>계약기간</b-th>
+                <b-td>{{ currentData.payMonth }} 개월</b-td>
+                <b-th>계약상품</b-th>
+                <b-td>{{ currentData.serviceType }}</b-td>
+                <b-th>비고</b-th>
+                <b-td>{{ currentData.contents }}</b-td>
+              </b-tr>
+            </b-tbody>
+          </b-table-simple>
+          <b-row class="justify-content-between align-items-center">
+            <b-col class="text-end">
+              <b-btn variant="dark" class="ms-2">신규등록</b-btn>
+              <b-btn class="ms-2">수정</b-btn>
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+    </div>
     <div class="bg-white border p-4" style="border-radius: 10px">
+      <b-tabs content-class="mt-3" no-fade>
+        <b-tab title="First" active><p>I'm the first tab</p></b-tab>
+        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
+        <b-tab title="Disabled"><p>I'm a disabled tab!</p></b-tab>
+      </b-tabs>
       <b-row class="justify-content-between align-items-center mb-3">
         <b-col>
           <h2 class="fw-900 m-0">DATA</h2>
@@ -153,21 +169,55 @@
           :sticky-header="true"
           :items="items"
           :fields="fields"
+          class="dataTable"
         >
+          <template #cell(payPrice)="row">
+            {{ row.item.payPrice.toLocaleString("ko-KR") }}
+          </template>
           <template #cell(design)="row">
-            <b-form-group>
-              <b-form-checkbox v-model="row.item.design"></b-form-checkbox>
-            </b-form-group>
+            <div class="text-center">
+              <font-awesome-icon
+                v-if="row.item.design"
+                class="fa-xl text-success"
+                icon="fa-solid fa-circle-check"
+              />
+              <font-awesome-icon
+                v-else
+                style="color: #ced4da"
+                class="fa-xl"
+                icon="fa-solid fa-circle-xmark"
+              />
+            </div>
           </template>
           <template #cell(traffic)="row">
-            <b-form-group>
-              <b-form-checkbox v-model="row.item.traffic"></b-form-checkbox>
-            </b-form-group>
+            <div class="text-center">
+              <font-awesome-icon
+                v-if="row.item.traffic"
+                class="fa-xl text-success"
+                icon="fa-solid fa-circle-check"
+              />
+              <font-awesome-icon
+                v-else
+                style="color: #ced4da"
+                class="fa-xl"
+                icon="fa-solid fa-circle-xmark"
+              />
+            </div>
           </template>
           <template #cell(done)="row">
-            <b-form-group>
-              <b-form-checkbox v-model="row.item.done"></b-form-checkbox>
-            </b-form-group>
+            <div class="text-center">
+              <font-awesome-icon
+                v-if="row.item.done"
+                class="fa-xl text-success"
+                icon="fa-solid fa-circle-check"
+              />
+              <font-awesome-icon
+                v-else
+                style="color: #ced4da"
+                class="fa-xl"
+                icon="fa-solid fa-circle-xmark"
+              />
+            </div>
           </template>
         </b-table>
       </div>
@@ -181,7 +231,9 @@ export default {
   name: "Sales",
   data() {
     return {
-      user: {
+      currentData: {
+        id: 1,
+        number: 220728,
         name: "황준",
         salesPrice: {
           predict: 1078000,
@@ -196,6 +248,7 @@ export default {
         payKind: "현대카드",
         payPrice: 297000,
         payMonth: 3,
+        payDate: "2022/03/01",
         userId: "djdj7707",
         password: "0mjdj6674626",
         phone: "010-2825-4262",
@@ -207,155 +260,162 @@ export default {
           cardName: "현대카드",
           cardNumber: " 4033-0200-6647-2904",
           expiryDate: "05/26",
+          approvalNumber: 123454,
           installmentMonth: 3,
         },
+        startDate: "2022/03/01",
+        endDate: "2022/06/01",
+        design: false,
+        traffic: true,
+        done: true,
+        contents: "비고내용",
       },
       fields: [
         {
           key: "id",
           label: "No",
-          // stickyColumn: true,
           // isRowHeader: true,
+          // sortable: true,
           variant: "secondary",
-          sortable: false,
-          thClass: "text-nowrap ",
-          tdClass: "text-nowrap",
+          thClass: "",
+
           // filterByFormatted: true,
         },
         {
           key: "number",
           label: "계약번호",
-          // stickyColumn: true,
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "name",
           label: "담당자",
-          // stickyColumn: true,
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "shopName",
           label: "상호명",
           stickyColumn: true,
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap table-primary",
+          thClass: "table-secondary",
+          tdClass: "table-primary",
         },
         {
           key: "owner",
           label: "대표자",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "phone",
           label: "연락처",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "businessNumber",
           label: "사업자등록번호",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "email",
           label: "이메일",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "address",
           label: "주소",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "url",
           label: "URL",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "userId",
           label: "아이디",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "password",
           label: "비밀번호",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "serviceType",
           label: "계약상품",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "design",
           label: "디자인",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "traffic",
           label: "트래픽",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "startDate",
           label: "시작일",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "payPrice",
           label: "결제금액",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "done",
           label: "확인",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "payMonth",
           label: "계약기간",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "endDate",
           label: "종료일",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "cardInfo.name",
           label: "카드소유자",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "cardInfo.cardName",
           label: "카드사",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
         },
         {
           key: "cardInfo.cardNumber",
           label: "카드번호",
-          thClass: "text-nowrap table-secondary",
-          tdClass: "text-nowrap",
+          thClass: "table-secondary",
+        },
+        {
+          key: "cardInfo.expiryDate",
+          label: "카드유효기간",
+          thClass: "table-secondary",
+        },
+        {
+          key: "cardInfo.approvalNumber",
+          label: "카드승인번호",
+          thClass: "table-secondary",
+        },
+        {
+          key: "cardInfo.installmentMonth",
+          label: "할부개월",
+          thClass: "table-secondary",
+        },
+        {
+          key: "payDate",
+          label: "결제일",
+          thClass: "table-secondary",
+        },
+        {
+          key: "contents",
+          label: "비고",
         },
       ],
       items: Sample.items,

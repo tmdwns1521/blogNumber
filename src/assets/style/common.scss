@@ -135,32 +135,27 @@ li {
   }
 }
 
-.user-info-table {
-  width: 100%;
-  border-top: 1px solid #dee2e6;
-  tr {
-    width: 100%;
-    display: inline-table;
-    th {
-      width: 15%;
-      background-color: #e2eae8;
-      border: 1px solid #dee2e6;
-      border-top: none;
-      padding: 4px 8px;
-      color: #555;
-    }
-    td {
-      width: 35%;
-      font-size: 15px;
-      border: 1px solid #dee2e6;
-      border-top: none;
-      padding: 2px 6px;
-      color: #888;
-    }
-  }
-}
-
 .b-table-sticky-header {
   max-height: 600px !important;
   margin: 0 !important;
+}
+
+.currentTable {
+  th {
+    background-color: #e2eae8 !important;
+    width: 10%;
+    padding: 4px 8px !important;
+  }
+  td {
+    background-color: #fff !important;
+  }
+}
+
+.dataTable {
+  th {
+    white-space: nowrap;
+  }
+  td {
+    white-space: nowrap;
+  }
 }

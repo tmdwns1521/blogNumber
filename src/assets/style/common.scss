@@ -159,3 +159,25 @@ li {
     white-space: nowrap;
   }
 }
+
+.tabs {
+  .nav-item {
+    font-size: 20px;
+    font-weight: 900;
+    margin-right: 5px !important;
+    .nav-link {
+      border-color: #dee2e6;
+      background-color: #fff;
+      color: #ccc;
+      &.active {
+        color: #000;
+      }
+    }
+  }
+  .tab-content {
+    background-color: #fff;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    border-bottom: 1px solid #dee2e6;
+  }
+}

@@ -127,12 +127,13 @@
         </b-col>
       </b-row>
     </div>
+    <b-tabs content-class="p-4" no-fade>
+      <b-tab title="메인" active>메인</b-tab>
+      <b-tab title="완료">완료</b-tab>
+      <b-tab title="취소">취소</b-tab>
+      <b-tab title="기타상품">기타상품</b-tab>
+    </b-tabs>
     <div class="bg-white border p-4" style="border-radius: 10px">
-      <b-tabs content-class="mt-3" no-fade>
-        <b-tab title="First" active><p>I'm the first tab</p></b-tab>
-        <b-tab title="Second"><p>I'm the second tab</p></b-tab>
-        <b-tab title="Disabled"><p>I'm a disabled tab!</p></b-tab>
-      </b-tabs>
       <b-row class="justify-content-between align-items-center mb-3">
         <b-col>
           <h2 class="fw-900 m-0">DATA</h2>

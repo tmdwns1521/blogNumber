@@ -3,6 +3,8 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
+import AxiosPlugin from "vue-axios-cors";
+import commons from "./lib/commons";
 
 // Style
 import "normalize.css";
@@ -22,22 +24,29 @@ Vue.use(BootstrapVue);
 library.add(fas, far, fab);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
+Vue.use(commons);
+
 Vue.config.productionTip = false;
 
-Vue.prototype.$axios = axios;
-axios.defaults.baseURL = "http://localhost:8100";
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    console.log(error);
-    if (error.message == "Network Error") {
-      alert("서버와의 통신에 실패했습니다.");
-    }
-    return Promise.reject(error);
-  }
-);
+Vue.use(AxiosPlugin);
+
+axios.defaults.headers.common["Content-Type"] =
+  "application/x-www-form-urlencoded";
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
+// Vue.prototype.$axios = axios;
+// axios.defaults.baseURL = "http://49.247.32.231:5000/api";
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     console.log(error);
+//     if (error.message == "Network Error") {
+//       alert("서버와의 통신에 실패했습니다.");
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 new Vue({
   router,

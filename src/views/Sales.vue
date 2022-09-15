@@ -63,7 +63,11 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.name }}</div>
+                  <b-form-input
+                    v-else
+                    v-model="currentData.name"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
                 </b-td>
                 <b-th>상호명</b-th>
                 <b-td>
@@ -71,7 +75,11 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.shopName }}</div>
+                  <b-form-input
+                    v-else
+                    v-model="currentData.shopName"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
                 </b-td>
                 <b-th>대표자</b-th>
                 <b-td>
@@ -79,8 +87,12 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.owner }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.owner"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
+                </b-td>
               </b-tr>
               <b-tr>
                 <b-th>URL</b-th>
@@ -89,25 +101,36 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.url }}</div></b-td
-                >
-
+                  <b-form-input
+                    v-else
+                    v-model="currentData.url"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
+                </b-td>
                 <b-th>아이디</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.userId }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.userId"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
+                </b-td>
                 <b-th>비밀번호</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.password }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.password"
+                    :disabled="!editDataAbled"
+                  ></b-form-input>
+                </b-td>
               </b-tr>
               <b-tr>
                 <b-th>사업자등록번호</b-th>
@@ -116,24 +139,36 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.businessNumber }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.businessNumber"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>연락처</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.phone }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.phone"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>이메일</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.email }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.email"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
               </b-tr>
               <b-tr>
                 <b-th>주소</b-th>
@@ -142,25 +177,37 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.address }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.address"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>결제방법</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.payKind }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.payKind"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>결제금액</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>
-                    {{ currentData.payPrice.toLocaleString("ko-KR") }} 원
-                  </div></b-td
+                  <b-form-input
+                    v-else
+                    v-model="currentData.payPrice"
+                    :disabled="!editDataAbled"
+                  >
+                    원
+                  </b-form-input></b-td
                 >
               </b-tr>
               <b-tr>
@@ -170,24 +217,36 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.cardInfo.cardName }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.cardName"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>카드소유자</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.cardInfo.name }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.name"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>카드번호</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.cardInfo.cardNumber }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.cardNumber"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
               </b-tr>
               <b-tr>
                 <b-th>카드유효기간</b-th>
@@ -196,28 +255,38 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.cardInfo.expiryDate }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.expiryDate"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>카드승인번호</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>
-                    {{ currentData.cardInfo.approvalNumber }}
-                  </div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.approvalNumber"
+                    :disabled="!editDataAbled"
+                  >
+                  </b-form-input
+                ></b-td>
                 <b-th>할부개월</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>
-                    {{ currentData.cardInfo.installmentMonth }} 개월
-                  </div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.cardInfo.installmentMonth"
+                    :disabled="!editDataAbled"
+                  >
+                  </b-form-input
+                ></b-td>
               </b-tr>
               <b-tr>
                 <b-th>계약기간</b-th>
@@ -226,24 +295,36 @@
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.payMonth }} 개월</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.payMonth"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>계약상품</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.serviceType }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.serviceType"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
                 <b-th>비고</b-th>
                 <b-td>
                   <b-form-input
                     v-if="newDataShow == true"
                     v-model="newData.name"
                   ></b-form-input>
-                  <div v-else>{{ currentData.contents }}</div></b-td
-                >
+                  <b-form-input
+                    v-else
+                    v-model="currentData.contents"
+                    :disabled="!editDataAbled"
+                  ></b-form-input
+                ></b-td>
               </b-tr>
             </b-tbody>
           </b-table-simple>
@@ -251,15 +332,26 @@
             <b-col class="text-end">
               <template v-if="newDataShow == true">
                 <b-btn variant="dark" class="ms-2" @click="newDataDone()"
-                  >완료</b-btn
+                  >등록완료</b-btn
                 >
                 <b-btn class="ms-2" @click="newDataShow = false">취소</b-btn>
+              </template>
+              <template v-else-if="editDataAbled == true">
+                <b-btn
+                  variant="dark"
+                  class="ms-2"
+                  @click="editDataAbled = false"
+                  >수정완료</b-btn
+                >
+                <b-btn class="ms-2" @click="editDataAbled = false">취소</b-btn>
               </template>
               <template v-else>
                 <b-btn variant="dark" class="ms-2" @click="newDataStart()"
                   >신규등록</b-btn
                 >
-                <b-btn class="ms-2">수정</b-btn>
+                <b-btn class="ms-2" @click="editDataAbled = !editDataAbled"
+                  >수정</b-btn
+                >
               </template>
             </b-col>
           </b-row>
@@ -271,6 +363,46 @@
         <div class="justify-content-between align-items-center mb-3 d-flex">
           <h2 class="fw-900 m-0">DATA</h2>
           <div>
+            <!-- 딜력 검색 Start Date -->
+            <b-input-group>
+              <b-form-input
+                id="schStartDate"
+                v-model="schStartDate"
+                type="text"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-form-datepicker
+                  v-model="schStartDate"
+                  button-only
+                  right
+                  locale="ko"
+                  aria-controls="schStartDate"
+                  hide-header
+                ></b-form-datepicker>
+              </b-input-group-append>
+            </b-input-group>
+            <!-- 딜력 검색 End Date -->
+            <b-input-group>
+              <b-form-input
+                id="schEndDate"
+                v-model="schEndDate"
+                type="text"
+                placeholder="YYYY-MM-DD"
+                autocomplete="off"
+              ></b-form-input>
+              <b-input-group-append>
+                <b-form-datepicker
+                  v-model="schEndDate"
+                  button-only
+                  right
+                  locale="ko"
+                  aria-controls="schEndDate"
+                  hide-header
+                ></b-form-datepicker>
+              </b-input-group-append>
+            </b-input-group>
             <b-form-group v-slot="{ ariaDescribedby }">
               <b-input-group>
                 <b-form-input
@@ -286,6 +418,10 @@
                     @click="filter = ''"
                     :disabled="!filter"
                     variant="outline-dark"
+                    style="
+                      border-top-left-radius: 0;
+                      border-bottom-left-radius: 0;
+                    "
                     >초기화</b-btn
                   >
                 </b-input-group-append>
@@ -299,14 +435,20 @@
           responsive
           hover
           :sticky-header="true"
-          :items="items"
+          :items="salesItems"
           :fields="fields"
           class="dataTable"
           :filter="filter"
           :filter-included-fields="filterOn"
         >
-          <template #cell(payPrice)="row">
-            {{ row.item.payPrice.toLocaleString("ko-KR") }}
+          <template #cell(ContractNumber)="row">
+            {{ dateFormat1(row.item.ContractNumber) }}
+          </template>
+          <template #cell(trfficData.created_at)="row">
+            {{ dateFormat2(row.item.trfficData.created_at) }}
+          </template>
+          <template #cell(trfficData.cexpiration_date)="row">
+            {{ dateFormat2(row.item.trfficData.cexpiration_date) }}
           </template>
           <template #cell(design)="row">
             <div class="text-center">
@@ -363,7 +505,6 @@
 </template>
 
 <script>
-import Sample from "@/lib/sample.js";
 export default {
   name: "Sales",
   data() {
@@ -395,16 +536,13 @@ export default {
         cardInfo: {
           name: "김자경",
           cardName: "현대카드",
-          cardNumber: " 4033-0200-6647-2904",
+          cardNumber: "4033-0200-6647-2904",
           expiryDate: "05/26",
           approvalNumber: 123454,
           installmentMonth: 3,
         },
         startDate: "2022/03/01",
         endDate: "2022/06/01",
-        design: false,
-        traffic: true,
-        done: true,
         contents: "비고내용",
       },
       fields: [
@@ -415,21 +553,20 @@ export default {
           // sortable: true,
           variant: "secondary",
           thClass: "",
-
           // filterByFormatted: true,
         },
         {
-          key: "number",
+          key: "ContractNumber",
           label: "계약번호",
           thClass: "table-secondary",
         },
         {
-          key: "name",
+          key: "manager",
           label: "담당자",
           thClass: "table-secondary",
         },
         {
-          key: "shopName",
+          key: "businessName",
           label: "상호명",
           stickyColumn: true,
           thClass: "table-secondary",
@@ -446,12 +583,12 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "businessNumber",
+          key: "CompanyNumber",
           label: "사업자등록번호",
           thClass: "table-secondary",
         },
         {
-          key: "email",
+          key: "Email",
           label: "이메일",
           thClass: "table-secondary",
         },
@@ -461,23 +598,28 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "url",
+          key: "trfficData.blog",
           label: "URL",
           thClass: "table-secondary",
         },
         {
-          key: "userId",
+          key: "blogId",
           label: "아이디",
           thClass: "table-secondary",
         },
         {
-          key: "password",
+          key: "blogPw",
           label: "비밀번호",
           thClass: "table-secondary",
         },
         {
-          key: "serviceType",
+          key: "contractProduct",
           label: "계약상품",
+          thClass: "table-secondary",
+        },
+        {
+          key: "trfficData.today_remain_count",
+          label: "실시간트래픽",
           thClass: "table-secondary",
         },
         {
@@ -491,12 +633,12 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "startDate",
+          key: "trfficData.created_at",
           label: "시작일",
           thClass: "table-secondary",
         },
         {
-          key: "payPrice",
+          key: "AmountOfPayment",
           label: "결제금액",
           thClass: "table-secondary",
         },
@@ -506,42 +648,42 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "payMonth",
+          key: "Term",
           label: "계약기간",
           thClass: "table-secondary",
         },
         {
-          key: "endDate",
+          key: "trfficData.cexpiration_date",
           label: "종료일",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.name",
+          key: "cardData.cardholder",
           label: "카드소유자",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.cardName",
+          key: "cardData.creditCardCompany",
           label: "카드사",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.cardNumber",
+          key: "cardData.creditCardNumber",
           label: "카드번호",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.expiryDate",
+          key: "cardData.CardValidityPeriod",
           label: "카드유효기간",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.approvalNumber",
+          key: "ApprovalNumber",
           label: "카드승인번호",
           thClass: "table-secondary",
         },
         {
-          key: "cardInfo.installmentMonth",
+          key: "installmentMonth",
           label: "할부개월",
           thClass: "table-secondary",
         },
@@ -551,18 +693,21 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "contents",
+          key: "Note",
           label: "비고",
           thClass: "table-secondary",
         },
       ],
-      items: Sample.items,
+      salesItems: null,
       filter: "",
       filterOn: [],
       newDataShow: false,
       newData: {
         name: null,
       },
+      editDataAbled: false,
+      schStartDate: "",
+      schEndDate: "",
     };
   },
   methods: {
@@ -576,7 +721,16 @@ export default {
       this.newDataShow = false;
       console.log(this.newData);
     },
+    async salesData() {
+      const data = await this.$axios.get("/api/salesData");
+      console.log(data.data);
+      this.salesItems = data.data;
+    },
   },
+  mounted() {
+    this.salesData();
+  },
+  computed: {},
 };
 </script>
 

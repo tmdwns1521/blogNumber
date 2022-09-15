@@ -58,110 +58,241 @@
             <b-tbody>
               <b-tr>
                 <b-th>담당자</b-th>
-                <b-td>{{ currentData.name }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.name }}</div>
+                </b-td>
                 <b-th>상호명</b-th>
-                <b-td>{{ currentData.shopName }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.shopName }}</div>
+                </b-td>
                 <b-th>대표자</b-th>
-                <b-td>{{ currentData.owner }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.owner }}</div></b-td
+                >
               </b-tr>
               <b-tr>
                 <b-th>URL</b-th>
-                <b-td>{{ currentData.url }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.url }}</div></b-td
+                >
 
                 <b-th>아이디</b-th>
-                <b-td>{{ currentData.userId }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.userId }}</div></b-td
+                >
                 <b-th>비밀번호</b-th>
-                <b-td>{{ currentData.password }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.password }}</div></b-td
+                >
               </b-tr>
               <b-tr>
                 <b-th>사업자등록번호</b-th>
-                <b-td>{{ currentData.businessNumber }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.businessNumber }}</div></b-td
+                >
                 <b-th>연락처</b-th>
-                <b-td>{{ currentData.phone }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.phone }}</div></b-td
+                >
                 <b-th>이메일</b-th>
-                <b-td>{{ currentData.email }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.email }}</div></b-td
+                >
               </b-tr>
               <b-tr>
                 <b-th>주소</b-th>
-                <b-td>{{ currentData.address }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.address }}</div></b-td
+                >
                 <b-th>결제방법</b-th>
-                <b-td>{{ currentData.payKind }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.payKind }}</div></b-td
+                >
                 <b-th>결제금액</b-th>
-                <b-td
-                  >{{ currentData.payPrice.toLocaleString("ko-KR") }} 원</b-td
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>
+                    {{ currentData.payPrice.toLocaleString("ko-KR") }} 원
+                  </div></b-td
                 >
               </b-tr>
               <b-tr>
                 <b-th>카드사</b-th>
-                <b-td>{{ currentData.cardInfo.cardName }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.cardInfo.cardName }}</div></b-td
+                >
                 <b-th>카드소유자</b-th>
-                <b-td>{{ currentData.cardInfo.name }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.cardInfo.name }}</div></b-td
+                >
                 <b-th>카드번호</b-th>
-                <b-td>{{ currentData.cardInfo.cardNumber }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.cardInfo.cardNumber }}</div></b-td
+                >
               </b-tr>
               <b-tr>
                 <b-th>카드유효기간</b-th>
-                <b-td>{{ currentData.cardInfo.expiryDate }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.cardInfo.expiryDate }}</div></b-td
+                >
                 <b-th>카드승인번호</b-th>
-                <b-td>{{ currentData.cardInfo.approvalNumber }}</b-td>
-
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>
+                    {{ currentData.cardInfo.approvalNumber }}
+                  </div></b-td
+                >
                 <b-th>할부개월</b-th>
-                <b-td>{{ currentData.cardInfo.installmentMonth }} 개월</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>
+                    {{ currentData.cardInfo.installmentMonth }} 개월
+                  </div></b-td
+                >
               </b-tr>
               <b-tr>
                 <b-th>계약기간</b-th>
-                <b-td>{{ currentData.payMonth }} 개월</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.payMonth }} 개월</div></b-td
+                >
                 <b-th>계약상품</b-th>
-                <b-td>{{ currentData.serviceType }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.serviceType }}</div></b-td
+                >
                 <b-th>비고</b-th>
-                <b-td>{{ currentData.contents }}</b-td>
+                <b-td>
+                  <b-form-input
+                    v-if="newDataShow == true"
+                    v-model="newData.name"
+                  ></b-form-input>
+                  <div v-else>{{ currentData.contents }}</div></b-td
+                >
               </b-tr>
             </b-tbody>
           </b-table-simple>
           <b-row class="justify-content-between align-items-center">
             <b-col class="text-end">
-              <b-btn variant="dark" class="ms-2">신규등록</b-btn>
-              <b-btn class="ms-2">수정</b-btn>
+              <template v-if="newDataShow == true">
+                <b-btn variant="dark" class="ms-2" @click="newDataDone()"
+                  >완료</b-btn
+                >
+                <b-btn class="ms-2" @click="newDataShow = false">취소</b-btn>
+              </template>
+              <template v-else>
+                <b-btn variant="dark" class="ms-2" @click="newDataStart()"
+                  >신규등록</b-btn
+                >
+                <b-btn class="ms-2">수정</b-btn>
+              </template>
             </b-col>
           </b-row>
         </b-col>
       </b-row>
     </div>
     <b-tabs content-class="p-4" no-fade>
-      <b-tab title="메인" active>메인</b-tab>
-      <b-tab title="완료">완료</b-tab>
-      <b-tab title="취소">취소</b-tab>
-      <b-tab title="기타상품">기타상품</b-tab>
-    </b-tabs>
-    <div class="bg-white border p-4" style="border-radius: 10px">
-      <b-row class="justify-content-between align-items-center mb-3">
-        <b-col>
+      <b-tab title="메인" active>
+        <div class="justify-content-between align-items-center mb-3 d-flex">
           <h2 class="fw-900 m-0">DATA</h2>
-        </b-col>
-        <!-- <b-col>
-          <b-form-group v-slot="{ ariaDescribedby }">
-            <b-input-group>
-              <b-form-input
-                class="mx-2"
-                id="filter-input"
-                v-model="filter"
-                :aria-describedby="ariaDescribedby"
-                type="search"
-                placeholder="검색어를 입력하세요."
-              ></b-form-input>
-              <b-input-group-append>
-                <b-btn
-                  @click="filter = ''"
-                  :disabled="!filter"
-                  variant="outline-dark"
-                  >초기화</b-btn
-                >
-              </b-input-group-append>
-            </b-input-group>
-          </b-form-group>
-        </b-col> -->
-      </b-row>
-      <div>
+          <div>
+            <b-form-group v-slot="{ ariaDescribedby }">
+              <b-input-group>
+                <b-form-input
+                  class="mx-2"
+                  id="filter-input"
+                  v-model="filter"
+                  :aria-describedby="ariaDescribedby"
+                  type="search"
+                  placeholder="검색어를 입력하세요."
+                ></b-form-input>
+                <b-input-group-append>
+                  <b-btn
+                    @click="filter = ''"
+                    :disabled="!filter"
+                    variant="outline-dark"
+                    >초기화</b-btn
+                  >
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
+          </div>
+        </div>
         <b-table
           head-variant="dark"
           bordered
@@ -171,6 +302,8 @@
           :items="items"
           :fields="fields"
           class="dataTable"
+          :filter="filter"
+          :filter-included-fields="filterOn"
         >
           <template #cell(payPrice)="row">
             {{ row.item.payPrice.toLocaleString("ko-KR") }}
@@ -221,8 +354,11 @@
             </div>
           </template>
         </b-table>
-      </div>
-    </div>
+      </b-tab>
+      <b-tab title="완료">완료</b-tab>
+      <b-tab title="취소">취소</b-tab>
+      <b-tab title="기타상품">기타상품</b-tab>
+    </b-tabs>
   </div>
 </template>
 
@@ -421,9 +557,26 @@ export default {
         },
       ],
       items: Sample.items,
+      filter: "",
+      filterOn: [],
+      newDataShow: false,
+      newData: {
+        name: null,
+      },
     };
   },
-  methods: {},
+  methods: {
+    // 신규등록 시작
+    newDataStart() {
+      this.newDataShow = true;
+      this.newData = {};
+    },
+    // 신규등록 완료
+    newDataDone() {
+      this.newDataShow = false;
+      console.log(this.newData);
+    },
+  },
 };
 </script>
 

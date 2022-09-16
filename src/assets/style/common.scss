@@ -152,6 +152,15 @@ li {
   }
 }
 
+.form-control:disabled {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+.b-calendar-grid-help {
+  display: none;
+}
+
 .dataTable {
   th {
     white-space: nowrap;

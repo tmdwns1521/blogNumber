@@ -2,7 +2,55 @@
   <div>
     <main>
       <article>1</article>
-      <article>2</article>
+      <article class="main-2">
+        <b-container class="py-5">
+          <p class="text-center fw-600 text-30 mb-4">
+            검색결과 상위에 노출되어 보다 많은 <br />잠재고객에게 가게를
+            알려보세요.
+          </p>
+          <span class="d-block text-center"
+            >상위노출이 어려운 키워드에서도 노출이 가능한지 <br />오늘의 픽
+            인플루언서들의 검증된 실력을 직접 확인해보세요.</span
+          >
+          <div class="text-center btns my-5">
+            <b-btn
+              pill
+              class="mx-2"
+              @click="activeBtn = 'btn1'"
+              :class="{ active: activeBtn === 'btn1' }"
+              >맛집</b-btn
+            >
+            <b-btn
+              pill
+              class="mx-2"
+              @click="activeBtn = 'btn2'"
+              :class="{ active: activeBtn === 'btn2' }"
+              >카페</b-btn
+            >
+            <b-btn
+              pill
+              class="mx-2"
+              @click="activeBtn = 'btn3'"
+              :class="{ active: activeBtn === 'btn3' }"
+              >음식명</b-btn
+            >
+            <b-btn
+              pill
+              class="mx-2"
+              @click="activeBtn = 'btn4'"
+              :class="{ active: activeBtn === 'btn4' }"
+              >미용실/네일샵</b-btn
+            >
+            <b-btn
+              pill
+              class="mx-2"
+              @click="activeBtn = 'btn5'"
+              :class="{ active: activeBtn === 'btn5' }"
+              >제품</b-btn
+            >
+          </div>
+        </b-container>
+      </article>
       <!-- main 3 -->
       <article class="main-3">
         <b-container class="py-5">
@@ -61,26 +109,28 @@
           <div class="text-center btns">
             <b-btn
               pill
-              @click="activeBtn = 'btn1'"
-              :class="{ active: activeBtn === 'btn1' }"
+              class="mx-2"
+              @click="activeBtn2 = 'btn1'"
+              :class="{ active: activeBtn2 === 'btn1' }"
               >마케팅 대시보드</b-btn
             >
             <b-btn
               pill
-              class="mx-4"
-              @click="activeBtn = 'btn2'"
-              :class="{ active: activeBtn === 'btn2' }"
+              class="mx-2"
+              @click="activeBtn2 = 'btn2'"
+              :class="{ active: activeBtn2 === 'btn2' }"
               >광고소재 센터</b-btn
             >
             <b-btn
               pill
-              @click="activeBtn = 'btn3'"
-              :class="{ active: activeBtn === 'btn3' }"
+              class="mx-2"
+              @click="activeBtn2 = 'btn3'"
+              :class="{ active: activeBtn2 === 'btn3' }"
               >정기리포트</b-btn
             >
           </div>
           <div class="contents">
-            <article :class="{ 'd-block': activeBtn === 'btn1' }">
+            <article :class="{ 'd-block': activeBtn2 === 'btn1' }">
               <b-row class="align-items-center">
                 <b-col>
                   <h1 class="text-white text-30 mb-4">
@@ -97,7 +147,7 @@
                 </b-col>
               </b-row>
             </article>
-            <article :class="{ 'd-block': activeBtn === 'btn2' }">
+            <article :class="{ 'd-block': activeBtn2 === 'btn2' }">
               <b-row class="align-items-center">
                 <b-col>
                   <h1 class="text-white text-30 mb-4">
@@ -114,7 +164,7 @@
                 </b-col>
               </b-row>
             </article>
-            <article :class="{ 'd-block': activeBtn === 'btn3' }">
+            <article :class="{ 'd-block': activeBtn2 === 'btn3' }">
               <b-row class="align-items-center">
                 <b-col>
                   <h1 class="text-white text-30 mb-4">
@@ -186,6 +236,7 @@ export default {
   data() {
     return {
       activeBtn: "btn1",
+      activeBtn2: "btn1",
     };
   },
 };

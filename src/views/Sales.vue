@@ -15,35 +15,36 @@
           >
             <b-row class="justify-content-between align-items-center">
               <b-col class="text-18 border-end">
-                <b-card-title class="fw-900">
-                  {{ currentData.manager ? currentData.manager : "-" }}
+                <b-card-title class="fw-900" v-if="currentData.manager">
+                  {{ currentData.manager }}
                 </b-card-title>
+                <b-card-title class="opacity-50" v-else> 담당자 </b-card-title>
               </b-col>
               <b-col class="text-18 border-end">
                 <strong class="">예상 총매출</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span>
+                  <span>\</span> 0
                   <!-- {{ currentData.salesPrice.predict.toLocaleString("ko-KR") }} -->
                 </p>
               </b-col>
               <b-col class="text-18 border-end">
                 <strong>확정 매출</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span>
+                  <span>\</span> 0
                   <!-- {{ currentData.salesPrice.confirm.toLocaleString("ko-KR") }} -->
                 </p>
               </b-col>
               <b-col class="text-18 border-end">
                 <strong>취소 매출</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span>
+                  <span>\</span> 0
                   <!-- {{ currentData.salesPrice.cancel.toLocaleString("ko-KR") }} -->
                 </p>
               </b-col>
               <b-col class="text-18">
                 <strong>합계</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span>
+                  <span>\</span> 0
                   <!-- {{ currentData.salesPrice.total.toLocaleString("ko-KR") }} -->
                 </p>
               </b-col>
@@ -377,7 +378,10 @@
                 <b-btn variant="dark" class="ms-2" @click="newDataStart()"
                   >신규등록</b-btn
                 >
-                <b-btn class="ms-2" @click="editDataAbled = !editDataAbled"
+                <b-btn
+                  class="ms-2"
+                  @click="editDataAbled = !editDataAbled"
+                  :disabled="isEmpty(currentData)"
                   >수정</b-btn
                 >
               </template>
@@ -390,72 +394,79 @@
       <b-tab title="메인" active>
         <div class="justify-content-between align-items-center mb-3 d-flex">
           <h2 class="fw-900 m-0">DATA</h2>
-          <div>
+          <b-row class="justify-content-end align-items-center">
             <!-- 딜력 검색 Start Date -->
-            <b-input-group>
-              <b-form-input
-                id="schStartDate"
-                v-model="schStartDate"
-                type="text"
-                placeholder="YYYY-MM-DD"
-                autocomplete="off"
-              ></b-form-input>
-              <b-input-group-append>
-                <b-form-datepicker
-                  v-model="schStartDate"
-                  button-only
-                  right
-                  locale="ko"
-                  aria-controls="schStartDate"
-                  hide-header
-                ></b-form-datepicker>
-              </b-input-group-append>
-            </b-input-group>
-            <!-- 딜력 검색 End Date -->
-            <b-input-group>
-              <b-form-input
-                id="schEndDate"
-                v-model="schEndDate"
-                type="text"
-                placeholder="YYYY-MM-DD"
-                autocomplete="off"
-              ></b-form-input>
-              <b-input-group-append>
-                <b-form-datepicker
-                  v-model="schEndDate"
-                  button-only
-                  right
-                  locale="ko"
-                  aria-controls="schEndDate"
-                  hide-header
-                ></b-form-datepicker>
-              </b-input-group-append>
-            </b-input-group>
-            <b-form-group v-slot="{ ariaDescribedby }">
+            <b-col cols="3">
               <b-input-group>
                 <b-form-input
-                  class="mx-2"
-                  id="filter-input"
-                  v-model="filter"
-                  :aria-describedby="ariaDescribedby"
-                  type="search"
-                  placeholder="검색어를 입력하세요."
+                  id="schStartDate"
+                  v-model="schStartDate"
+                  type="text"
+                  placeholder="시작일"
+                  autocomplete="off"
                 ></b-form-input>
                 <b-input-group-append>
-                  <b-btn
-                    @click="filter = ''"
-                    :disabled="!filter"
-                    variant="outline-dark"
-                    style="
-                      border-top-left-radius: 0;
-                      border-bottom-left-radius: 0;
-                    "
-                    >초기화</b-btn
-                  >
+                  <b-form-datepicker
+                    v-model="schStartDate"
+                    button-only
+                    right
+                    locale="ko"
+                    aria-controls="schStartDate"
+                    hide-header
+                  ></b-form-datepicker>
                 </b-input-group-append>
               </b-input-group>
-            </b-form-group>
-          </div>
+            </b-col>
+            <!-- 딜력 검색 End Date -->
+            <b-col cols="3">
+              <b-input-group>
+                <b-form-input
+                  id="schEndDate"
+                  v-model="schEndDate"
+                  type="text"
+                  placeholder="종료일"
+                  autocomplete="off"
+                ></b-form-input>
+                <b-input-group-append>
+                  <b-form-datepicker
+                    v-model="schEndDate"
+                    button-only
+                    right
+                    locale="ko"
+                    aria-controls="schEndDate"
+                    hide-header
+                  ></b-form-datepicker>
+                </b-input-group-append>
+              </b-input-group>
+            </b-col>
+            <!-- 검색어 -->
+            <b-col cols="5">
+              <b-form-group v-slot="{ ariaDescribedby }">
+                <b-input-group>
+                  <b-form-input
+                    class="mx-2"
+                    id="filter-input"
+                    v-model="filter"
+                    :aria-describedby="ariaDescribedby"
+                    type="search"
+                    placeholder="검색어"
+                  ></b-form-input>
+                  <b-input-group-append>
+                    <b-btn
+                      @click="filter = null"
+                      :disabled="!filter"
+                      variant="outline-dark"
+                      style="
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                      "
+                      >초기화</b-btn
+                    >
+                  </b-input-group-append>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
+          </b-row>
         </div>
         <b-table
           head-variant="dark"
@@ -471,7 +482,14 @@
           class="dataTable"
           :filter="filter"
           ref="selectableTable"
+          show-empty
+          emptyFilteredText="찾으시는 검색어와 일치하는 정보가 없습니다."
+          emptyText="데이터 정보가 없습니다."
         >
+          <!-- No. -->
+          <template #cell(index)="row">
+            {{ row.item.index + 1 }}
+          </template>
           <!-- 계약번호 -->
           <template #cell(ContractNumber)="row">
             {{ dateFormat1(row.item.ContractNumber) }}
@@ -495,6 +513,7 @@
           <template #cell(AmountOfPayment)="row">
             {{ numberToString(parseInt(row.item.AmountOfPayment)) }}원
           </template>
+          <!-- 디자인체크 -->
           <template #cell(designChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -510,6 +529,7 @@
               />
             </div>
           </template>
+          <!-- 트래픽체크 -->
           <template #cell(trafficChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -525,10 +545,11 @@
               />
             </div>
           </template>
-          <template #cell(done)="row">
+          <!-- 확인체크 -->
+          <template #cell(doneChk)="row">
             <div class="text-center">
               <font-awesome-icon
-                v-if="row.item.done"
+                v-if="row.item.doneChk"
                 class="fa-xl text-success"
                 icon="fa-solid fa-circle-check"
               />
@@ -556,7 +577,7 @@ export default {
     return {
       fields: [
         {
-          key: "id",
+          key: "index",
           label: "No",
           // isRowHeader: true,
           // sortable: true,
@@ -651,7 +672,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "done",
+          key: "doneChk",
           label: "확인",
           thClass: "table-secondary",
         },
@@ -709,59 +730,44 @@ export default {
       salesItems: null,
       filter: "",
       currentData: {
-        manager: null,
-        businessName: null,
-        owner: null,
-        trfficData: {
-          // blog: null,
-        },
-        blogId: null,
-        blogPw: null,
-        CompanyNumber: null,
-        phone: null,
-        Email: null,
-        address: null,
-        cardData: {
-          // creditCardCompany: null,
-          // cardholder: null,
-          // creditCardNumber: null,
-          // CardValidityPeriod: null,
-        },
-        AmountOfPayment: null,
-        ApprovalNumber: null,
-        installmentMonth: null,
-        Term: null,
-        contractProduct: null,
-        Note: null,
+        // manager: null,
+        // businessName: null,
+        // owner: null,
+        // trfficData: {
+        //   // blog: null,
+        // },
+        // blogId: null,
+        // blogPw: null,
+        // CompanyNumber: null,
+        // phone: null,
+        // Email: null,
+        // address: null,
+        // cardData: {
+        //   // creditCardCompany: null,
+        //   // cardholder: null,
+        //   // creditCardNumber: null,
+        //   // CardValidityPeriod: null,
+        // },
+        // AmountOfPayment: null,
+        // ApprovalNumber: null,
+        // installmentMonth: null,
+        // Term: null,
+        // contractProduct: null,
+        // Note: null,
       },
       newDataShow: false,
       newData: {
         manager: null,
         businessName: null,
         owner: null,
-        trfficData: {
-          // blog: null,
-          // blog_validate: null,
-          // cexpiration_date: null,
-          // created_at: null,
-          // day_total_count: null,
-          // start_date: null,
-          // today_remain_count: null,
-          // updatedAt: null,
-          // updated_at: null,
-        },
+        trfficData: {},
         blogId: null,
         blogPw: null,
         CompanyNumber: null,
         phone: null,
         Email: null,
         address: null,
-        cardData: {
-          // creditCardCompany: null,
-          // cardholder: null,
-          // creditCardNumber: null,
-          // CardValidityPeriod: null,
-        },
+        cardData: {},
         AmountOfPayment: null,
         ApprovalNumber: null,
         installmentMonth: null,
@@ -793,6 +799,9 @@ export default {
       const data = await this.$axios.get("/api/salesData");
       console.log(data.data);
       this.salesItems = data.data;
+      this.salesItems.forEach((el, index) => {
+        this.$set(el, "index", index);
+      });
     },
   },
   mounted() {

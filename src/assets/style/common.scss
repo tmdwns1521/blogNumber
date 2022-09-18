@@ -33,6 +33,20 @@ li {
 }
 
 // 홈 메인
+.main-2 {
+  background: #fbfbfb;
+  .btns {
+    button {
+      border: none;
+      padding: 6px 18px;
+      background-color: #454545;
+      font-weight: 600;
+      &.active {
+        background-color: #00eadc;
+      }
+    }
+  }
+}
 .main-3 {
   .row {
     align-items: center;
@@ -129,14 +143,14 @@ li {
     }
     &.active {
       a {
-        color: #00eadc;
+        color: #ff656a;
       }
     }
   }
 }
 
 .b-table-sticky-header {
-  max-height: 600px !important;
+  max-height: 100% !important;
   margin: 0 !important;
 }
 
@@ -149,6 +163,9 @@ li {
   }
   td {
     background-color: #fff !important;
+  }
+  input {
+    padding: initial;
   }
 }
 

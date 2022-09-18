@@ -7,6 +7,9 @@ export default {
       },
       filters: {},
       methods: {
+        isEmpty(param) {
+          return Object.keys(param).length === 0;
+        },
         dateFormat1(value) {
           value = value.substring(0, 10).replaceAll("-", "");
           return value;

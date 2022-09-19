@@ -9,6 +9,25 @@ li {
   list-style: none;
 }
 
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: url(../images/non-check.svg) center / cover;
+  &:checked {
+    background: url(../images/checked.svg) center / cover;
+  }
+}
+button.close {
+  background-color: transparent;
+  border: 0;
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+}
+
 // 배너
 .banner {
   height: 120px;
@@ -33,6 +52,40 @@ li {
 }
 
 // 홈 메인
+.main-0 {
+  background: url(../images/main_banner.png);
+  height: 590px;
+  .startBtn {
+    background-color: #00eadc;
+    border: none;
+    font-weight: 600;
+    padding: 6px 36px;
+  }
+}
+.main-1 {
+  .logo_banner {
+    margin-top: 30px;
+    height: 50px;
+    background-position: 0;
+    background-size: 1858px;
+    background-repeat: repeat-x;
+    animation: moveBg 20s linear infinite;
+    &.logo_banner1 {
+      background-image: url(../images/logo_banner_1.png);
+    }
+    &.logo_banner2 {
+      background-image: url(../images/logo_banner_2.png);
+    }
+  }
+  @keyframes moveBg {
+    0% {
+      background-position: 0;
+    }
+    100% {
+      background-position: 1858px;
+    }
+  }
+}
 .main-2 {
   background: #fbfbfb;
   .btns {
@@ -44,6 +97,11 @@ li {
       &.active {
         background-color: #00eadc;
       }
+    }
+  }
+  .contents {
+    article {
+      display: none;
     }
   }
 }
@@ -140,10 +198,11 @@ li {
     a {
       font-size: 20px;
       color: #888;
+      font-weight: bolder;
     }
     &.active {
       a {
-        color: #ff656a;
+        color: #00eadc;
       }
     }
   }

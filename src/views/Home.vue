@@ -1,9 +1,164 @@
 <template>
   <div>
     <main>
-      <article>1</article>
+      <article class="main-0">
+        <b-container class="h-100">
+          <b-row class="align-items-center h-100">
+            <b-col class="text-white"
+              ><p class="fw-600 text-30 mb-5">
+                오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와
+                판매를 한번에 도와드립니다.
+              </p>
+              <span class="d-block mb-4"
+                >검색하는 잠재고객에게 매장을 알리고 <br />리뷰/후기를 노출해
+                가게의 신뢰도를 높여보세요.</span
+              >
+              <b-btn pill class="mb-5 startBtn" @click="upDown()"
+                >무료로 광고 시작하기
+                <font-awesome-icon icon="fa-solid fa-chevron-right"
+              /></b-btn>
+              <span class="d-block">상위노출 효과를 직접 경험하세요!</span>
+            </b-col>
+            <b-col cols="5">
+              <div
+                class="bg-white p-5 shadow"
+                :class="{ shake: disabled }"
+                style="border-radius: 20px"
+              >
+                <validation-observer ref="observer" v-slot="{ handleSubmit }">
+                  <b-form @submit.prevent="handleSubmit(submit)">
+                    <div>
+                      <validation-provider
+                        name="성함"
+                        :rules="{ required: true, min: 1 }"
+                        v-slot="validationContext"
+                      >
+                        <b-form-group id="name-input-group" class="mb-3">
+                          <b-form-input
+                            id="name-input"
+                            name="name-input"
+                            v-model="input.name"
+                            placeholder="성함 *"
+                            :state="getValidationState(validationContext)"
+                            aria-describedby="name-input-feedback"
+                          ></b-form-input>
+                          <b-form-invalid-feedback id="name-input-feedback">{{
+                            validationContext.errors[0]
+                          }}</b-form-invalid-feedback>
+                        </b-form-group>
+                      </validation-provider>
+                      <validation-provider
+                        name="업체명"
+                        :rules="{ required: true, min: 1 }"
+                        v-slot="validationContext"
+                      >
+                        <b-form-group id="company-input-group" class="mb-3">
+                          <b-form-input
+                            id="company-input"
+                            name="company-input"
+                            v-model="input.company"
+                            placeholder="업체명 *"
+                            :state="getValidationState(validationContext)"
+                            aria-describedby="company-input-feedback"
+                          ></b-form-input>
+                          <b-form-invalid-feedback
+                            id="company-input-feedback"
+                            >{{
+                              validationContext.errors[0]
+                            }}</b-form-invalid-feedback
+                          >
+                        </b-form-group>
+                      </validation-provider>
+                      <validation-provider
+                        name="연락처"
+                        :rules="{
+                          required: true,
+                          integer: true,
+                          min: 9,
+                          max: 11,
+                        }"
+                        v-slot="validationContext"
+                      >
+                        <b-form-group id="tel-input-group" class="mb-3">
+                          <b-form-input
+                            id="tel-input"
+                            name="tel-input"
+                            type="tel"
+                            v-model="input.phone"
+                            placeholder="전화번호 *"
+                            maxlength="11"
+                            :state="getValidationState(validationContext)"
+                            aria-describedby="tel-input-feedback"
+                          ></b-form-input>
+                          <b-form-invalid-feedback id="tel-input-feedback">{{
+                            validationContext.errors[0]
+                          }}</b-form-invalid-feedback>
+                        </b-form-group>
+                      </validation-provider>
+                    </div>
+                    <div>
+                      <validation-provider
+                        name="개인정보취급방침 이용동의"
+                        :rules="{ required: true }"
+                        v-slot="validationContext"
+                      >
+                        <b-form-checkbox-group
+                          :state="getValidationState(validationContext)"
+                          v-model="check"
+                          id="check-input"
+                        >
+                          <b-form-checkbox
+                            value="개인정보취급방침 이용동의"
+                            class="d-flex align-items-center"
+                          >
+                            <span class="ms-2"
+                              >개인정보 수집 이용 및 마케팅 활용 전체 동의
+                            </span>
+                          </b-form-checkbox>
+                          <!-- <b-btn v-b-modal.check variant="link">
+                            [자세히보기]
+                          </b-btn> -->
+                          <b-form-invalid-feedback id="check-input-feedback">{{
+                            validationContext.errors[0]
+                          }}</b-form-invalid-feedback>
+                        </b-form-checkbox-group>
+                      </validation-provider>
+                      <b-btn
+                        type="submit"
+                        pill
+                        class="mt-4 w-100 border-0 shadow-sm"
+                        style="
+                          background: #00eadc;
+                          font-weight: bold;
+                          font-size: 24px;
+                        "
+                        >무료 상담 신청하기</b-btn
+                      >
+                    </div>
+                  </b-form>
+                </validation-observer>
+              </div>
+            </b-col>
+          </b-row>
+        </b-container>
+      </article>
+      <!-- main 1 -->
+      <article class="main-1">
+        <b-container class="py-5" fluid>
+          <p class="text-center fw-600 text-30 mb-2">
+            수년간 국내 대형 브랜드부터 소형 브랜드까지
+          </p>
+          <span class="d-block text-center"
+            >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서 오늘의 픽을
+            이용하고 있습니다.</span
+          >
+          <div class="logo_banner1 logo_banner"></div>
+          <div class="logo_banner2 logo_banner"></div>
+        </b-container>
+      </article>
+      <!-- main 2 -->
       <article class="main-2">
-        <b-container class="py-5">
+        <b-container class="py-5" fluid>
           <p class="text-center fw-600 text-30 mb-4">
             검색결과 상위에 노출되어 보다 많은 <br />잠재고객에게 가게를
             알려보세요.
@@ -48,6 +203,31 @@
               :class="{ active: activeBtn === 'btn5' }"
               >제품</b-btn
             >
+          </div>
+          <div class="contents">
+            <article :class="{ 'd-block': activeBtn === 'btn1' }">
+              <img
+                src="@/assets/images/main_2_famous.png"
+                class="w-100"
+                alt=""
+              />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn2' }">
+              <img src="@/assets/images/main_2_cafe.png" class="w-100" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn3' }">
+              <img src="@/assets/images/main_2_food.png" class="w-100" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn4' }">
+              <img src="@/assets/images/main_2_shop.png" class="w-100" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn5' }">
+              <img
+                src="@/assets/images/main_2_product.png"
+                class="w-100"
+                alt=""
+              />
+            </article>
           </div>
         </b-container>
       </article>
@@ -197,7 +377,10 @@
                 <span>A</span> 10만 원 대부터 시작하여 각 상품마다 비용이 다르기
                 때문에 자세한 비용은 상담을 통해 안내해드리겠습니다.
               </div>
-              <b-btn pill>상담 신청하기 ></b-btn>
+              <b-btn pill @click="goToTop()"
+                >상담 신청하기
+                <font-awesome-icon icon="fa-solid fa-chevron-right"
+              /></b-btn>
             </li>
             <li>
               <div class="q">
@@ -208,7 +391,10 @@
                 강원 제외) 고민은 시간만 늦출 뿐! 지금 바로 무료 상담을
                 신청하세요.
               </div>
-              <b-btn pill>상담 신청하기 ></b-btn>
+              <b-btn pill @click="goToTop()"
+                >상담 신청하기
+                <font-awesome-icon icon="fa-solid fa-chevron-right"
+              /></b-btn>
             </li>
             <li>
               <div class="q">
@@ -218,28 +404,99 @@
                 <span>A</span> 당연히 가능해요. 상품에 따라 컨설팅을
                 도와드리겠습니다.
               </div>
-              <b-btn pill>상담 신청하기 ></b-btn>
+              <b-btn pill @click="goToTop()"
+                >상담 신청하기
+                <font-awesome-icon icon="fa-solid fa-chevron-right"
+              /></b-btn>
             </li>
           </ul>
         </b-container>
       </article>
     </main>
     <BottomBanner />
+    <Check />
   </div>
 </template>
 
 <script>
 import BottomBanner from "@/components/Banner/BottomBanner.vue";
+import Check from "@/components/Modal/Check.vue";
+
 export default {
   name: "Home",
-  components: { BottomBanner },
+  components: { BottomBanner, Check },
   data() {
     return {
       activeBtn: "btn1",
       activeBtn2: "btn1",
+      input: {
+        name: null,
+        phone: null,
+        company: null,
+      },
+      check: [],
+      disabled: false,
     };
+  },
+  methods: {
+    goToTop() {
+      window.scrollTo(0, 0);
+    },
+    async submit() {
+      console.log("신청완료");
+    },
+    getValidationState({ dirty, validated, valid = null }) {
+      return dirty || validated ? valid : null;
+    },
+    upDown() {
+      this.disabled = true;
+      setTimeout(() => {
+        this.disabled = false;
+      }, 1000);
+    },
+  },
+  watch: {
+    check(n, o) {
+      if (o.length == 0) {
+        this.$bvModal.show("check");
+      }
+    },
   },
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#check-input {
+  #check-input-feedback {
+    display: block;
+    margin: 0;
+  }
+}
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
+</style>

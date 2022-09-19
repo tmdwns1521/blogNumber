@@ -1,5 +1,5 @@
 <template>
-  <nav class="left-nav p-4">
+  <nav class="left-nav py-4">
     <b-navbar-nav>
       <b-nav-item
         to="/manage/sales"

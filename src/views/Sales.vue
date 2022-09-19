@@ -476,14 +476,14 @@
                 <b-btn variant="dark" class="ms-2" @click="addData()"
                   >등록완료</b-btn
                 >
-                <b-btn class="ms-2" @click="addTag = false">취소</b-btn>
+                <b-btn class="ms-2" @click="addCancel()">취소</b-btn>
               </template>
               <!-- 수정일 때 -->
               <template v-else-if="updateTag == true">
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
-                <b-btn class="ms-2" @click="updateTag = false">취소</b-btn>
+                <b-btn class="ms-2" @click="updateCancel()">취소</b-btn>
               </template>
               <!-- 기본 -->
               <template v-else>
@@ -870,11 +870,36 @@ export default {
   },
   methods: {
     // 신규등록 완료
-    addData() {
+    async addData() {
+      // const isAllEmpty = (object) =>
+      //   !Object.values(object).every((x) => x !== null && x !== "");
+
+      // if (isAllEmpty(this.newData)) {
+      //   window.alert("필수 값들을 모두 입력해주세요.", {
+      //     title: "필수 값 미입력",
+      //   });
+      // } else {
+      //   this.addTag = false;
+      // }
+      window.alert("신규등록 성공");
+      this.addTag = false;
+    },
+    // 신규등록 취소
+    addCancel() {
       this.addTag = false;
     },
     // 수정 완료
-    updateData() {
+    async updateData() {
+      window.alert("수정 성공");
+      this.updateTag = false;
+    },
+    // 수정 취소
+    updateCancel() {
+      this.salesItems.forEach((el) => {
+        if (this.currentData._id === el._id) {
+          this.currentData = { ...el };
+        }
+      });
       this.updateTag = false;
     },
     onRowSelected(items) {
@@ -882,7 +907,7 @@ export default {
       items = items[0];
       this.currentData = { ...items };
     },
-    async salesData() {
+    async getSalesData() {
       const data = await this.$axios.get("/api/salesData");
       console.log(data.data);
       this.salesItems = data.data;
@@ -892,7 +917,7 @@ export default {
     },
   },
   mounted() {
-    this.salesData();
+    this.getSalesData();
   },
   computed: {},
 };

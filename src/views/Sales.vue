@@ -124,13 +124,14 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.trfficData.blog"
+                      disabled
+                      v-model="currentData.blogId"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.trfficData.blog"
+                      disabled
+                      v-model="newData.blogId"
                     ></b-form-input>
                   </template>
                 </b-td>
@@ -163,11 +164,11 @@
                     <b-form-input
                       v-else
                       :disabled="!updateTag"
-                      v-model="currentData.blogPw"
+                      v-model="currentData.blogPW"
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input v-model="newData.blogPw"></b-form-input>
+                    <b-form-input v-model="newData.blogPW"></b-form-input>
                   </template>
                 </b-td>
               </b-tr>
@@ -220,12 +221,15 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.Email"
+                      disabled
+                      v-model="currentData.blogId"
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input v-model="newData.Email"></b-form-input>
+                    <b-form-input
+                      disabled
+                      v-model="newData.blogId"
+                    ></b-form-input>
                   </template>
                 </b-td>
               </b-tr>
@@ -251,7 +255,7 @@
                 ></b-td>
                 <b-th>결제방법</b-th>
                 <b-td>
-                  <template v-if="!addTag">
+                  <!-- <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -267,7 +271,8 @@
                     <b-form-input
                       v-model="newData.cardData.creditCardCompany"
                     ></b-form-input> </template
-                ></b-td>
+                > -->
+                </b-td>
                 <b-th>결제금액</b-th>
                 <b-td>
                   <template v-if="!addTag">
@@ -292,7 +297,7 @@
               <b-tr>
                 <b-th>카드사</b-th>
                 <b-td>
-                  <template v-if="!addTag">
+                  <!-- <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -308,11 +313,11 @@
                     <b-form-input
                       v-model="newData.cardData.creditCardCompany"
                     ></b-form-input>
-                  </template>
+                  </template> -->
                 </b-td>
                 <b-th>카드소유자</b-th>
                 <b-td>
-                  <template v-if="!addTag">
+                  <!-- <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -328,10 +333,11 @@
                     <b-form-input
                       v-model="newData.cardData.cardholder"
                     ></b-form-input> </template
-                ></b-td>
+                > -->
+                </b-td>
                 <b-th>카드번호</b-th>
                 <b-td>
-                  <template v-if="!addTag">
+                  <!-- <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -347,12 +353,13 @@
                     <b-form-input
                       v-model="newData.cardData.creditCardNumber"
                     ></b-form-input> </template
-                ></b-td>
+                > -->
+                </b-td>
               </b-tr>
               <b-tr>
                 <b-th>카드유효기간</b-th>
                 <b-td>
-                  <template v-if="!addTag">
+                  <!-- <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -368,7 +375,8 @@
                     <b-form-input
                       v-model="newData.cardData.CardValidityPeriod"
                     ></b-form-input> </template
-                ></b-td>
+                > -->
+                </b-td>
                 <b-th>카드승인번호</b-th>
                 <b-td>
                   <template v-if="!addTag">
@@ -598,34 +606,49 @@
           emptyFilteredText="찾으시는 검색어와 일치하는 정보가 없습니다."
           emptyText="데이터 정보가 없습니다."
         >
-          <!-- No. -->
           <template #cell(index)="row">
             {{ row.item.index + 1 }}
           </template>
-          <!-- 계약번호 -->
+          <template #cell(url)="row">
+            https://blog.naver.com/{{ row.item.blogId }}
+          </template>
+          <template #cell(email)="row">
+            {{ row.item.blogId }}@naver.com
+          </template>
+
           <template #cell(ContractNumber)="row">
             {{ dateFormat1(row.item.ContractNumber) }}
           </template>
-          <!-- 결제일 -->
+
           <template #cell(payDate)="row">
             {{ dateFormat2(row.item.ContractNumber) }}
           </template>
-          <!-- 시작일 -->
+
           <template #cell(trfficDataCreated)="row">
-            {{ dateFormat2(row.item.trfficData.created_at) }}
+            {{
+              row.item.trfficData
+                ? dateFormat2(row.item.trfficData.created_at)
+                : "-"
+            }}
           </template>
-          <!-- 종료일 -->
+
           <template #cell(trfficDataExpiration)="row">
-            {{ dateFormat2(row.item.trfficData.cexpiration_date) }}
+            {{
+              row.item.trfficData
+                ? dateFormat2(row.item.trfficData.cexpiration_date)
+                : "-"
+            }}
           </template>
-          <!-- 실시간트래픽 -->
+
           <template #cell(trfficDataTodayCount)="row">
-            {{ row.item.trfficData.today_remain_count }}
+            {{
+              row.item.trfficData ? row.item.trfficData.today_remain_count : "-"
+            }}
           </template>
           <template #cell(AmountOfPayment)="row">
             {{ numberToString(parseInt(row.item.AmountOfPayment)) }}원
           </template>
-          <!-- 디자인체크 -->
+
           <template #cell(designChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -641,7 +664,7 @@
               />
             </div>
           </template>
-          <!-- 트래픽체크 -->
+
           <template #cell(trafficChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -657,7 +680,7 @@
               />
             </div>
           </template>
-          <!-- 확인체크 -->
+
           <template #cell(doneChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -729,7 +752,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "Email",
+          key: "email",
           label: "이메일",
           thClass: "table-secondary",
         },
@@ -739,7 +762,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "trfficData.blog",
+          key: "url",
           label: "URL",
           thClass: "table-secondary",
         },
@@ -749,7 +772,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "blogPw",
+          key: "blogPW",
           label: "비밀번호",
           thClass: "table-secondary",
         },
@@ -843,17 +866,18 @@ export default {
       filter: "",
       currentData: {},
       newData: {
+        ContractNumber: null,
         manager: null,
         businessName: null,
         owner: null,
-        trfficData: {},
+        // trfficData: {},
         blogId: null,
         blogPw: null,
         CompanyNumber: null,
         phone: null,
-        Email: null,
+        // Email: null,
         address: null,
-        cardData: {},
+        // cardData: {},
         AmountOfPayment: null,
         ApprovalNumber: null,
         installmentMonth: null,
@@ -871,6 +895,30 @@ export default {
   methods: {
     // 신규등록 완료
     async addData() {
+      let form = {
+        AmountOfPayment: "10000",
+        manager: "민경재",
+        owner: "김한솔",
+        blogId: "celkey",
+        blogPW: "tmdwns1521",
+        businessName: "롯데리아",
+        phone: "010-2524-4865",
+        contractProduct: "B 1000",
+        address: "서울시 관악구 ",
+        CompanyNumber: "회사명",
+        Term: "3",
+        installmentMonth: "3",
+        ApprovalNumber: "3",
+        Note: "정상",
+        cardholder: "김부각",
+        creditCardCompany: "현대카드",
+        creditCardNumber: "4022-4498-4848-1848",
+        CardValidityPeriod: "07/28",
+        ContractNumber: new Date().setHours(new Date().getHours() + 9),
+      };
+
+      const data = await this.$axios.post("/api/saleData", form);
+      console.log(data);
       // const isAllEmpty = (object) =>
       //   !Object.values(object).every((x) => x !== null && x !== "");
 
@@ -883,6 +931,7 @@ export default {
       // }
       window.alert("신규등록 성공");
       this.addTag = false;
+      this.getSalesData();
     },
     // 신규등록 취소
     addCancel() {
@@ -910,9 +959,17 @@ export default {
     async getSalesData() {
       const data = await this.$axios.get("/api/salesData");
       console.log(data.data);
-      this.salesItems = data.data;
+      const datas = data.data;
+      const dataList = [];
+      for (const i of datas) {
+        if (i.Approved === false) {
+          dataList.push(i);
+        }
+      }
+      this.salesItems = dataList;
       this.salesItems.forEach((el, index) => {
         this.$set(el, "index", index);
+        console.log(el.Approved);
       });
     },
   },

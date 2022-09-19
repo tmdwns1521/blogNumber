@@ -1,6 +1,7 @@
 <template>
   <div>
     <main>
+      <!-- main 0 -->
       <article class="main-0">
         <b-container class="h-100">
           <b-row class="align-items-center h-100">
@@ -366,7 +367,7 @@
       </article>
       <!-- main 5 -->
       <article class="main-5">
-        <b-container class="py-5">
+        <b-container class="py-5 d-none d-lg-block">
           <p class="text-center text-white text-30 mb-4">
             퍼포먼스 마케팅이 궁금하신가요? <br />언제든지 문의 주세요.
           </p>
@@ -411,6 +412,7 @@
             </li>
           </ul>
         </b-container>
+        <b-container class="d-lg-none d-block"> </b-container>
       </article>
     </main>
     <BottomBanner />

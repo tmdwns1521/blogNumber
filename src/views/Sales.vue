@@ -60,327 +60,439 @@
               <b-tr>
                 <b-th>담당자</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.manager"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.manager"
-                    v-model="currentData.manager"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.manager"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.manager"></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>상호명</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.businessName"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.businessName"
-                    v-model="currentData.businessName"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.businessName"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.businessName"></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>대표자</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.owner"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.owner"
-                    v-model="currentData.owner"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.owner"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.owner"></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>URL</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.trfficData.blog"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.trfficData"
-                    v-model="currentData.trfficData.blog"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.trfficData.blog"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.trfficData.blog"
+                    ></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>아이디</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.blogId"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.blogId"
-                    v-model="currentData.blogId"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.blogId"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.blogId"></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>비밀번호</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.blogPw"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.blogPw"
-                    v-model="currentData.blogPw"
-                    :disabled="!editDataAbled"
-                  ></b-form-input>
-                  <b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.blogPw"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.blogPw"></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>사업자등록번호</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.CompanyNumber"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.CompanyNumber"
-                    v-model="currentData.CompanyNumber"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
-                ></b-td>
-
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.CompanyNumber"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.CompanyNumber"
+                    ></b-form-input>
+                  </template>
+                </b-td>
                 <b-th>연락처</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.phone"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.phone"
-                    v-model="currentData.phone"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
-                ></b-td>
-
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.phone"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.phone"></b-form-input>
+                  </template>
+                </b-td>
                 <b-th>이메일</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.Email"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.Email"
-                    v-model="currentData.Email"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
-                ></b-td>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.Email"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.Email"></b-form-input>
+                  </template>
+                </b-td>
               </b-tr>
               <b-tr>
                 <b-th>주소</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.address"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.address"
-                    v-model="currentData.address"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.address"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.address"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>결제방법</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.cardData.creditCardCompany"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.cardData"
-                    v-model="currentData.cardData.creditCardCompany"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.cardData.creditCardCompany"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.cardData.creditCardCompany"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>결제금액</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.AmountOfPayment"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.AmountOfPayment"
-                    v-model="currentData.AmountOfPayment"
-                    :disabled="!editDataAbled"
-                  >
-                    원 </b-form-input
-                  ><b-form-input v-else disabled></b-form-input>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.AmountOfPayment"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.AmountOfPayment"
+                    ></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>카드사</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.cardData.creditCardCompany"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.cardData"
-                    v-model="currentData.cardData.creditCardCompany"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
-                ></b-td>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.cardData.creditCardCompany"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.cardData.creditCardCompany"
+                    ></b-form-input>
+                  </template>
+                </b-td>
                 <b-th>카드소유자</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.cardData.cardholder"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.cardData"
-                    v-model="currentData.cardData.cardholder"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.cardData.cardholder"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.cardData.cardholder"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>카드번호</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.cardData.creditCardNumber"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.cardData"
-                    v-model="currentData.cardData.creditCardNumber"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.cardData.creditCardNumber"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.cardData.creditCardNumber"
+                    ></b-form-input> </template
                 ></b-td>
               </b-tr>
               <b-tr>
                 <b-th>카드유효기간</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.cardData.CardValidityPeriod"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.cardData"
-                    v-model="currentData.cardData.CardValidityPeriod"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.cardData.CardValidityPeriod"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.cardData.CardValidityPeriod"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>카드승인번호</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.ApprovalNumber"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.ApprovalNumber"
-                    v-model="currentData.ApprovalNumber"
-                    :disabled="!editDataAbled"
-                  >
-                  </b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.ApprovalNumber"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.ApprovalNumber"
+                    ></b-form-input> </template
                 ></b-td>
                 <b-th>할부개월</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.installmentMonth"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.installmentMonth"
-                    v-model="currentData.installmentMonth"
-                    :disabled="!editDataAbled"
-                  >
-                  </b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.installmentMonth"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.installmentMonth"
+                    ></b-form-input> </template
                 ></b-td>
               </b-tr>
               <b-tr>
                 <b-th>계약기간</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.Term"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.Term"
-                    v-model="currentData.Term"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.Term"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.Term"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>계약상품</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.contractProduct"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.contractProduct"
-                    v-model="currentData.contractProduct"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.contractProduct"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.contractProduct"
+                    ></b-form-input> </template
                 ></b-td>
-
                 <b-th>비고</b-th>
                 <b-td>
-                  <b-form-input
-                    v-if="newDataShow == true"
-                    v-model="newData.Note"
-                  ></b-form-input>
-                  <b-form-input
-                    v-else-if="currentData.Note"
-                    v-model="currentData.Note"
-                    :disabled="!editDataAbled"
-                  ></b-form-input
-                  ><b-form-input v-else disabled></b-form-input
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.Note"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.Note"
+                    ></b-form-input> </template
                 ></b-td>
               </b-tr>
             </b-tbody>
           </b-table-simple>
           <b-row class="justify-content-between align-items-center">
             <b-col class="text-end">
-              <template v-if="newDataShow == true">
-                <b-btn variant="dark" class="ms-2" @click="newDataDone()"
+              <!-- 신규등록일 때 -->
+              <template v-if="addTag == true">
+                <b-btn variant="dark" class="ms-2" @click="addData()"
                   >등록완료</b-btn
                 >
-                <b-btn class="ms-2" @click="newDataShow = false">취소</b-btn>
+                <b-btn class="ms-2" @click="addTag = false">취소</b-btn>
               </template>
-              <template v-else-if="editDataAbled == true">
-                <b-btn
-                  variant="dark"
-                  class="ms-2"
-                  @click="editDataAbled = false"
+              <!-- 수정일 때 -->
+              <template v-else-if="updateTag == true">
+                <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
-                <b-btn class="ms-2" @click="editDataAbled = false">취소</b-btn>
+                <b-btn class="ms-2" @click="updateTag = false">취소</b-btn>
               </template>
+              <!-- 기본 -->
               <template v-else>
-                <b-btn variant="dark" class="ms-2" @click="newDataStart()"
+                <b-btn variant="dark" class="ms-2" @click="addTag = true"
                   >신규등록</b-btn
                 >
                 <b-btn
                   class="ms-2"
-                  @click="editDataAbled = !editDataAbled"
+                  @click="updateTag = true"
                   :disabled="isEmpty(currentData)"
                   >수정</b-btn
                 >
@@ -729,33 +841,7 @@ export default {
       ],
       salesItems: null,
       filter: "",
-      currentData: {
-        // manager: null,
-        // businessName: null,
-        // owner: null,
-        // trfficData: {
-        //   // blog: null,
-        // },
-        // blogId: null,
-        // blogPw: null,
-        // CompanyNumber: null,
-        // phone: null,
-        // Email: null,
-        // address: null,
-        // cardData: {
-        //   // creditCardCompany: null,
-        //   // cardholder: null,
-        //   // creditCardNumber: null,
-        //   // CardValidityPeriod: null,
-        // },
-        // AmountOfPayment: null,
-        // ApprovalNumber: null,
-        // installmentMonth: null,
-        // Term: null,
-        // contractProduct: null,
-        // Note: null,
-      },
-      newDataShow: false,
+      currentData: {},
       newData: {
         manager: null,
         businessName: null,
@@ -775,23 +861,24 @@ export default {
         contractProduct: null,
         Note: null,
       },
-      editDataAbled: false,
+      addTag: false,
+      updateTag: false,
+      empty: "-",
       schStartDate: "",
       schEndDate: "",
     };
   },
   methods: {
-    // 신규등록 시작
-    newDataStart() {
-      this.newDataShow = true;
-    },
     // 신규등록 완료
-    newDataDone() {
-      this.newDataShow = false;
-      console.log(this.newData);
+    addData() {
+      this.addTag = false;
+    },
+    // 수정 완료
+    updateData() {
+      this.updateTag = false;
     },
     onRowSelected(items) {
-      this.newDataShow = false;
+      this.addTag = false;
       items = items[0];
       this.currentData = { ...items };
     },

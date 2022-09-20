@@ -18,7 +18,7 @@
             :items="orderItems"
             :fields="orderFields"
             selected-variant="white"
-            class="dataTable orderTable"
+            class="dataTable orderTable mb-3"
             ref="orderTable"
             show-empty
             emptyText="데이터 정보가 없습니다."
@@ -27,6 +27,7 @@
               <div class="text-center">
                 <font-awesome-icon
                   v-if="rowSelected"
+                  class="text-primary"
                   icon="fa-solid fa-check"
                 />
               </div>
@@ -63,16 +64,134 @@
             </template>
           </b-table>
           <b-row class="justify-content-between align-items-center">
-            <b-col class="">
+            <!-- <b-col class="">
               <b-btn @click="selectAllRows">전체 선택</b-btn>
               <b-btn @click="clearSelected">초기화</b-btn>
-            </b-col>
+            </b-col> -->
             <b-col class="text-end">
               <b-btn variant="dark">승인</b-btn>
             </b-col>
           </b-row>
         </b-col>
-        <b-col>2</b-col>
+        <b-col>
+          <b-table-simple small bordered fixed class="currentTable">
+            <b-tbody>
+              <b-tr>
+                <b-th>계약번호</b-th>
+                <b-th>담당자</b-th>
+                <b-th>상호명</b-th>
+                <b-th>대표자</b-th>
+                <b-th>계약상품</b-th>
+                <b-th>결제금액</b-th>
+              </b-tr>
+              <b-tr>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ dateFormat1(currentData.ContractNumber)}}
+                  </template>
+                </b-td>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ dateFormat1(currentData.manager)}}
+                  </template>
+                </b-td>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ dateFormat1(currentData.businessName)}}
+                  </template>
+                </b-td>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ dateFormat1(currentData.owner)}}
+                  </template>
+                </b-td>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ dateFormat1(currentData.contractProduct)}}
+                  </template>
+                </b-td>
+                <b-td>
+                  <template v-if="isEmpty(currentData)">
+                    {{empty}}
+                  </template>
+                  <template v-else>
+                    {{ numberToString(currentData.AmountOfPayment)}}
+                  </template>
+                </b-td>
+                
+              </b-tr>
+                <!-- <b-td>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.manager"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.manager"></b-form-input>
+                  </template>
+                </b-td>
+                <b-th>상호명</b-th>
+                <b-td>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.businessName"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.businessName"></b-form-input>
+                  </template>
+                </b-td>
+                <b-th>대표자</b-th>
+                <b-td>
+                  <template v-if="!addTag">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="currentData.owner"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="newData.owner"></b-form-input>
+                  </template>
+                </b-td> -->
+              </b-tr>
+            </b-tbody>
+          </b-table-simple>
+        </b-col>
       </b-row>
     </div>
     <b-tabs content-class="p-4" no-fade>

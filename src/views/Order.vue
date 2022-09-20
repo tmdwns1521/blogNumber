@@ -36,14 +36,18 @@
             </template>
 
             <template #cell(designChk)="row">
-              <b-form-group class="text-center">
-                <b-form-checkbox v-model="row.item.designChk"></b-form-checkbox>
-              </b-form-group>
+              <div class="text-center">
+                <b-form-checkbox
+                  switch
+                  v-model="row.item.designChk"
+                ></b-form-checkbox>
+              </div>
             </template>
 
             <template #cell(trafficChk)="row">
               <b-form-group class="text-center">
                 <b-form-checkbox
+                  switch
                   v-model="row.item.trafficChk"
                 ></b-form-checkbox>
               </b-form-group>
@@ -52,6 +56,7 @@
             <template #cell(etcProductChk)="row">
               <b-form-group class="text-center">
                 <b-form-checkbox
+                  switch
                   v-model="row.item.etcProductChk"
                 ></b-form-checkbox>
               </b-form-group>

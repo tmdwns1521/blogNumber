@@ -12,7 +12,6 @@
             small
             head-variant="dark"
             bordered
-            hover
             selectable
             select-mode="multi"
             :sticky-header="true"

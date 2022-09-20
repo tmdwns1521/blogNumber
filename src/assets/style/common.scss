@@ -9,16 +9,16 @@ li {
   list-style: none;
 }
 
-input[type="checkbox"] {
-  cursor: pointer;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  background: url(../images/non-check.svg) center / cover;
-  &:checked {
-    background: url(../images/checked.svg) center / cover;
-  }
-}
+// input[type="checkbox"] {
+//   cursor: pointer;
+//   appearance: none;
+//   width: 20px;
+//   height: 20px;
+//   background: url(../images/non-check.svg) center / cover;
+//   &:checked {
+//     background: url(../images/checked.svg) center / cover;
+//   }
+// }
 button.close {
   background-color: transparent;
   border: 0;

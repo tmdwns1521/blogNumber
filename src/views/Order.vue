@@ -1,11 +1,76 @@
 <template>
-  <div class="sales-page">
+  <div class="order-page">
     <b-row class="justify-content-between align-items-center mb-3">
       <b-col>
         <h1 class="text-25 m-0">주문관리</h1>
       </b-col>
     </b-row>
-    <div style="max-width: 1500px"></div>
+    <div style="max-width: 1500px" class="mb-4">
+      <b-row>
+        <b-col>
+          <b-table
+            small
+            head-variant="dark"
+            bordered
+            hover
+            selectable
+            select-mode="multi"
+            :sticky-header="true"
+            :items="orderItems"
+            :fields="orderFields"
+            selected-variant="white"
+            class="dataTable orderTable"
+            ref="orderTable"
+            show-empty
+            emptyText="데이터 정보가 없습니다."
+          >
+            <template #cell(selected)="{ rowSelected }">
+              <div class="text-center">
+                <font-awesome-icon
+                  v-if="rowSelected"
+                  icon="fa-solid fa-check"
+                />
+              </div>
+            </template>
+            <template #cell(ContractNumber)="row">
+              {{ dateFormat1(row.item.ContractNumber) }}
+            </template>
+
+            <template #cell(designChk)="row">
+              <b-form-group class="text-center">
+                <b-form-checkbox v-model="row.item.designChk"></b-form-checkbox>
+              </b-form-group>
+            </template>
+
+            <template #cell(trafficChk)="row">
+              <b-form-group class="text-center">
+                <b-form-checkbox
+                  v-model="row.item.trafficChk"
+                ></b-form-checkbox>
+              </b-form-group>
+            </template>
+
+            <template #cell(etcProductChk)="row">
+              <b-form-group class="text-center">
+                <b-form-checkbox
+                  v-model="row.item.etcProductChk"
+                ></b-form-checkbox>
+              </b-form-group>
+            </template>
+          </b-table>
+          <b-row class="justify-content-between align-items-center">
+            <b-col class="">
+              <b-btn @click="selectAllRows">전체 선택</b-btn>
+              <b-btn @click="clearSelected">초기화</b-btn>
+            </b-col>
+            <b-col class="text-end">
+              <b-btn variant="dark">승인</b-btn>
+            </b-col>
+          </b-row>
+        </b-col>
+        <b-col>2</b-col>
+      </b-row>
+    </div>
     <b-tabs content-class="p-4" no-fade>
       <b-tab title="메인" active>
         <div class="justify-content-between align-items-center mb-3 d-flex">
@@ -95,41 +160,57 @@
           :sticky-header="true"
           :items="salesItems"
           :fields="fields"
-          class="dataTable"
+          class="dataTable salesTable"
           :filter="filter"
           ref="selectableTable"
           show-empty
           emptyFilteredText="찾으시는 검색어와 일치하는 정보가 없습니다."
           emptyText="데이터 정보가 없습니다."
         >
-          <!-- No. -->
           <template #cell(index)="row">
             {{ row.item.index + 1 }}
           </template>
-          <!-- 계약번호 -->
+          <template #cell(url)="row">
+            https://blog.naver.com/{{ row.item.blogId }}
+          </template>
+          <template #cell(email)="row">
+            {{ row.item.blogId }}@naver.com
+          </template>
           <template #cell(ContractNumber)="row">
             {{ dateFormat1(row.item.ContractNumber) }}
           </template>
-          <!-- 결제일 -->
+
           <template #cell(payDate)="row">
             {{ dateFormat2(row.item.ContractNumber) }}
           </template>
-          <!-- 시작일 -->
+
           <template #cell(trfficDataCreated)="row">
-            {{ dateFormat2(row.item.trfficData.created_at) }}
+            {{
+              row.item.trfficData
+                ? dateFormat2(row.item.trfficData.created_at)
+                : empty
+            }}
           </template>
-          <!-- 종료일 -->
+
           <template #cell(trfficDataExpiration)="row">
-            {{ dateFormat2(row.item.trfficData.cexpiration_date) }}
+            {{
+              row.item.trfficData
+                ? dateFormat2(row.item.trfficData.cexpiration_date)
+                : empty
+            }}
           </template>
-          <!-- 실시간트래픽 -->
+
           <template #cell(trfficDataTodayCount)="row">
-            {{ row.item.trfficData.today_remain_count }}
+            {{
+              row.item.trfficData
+                ? isNegative(row.item.trfficData.today_remain_count)
+                : empty
+            }}
           </template>
           <template #cell(AmountOfPayment)="row">
-            {{ numberToString(parseInt(row.item.AmountOfPayment)) }}원
+            {{ numberToString(row.item.AmountOfPayment) }}원
           </template>
-          <!-- 디자인체크 -->
+
           <template #cell(designChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -145,7 +226,7 @@
               />
             </div>
           </template>
-          <!-- 트래픽체크 -->
+
           <template #cell(trafficChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -161,7 +242,7 @@
               />
             </div>
           </template>
-          <!-- 확인체크 -->
+
           <template #cell(doneChk)="row">
             <div class="text-center">
               <font-awesome-icon
@@ -191,6 +272,48 @@ export default {
   name: "Sales",
   data() {
     return {
+      orderFields: [
+        {
+          key: "selected",
+          label: "선택",
+          thClass: "table-secondary",
+        },
+        {
+          key: "ContractNumber",
+          label: "계약번호",
+          thClass: "table-secondary",
+        },
+        {
+          key: "manager",
+          label: "담당자",
+          thClass: "table-secondary",
+        },
+        {
+          key: "owner",
+          label: "대표자",
+          thClass: "table-secondary",
+        },
+        {
+          key: "contractProduct",
+          label: "계약상품",
+          thClass: "table-secondary",
+        },
+        {
+          key: "designChk",
+          label: "디자인",
+          thClass: "table-secondary",
+        },
+        {
+          key: "trafficChk",
+          label: "트래픽",
+          thClass: "table-secondary",
+        },
+        {
+          key: "etcProductChk",
+          label: "기타상품",
+          thClass: "table-secondary",
+        },
+      ],
       fields: [
         {
           key: "index",
@@ -233,7 +356,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "Email",
+          key: "email",
           label: "이메일",
           thClass: "table-secondary",
         },
@@ -243,7 +366,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "trfficData.blog",
+          key: "url",
           label: "URL",
           thClass: "table-secondary",
         },
@@ -253,7 +376,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "blogPw",
+          key: "blogPW",
           label: "비밀번호",
           thClass: "table-secondary",
         },
@@ -344,26 +467,29 @@ export default {
         },
       ],
       salesItems: null,
+      orderItems: null,
       filter: "",
       currentData: {},
       newData: {
-        manager: null,
-        businessName: null,
-        owner: null,
-        trfficData: {},
-        blogId: null,
-        blogPw: null,
-        CompanyNumber: null,
-        phone: null,
-        Email: null,
-        address: null,
-        cardData: {},
         AmountOfPayment: null,
-        ApprovalNumber: null,
-        installmentMonth: null,
-        Term: null,
+        manager: null,
+        owner: null,
+        blogId: null,
+        blogPW: null,
+        businessName: null,
+        phone: null,
         contractProduct: null,
+        address: null,
+        CompanyNumber: null,
+        Term: null,
+        installmentMonth: null,
+        ApprovalNumber: null,
         Note: null,
+        cardholder: null,
+        creditCardCompany: null,
+        creditCardNumber: null,
+        CardValidityPeriod: null,
+        ContractNumber: new Date().setHours(new Date().getHours() + 9),
       },
       addTag: false,
       updateTag: false,
@@ -373,30 +499,39 @@ export default {
     };
   },
   methods: {
-    // 신규등록 완료
-    addData() {
-      this.addTag = false;
+    selectAllRows() {
+      this.$refs.orderTable.selectAllRows();
     },
-    // 수정 완료
-    updateData() {
-      this.updateTag = false;
+    clearSelected() {
+      this.$refs.orderTable.clearSelected();
     },
     onRowSelected(items) {
       this.addTag = false;
       items = items[0];
       this.currentData = { ...items };
     },
-    async salesData() {
+    async getSalesData() {
       const data = await this.$axios.get("/api/salesData");
       console.log(data.data);
-      this.salesItems = data.data;
+      const datas = data.data;
+      const dataList = [];
+      const orderList = [];
+      for (const i of datas) {
+        if (i.Approved === false) {
+          dataList.push(i);
+          orderList.push(i);
+        }
+      }
+      this.salesItems = dataList;
+      this.orderItems = orderList;
       this.salesItems.forEach((el, index) => {
         this.$set(el, "index", index);
+        console.log(el.Approved);
       });
     },
   },
   mounted() {
-    this.salesData();
+    this.getSalesData();
   },
   computed: {},
 };

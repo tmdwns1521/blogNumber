@@ -122,17 +122,12 @@
                       disabled
                       :value="empty"
                     ></b-form-input>
-                    <b-form-input
-                      v-else
-                      disabled
-                      v-model="currentData.blogId"
-                    ></b-form-input>
+                    <template v-else>
+                      https://blog.naver.com/{{ currentData.blogId }}
+                    </template>
                   </template>
                   <template v-else>
-                    <b-form-input
-                      disabled
-                      v-model="newData.blogId"
-                    ></b-form-input>
+                    https://blog.naver.com/{{ newData.blogId }}
                   </template>
                 </b-td>
                 <b-th>아이디</b-th>
@@ -219,18 +214,11 @@
                       disabled
                       :value="empty"
                     ></b-form-input>
-                    <b-form-input
-                      v-else
-                      disabled
-                      v-model="currentData.blogId"
-                    ></b-form-input>
+                    <template v-else>
+                      {{ currentData.blogId }}@naver.com
+                    </template>
                   </template>
-                  <template v-else>
-                    <b-form-input
-                      disabled
-                      v-model="newData.blogId"
-                    ></b-form-input>
-                  </template>
+                  <template v-else> {{ newData.blogId }}@naver.com </template>
                 </b-td>
               </b-tr>
               <b-tr>
@@ -255,7 +243,7 @@
                 ></b-td>
                 <b-th>결제방법</b-th>
                 <b-td>
-                  <!-- <template v-if="!addTag">
+                  <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -269,9 +257,9 @@
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.cardData.creditCardCompany"
-                    ></b-form-input> </template
-                > -->
+                      v-model="newData.creditCardCompany"
+                    ></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>결제금액</b-th>
                 <b-td>
@@ -297,7 +285,7 @@
               <b-tr>
                 <b-th>카드사</b-th>
                 <b-td>
-                  <!-- <template v-if="!addTag">
+                  <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -311,13 +299,13 @@
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.cardData.creditCardCompany"
+                      v-model="newData.creditCardCompany"
                     ></b-form-input>
-                  </template> -->
+                  </template>
                 </b-td>
                 <b-th>카드소유자</b-th>
                 <b-td>
-                  <!-- <template v-if="!addTag">
+                  <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -330,14 +318,12 @@
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input
-                      v-model="newData.cardData.cardholder"
-                    ></b-form-input> </template
-                > -->
+                    <b-form-input v-model="newData.cardholder"></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>카드번호</b-th>
                 <b-td>
-                  <!-- <template v-if="!addTag">
+                  <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -351,15 +337,15 @@
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.cardData.creditCardNumber"
-                    ></b-form-input> </template
-                > -->
+                      v-model="newData.creditCardNumber"
+                    ></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>카드유효기간</b-th>
                 <b-td>
-                  <!-- <template v-if="!addTag">
+                  <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
                       disabled
@@ -373,9 +359,9 @@
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.cardData.CardValidityPeriod"
-                    ></b-form-input> </template
-                > -->
+                      v-model="newData.CardValidityPeriod"
+                    ></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>카드승인번호</b-th>
                 <b-td>
@@ -484,14 +470,18 @@
                 <b-btn variant="dark" class="ms-2" @click="addData()"
                   >등록완료</b-btn
                 >
-                <b-btn class="ms-2" @click="addCancel()">취소</b-btn>
+                <b-btn class="ms-2" variant="danger" @click="addCancel()"
+                  >취소</b-btn
+                >
               </template>
               <!-- 수정일 때 -->
               <template v-else-if="updateTag == true">
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
-                <b-btn class="ms-2" @click="updateCancel()">취소</b-btn>
+                <b-btn class="ms-2" variant="danger" @click="updateCancel()"
+                  >취소</b-btn
+                >
               </template>
               <!-- 기본 -->
               <template v-else>
@@ -503,6 +493,12 @@
                   @click="updateTag = true"
                   :disabled="isEmpty(currentData)"
                   >수정</b-btn
+                >
+                <b-btn
+                  class="ms-2"
+                  variant="danger"
+                  :disabled="isEmpty(currentData)"
+                  >삭제</b-btn
                 >
               </template>
             </b-col>
@@ -599,7 +595,7 @@
           :sticky-header="true"
           :items="salesItems"
           :fields="fields"
-          class="dataTable"
+          class="dataTable salesTable"
           :filter="filter"
           ref="selectableTable"
           show-empty
@@ -615,7 +611,6 @@
           <template #cell(email)="row">
             {{ row.item.blogId }}@naver.com
           </template>
-
           <template #cell(ContractNumber)="row">
             {{ dateFormat1(row.item.ContractNumber) }}
           </template>
@@ -628,7 +623,7 @@
             {{
               row.item.trfficData
                 ? dateFormat2(row.item.trfficData.created_at)
-                : "-"
+                : empty
             }}
           </template>
 
@@ -636,17 +631,19 @@
             {{
               row.item.trfficData
                 ? dateFormat2(row.item.trfficData.cexpiration_date)
-                : "-"
+                : empty
             }}
           </template>
 
           <template #cell(trfficDataTodayCount)="row">
             {{
-              row.item.trfficData ? row.item.trfficData.today_remain_count : "-"
+              row.item.trfficData
+                ? isNegative(row.item.trfficData.today_remain_count)
+                : empty
             }}
           </template>
           <template #cell(AmountOfPayment)="row">
-            {{ numberToString(parseInt(row.item.AmountOfPayment)) }}원
+            {{ numberToString(row.item.AmountOfPayment) }}원
           </template>
 
           <template #cell(designChk)="row">
@@ -866,24 +863,25 @@ export default {
       filter: "",
       currentData: {},
       newData: {
-        ContractNumber: null,
-        manager: null,
-        businessName: null,
-        owner: null,
-        // trfficData: {},
-        blogId: null,
-        blogPw: null,
-        CompanyNumber: null,
-        phone: null,
-        // Email: null,
-        address: null,
-        // cardData: {},
         AmountOfPayment: null,
-        ApprovalNumber: null,
-        installmentMonth: null,
-        Term: null,
+        manager: null,
+        owner: null,
+        blogId: null,
+        blogPW: null,
+        businessName: null,
+        phone: null,
         contractProduct: null,
+        address: null,
+        CompanyNumber: null,
+        Term: null,
+        installmentMonth: null,
+        ApprovalNumber: null,
         Note: null,
+        cardholder: null,
+        creditCardCompany: null,
+        creditCardNumber: null,
+        CardValidityPeriod: null,
+        ContractNumber: new Date().setHours(new Date().getHours() + 9),
       },
       addTag: false,
       updateTag: false,
@@ -895,29 +893,7 @@ export default {
   methods: {
     // 신규등록 완료
     async addData() {
-      let form = {
-        AmountOfPayment: "10000",
-        manager: "민경재",
-        owner: "김한솔",
-        blogId: "celkey",
-        blogPW: "tmdwns1521",
-        businessName: "롯데리아",
-        phone: "010-2524-4865",
-        contractProduct: "B 1000",
-        address: "서울시 관악구 ",
-        CompanyNumber: "회사명",
-        Term: "3",
-        installmentMonth: "3",
-        ApprovalNumber: "3",
-        Note: "정상",
-        cardholder: "김부각",
-        creditCardCompany: "현대카드",
-        creditCardNumber: "4022-4498-4848-1848",
-        CardValidityPeriod: "07/28",
-        ContractNumber: new Date().setHours(new Date().getHours() + 9),
-      };
-
-      const data = await this.$axios.post("/api/saleData", form);
+      const data = await this.$axios.post("/api/saleData", this.newData);
       console.log(data);
       // const isAllEmpty = (object) =>
       //   !Object.values(object).every((x) => x !== null && x !== "");

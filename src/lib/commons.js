@@ -7,6 +7,12 @@ export default {
       },
       filters: {},
       methods: {
+        isNegative(value) {
+          if (value <= 0) {
+            value = 0;
+          }
+          return value;
+        },
         isEmpty(param) {
           return Object.keys(param).length === 0;
         },
@@ -19,7 +25,16 @@ export default {
           return value;
         },
         numberToString(value) {
-          value = value.toLocaleString("ko-KR");
+          if (typeof value === "number") {
+            value = value.toLocaleString("ko-KR");
+          } else {
+            if (isNaN(value) === false) {
+              value = parseInt(value);
+              value = value.toLocaleString("ko-KR");
+            } else {
+              value = null;
+            }
+          }
           return value;
         },
       },

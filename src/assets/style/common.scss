@@ -10,6 +10,7 @@ li {
 }
 
 input[type="checkbox"] {
+  cursor: pointer;
   appearance: none;
   width: 20px;
   height: 20px;
@@ -208,11 +209,6 @@ button.close {
   }
 }
 
-.b-table-sticky-header {
-  max-height: 100% !important;
-  margin: 0 !important;
-}
-
 .currentTable {
   th {
     background-color: #e2eae8 !important;
@@ -238,6 +234,18 @@ button.close {
 }
 
 .dataTable {
+  background-color: #fff;
+  &.salesTable {
+    &.b-table-sticky-header {
+      max-height: 100% !important;
+    }
+  }
+  &.orderTable {
+    .table-white {
+      background-color: none;
+    }
+  }
+  margin: 0 !important;
   th {
     white-space: nowrap;
   }

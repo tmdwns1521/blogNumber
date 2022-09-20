@@ -1,8 +1,18 @@
 <template>
   <div class="footer">
     <!-- PC -->
-    <b-container class="w-50 d-none d-lg-block py-5">
-      <h1 class="text-25 fw-900 pb-2">오늘의 픽</h1>
+    <b-container class="d-none d-lg-block py-5">
+      <div class="d-flex align-items-center justify-content-between mb-4">
+        <h1 class="text-25 fw-900 m-0">오늘의 픽</h1>
+        <b-nav-item-dropdown right>
+          <template #button-content>
+            <b-avatar></b-avatar>
+            <span>회원이름</span>
+          </template>
+          <b-dropdown-item href="/manage">관리페이지</b-dropdown-item>
+          <b-dropdown-item href="#">로그아웃</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </div>
       <div class="d-flex" style="gap: 20px">
         <p>
           <span class="fw-900">대표</span>

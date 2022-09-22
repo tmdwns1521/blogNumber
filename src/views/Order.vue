@@ -13,7 +13,7 @@
             head-variant="dark"
             bordered
             selectable
-            select-mode="multi"
+            select-mode="single"
             :sticky-header="true"
             :items="orderItems"
             :fields="orderFields"

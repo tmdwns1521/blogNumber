@@ -565,7 +565,7 @@ export default {
   methods: {
     // 신규등록 완료
     async addData() {
-      const data = await this.$axios.post("/api/saleData", this.newData);
+      const data = await this.$axios.post("http://49.247.32.231:5000/api/saleData", this.newData);
       console.log(data);
       // const isAllEmpty = (object) =>
       //   !Object.values(object).every((x) => x !== null && x !== "");
@@ -639,7 +639,7 @@ export default {
       });
     },
     async getSalesData() {
-      const data = await this.$axios.get("/api/salesData");
+      const data = await this.$axios.get("http://49.247.32.231:5000/api/salesData");
       // console.log(data.data);
 
       const datas = data.data;

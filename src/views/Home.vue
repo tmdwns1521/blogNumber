@@ -2,7 +2,7 @@
   <div>
     <main>
       <!-- main 0 -->
-      <article class="main-0">
+      <article class="main-0 d-none d-lg-block">
         <b-container class="h-100">
           <b-row class="align-items-center h-100">
             <b-col class="text-white"
@@ -142,6 +142,138 @@
             </b-col>
           </b-row>
         </b-container>
+      </article>
+      <article class="main-0 d-lg-none d-lg-none mobile">
+        <div class="bg text-center text-white">
+          <p class="fw-600 text-20 mb-3">
+            오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
+            한번에 도와드립니다.
+          </p>
+          <span class="d-block text-14 mb-3"
+            >검색하는 잠재고객에게 매장을 알리고 <br />리뷰/후기를 노출해 가게의
+            신뢰도를 높여보세요.</span
+          >
+          <b-btn pill class="mb-3 startBtn" @click="upDown()"
+            >무료로 광고 시작하기
+            <font-awesome-icon icon="fa-solid fa-chevron-right"
+          /></b-btn>
+          <span class="d-block text-14">상위노출 효과를 직접 경험하세요!</span>
+        </div>
+        <div
+          class="bg-white p-5 shadow"
+          :class="{ shake: disabled }"
+          style="border-radius: 20px"
+        >
+          <validation-observer ref="observer" v-slot="{ handleSubmit }">
+            <b-form @submit.prevent="handleSubmit(submit)">
+              <div>
+                <validation-provider
+                  name="성함"
+                  :rules="{ required: true, min: 1 }"
+                  v-slot="validationContext"
+                >
+                  <b-form-group id="name-input-group" class="mb-3">
+                    <b-form-input
+                      id="name-input"
+                      name="name-input"
+                      v-model="input.name"
+                      placeholder="성함 *"
+                      :state="getValidationState(validationContext)"
+                      aria-describedby="name-input-feedback"
+                    ></b-form-input>
+                    <b-form-invalid-feedback id="name-input-feedback">{{
+                      validationContext.errors[0]
+                    }}</b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
+                <validation-provider
+                  name="업체명"
+                  :rules="{ required: true, min: 1 }"
+                  v-slot="validationContext"
+                >
+                  <b-form-group id="company-input-group" class="mb-3">
+                    <b-form-input
+                      id="company-input"
+                      name="company-input"
+                      v-model="input.company"
+                      placeholder="업체명 *"
+                      :state="getValidationState(validationContext)"
+                      aria-describedby="company-input-feedback"
+                    ></b-form-input>
+                    <b-form-invalid-feedback id="company-input-feedback">{{
+                      validationContext.errors[0]
+                    }}</b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
+                <validation-provider
+                  name="연락처"
+                  :rules="{
+                    required: true,
+                    integer: true,
+                    min: 9,
+                    max: 11,
+                  }"
+                  v-slot="validationContext"
+                >
+                  <b-form-group id="tel-input-group" class="mb-3">
+                    <b-form-input
+                      id="tel-input"
+                      name="tel-input"
+                      type="tel"
+                      v-model="input.phone"
+                      placeholder="전화번호 *"
+                      maxlength="11"
+                      :state="getValidationState(validationContext)"
+                      aria-describedby="tel-input-feedback"
+                    ></b-form-input>
+                    <b-form-invalid-feedback id="tel-input-feedback">{{
+                      validationContext.errors[0]
+                    }}</b-form-invalid-feedback>
+                  </b-form-group>
+                </validation-provider>
+              </div>
+              <div>
+                <validation-provider
+                  name="개인정보취급방침 이용동의"
+                  :rules="{ required: true }"
+                  v-slot="validationContext"
+                >
+                  <b-form-checkbox-group
+                    :state="getValidationState(validationContext)"
+                    v-model="check"
+                    id="check-input"
+                  >
+                    <b-form-checkbox
+                      value="개인정보취급방침 이용동의"
+                      class="d-flex align-items-center"
+                    >
+                      <span class="ms-2"
+                        >개인정보 수집 이용 및 마케팅 활용 전체 동의
+                      </span>
+                    </b-form-checkbox>
+                    <!-- <b-btn v-b-modal.check variant="link">
+                            [자세히보기]
+                          </b-btn> -->
+                    <b-form-invalid-feedback id="check-input-feedback">{{
+                      validationContext.errors[0]
+                    }}</b-form-invalid-feedback>
+                  </b-form-checkbox-group>
+                </validation-provider>
+                <b-btn
+                  type="submit"
+                  pill
+                  class="mt-4 w-100 border-0 shadow-sm"
+                  style="
+                    background: #00eadc;
+                    font-weight: bold;
+                    font-size: 24px;
+                  "
+                  >무료 상담 신청하기</b-btn
+                >
+              </div>
+            </b-form>
+          </validation-observer>
+        </div>
       </article>
       <!-- main 1 -->
       <article class="main-1">

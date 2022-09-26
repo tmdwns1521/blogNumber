@@ -115,6 +115,12 @@ button.close {
     font-weight: 600;
     padding: 6px 36px;
   }
+  &.mobile {
+    .bg {
+      background: url(/img/main_banner.6cd0230d.png) left 35% top / cover;
+      height: 344px;
+    }
+  }
 }
 .main-1 {
   .logo_banner {

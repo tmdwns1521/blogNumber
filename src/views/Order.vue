@@ -39,7 +39,7 @@
               {{ dateFormat1(row.item.ContractNumber) }}
             </template>
 
-            <template #cell(Design)="row">
+            <template #cell(Design)="">
               <div class="text-center">
                 <b-form-checkbox
                   switch
@@ -48,7 +48,7 @@
               </div>
             </template>
 
-            <template #cell(Traffic)="row">
+            <template #cell(Traffic)="">
               <b-form-group class="text-center">
                 <b-form-checkbox
                   switch
@@ -57,7 +57,7 @@
               </b-form-group>
             </template>
 
-            <template #cell(EtcProduct)="row">
+            <template #cell(EtcProduct)="">
               <b-form-group class="text-center">
                 <b-form-checkbox
                   switch
@@ -71,7 +71,7 @@
               <b-btn variant="dark" @click="approvedData()">승인</b-btn>
             </b-col>
           </b-row>
-              <!-- {{selectData}} -->
+          <!-- {{selectData}} -->
         </b-col>
         <!-- 데이터 수정 -->
         <b-col>
@@ -88,55 +88,54 @@
               <b-tr>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ dateFormat1(currentData.ContractNumber)}}
+                    {{ dateFormat1(currentData.ContractNumber) }}
                   </template>
                 </b-td>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ dateFormat1(currentData.manager)}}
+                    {{ dateFormat1(currentData.manager) }}
                   </template>
                 </b-td>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ dateFormat1(currentData.businessName)}}
+                    {{ dateFormat1(currentData.businessName) }}
                   </template>
                 </b-td>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ dateFormat1(currentData.owner)}}
+                    {{ dateFormat1(currentData.owner) }}
                   </template>
                 </b-td>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ dateFormat1(currentData.contractProduct)}}
+                    {{ dateFormat1(currentData.contractProduct) }}
                   </template>
                 </b-td>
                 <b-td>
                   <template v-if="isEmpty(currentData)">
-                    {{empty}}
+                    {{ empty }}
                   </template>
                   <template v-else>
-                    {{ numberToString(currentData.AmountOfPayment)}}
+                    {{ numberToString(currentData.AmountOfPayment) }}
                   </template>
                 </b-td>
-                
               </b-tr>
-                <!-- <b-td>
+              <!-- <b-td>
                   <template v-if="!addTag">
                     <b-form-input
                       v-if="isEmpty(currentData)"
@@ -188,22 +187,27 @@
                   <template v-else>
                     <b-form-input v-model="newData.owner"></b-form-input>
                   </template>
-                </b-td> -->
+                </b-td> 
               </b-tr>
+                -->
             </b-tbody>
           </b-table-simple>
         </b-col>
       </b-row>
     </div>
-    <Tabs @onRowSelected="onRowSelected" :orderItems="orderItems" :salesItems="salesItems"/>
+    <Tabs
+      @onRowSelected="onRowSelected"
+      :orderItems="orderItems"
+      :salesItems="salesItems"
+    />
   </div>
 </template>
 
 <script>
-import Tabs from '@/components/Tabs.vue';
+import Tabs from "@/components/Tabs.vue";
 export default {
   name: "Order",
-  components: {Tabs},
+  components: { Tabs },
   data() {
     return {
       orderFields: [
@@ -253,7 +257,7 @@ export default {
       currentData: {},
       selectData: {},
       updateTag: false,
-      empty: "-"
+      empty: "-",
     };
   },
   methods: {
@@ -266,9 +270,12 @@ export default {
         id: this.selectData._id,
         Term: this.selectData.Term,
         contractProduct: this.selectData.contractProduct,
-        blogId: this.selectData.blogId
-      }
-      const data = await this.$axios.post("http://49.247.32.231:5000/api/saleAproveData", form);
+        blogId: this.selectData.blogId,
+      };
+      const data = await this.$axios.post(
+        "http://49.247.32.231:5000/api/saleAproveData",
+        form
+      );
       console.log(data);
       // window.alert("승인 성공");
       this.getSalesData();
@@ -288,7 +295,9 @@ export default {
       this.selectData = { ...items };
     },
     async getSalesData() {
-      const data = await this.$axios.get("http://49.247.32.231:5000/api/salesData");
+      const data = await this.$axios.get(
+        "http://49.247.32.231:5000/api/salesData"
+      );
       console.log(data.data);
 
       const datas = data.data;

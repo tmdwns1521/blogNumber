@@ -99,7 +99,9 @@
           {{ row.item.index + 1 }}
         </template>
         <template #cell(url)="row">
-          https://blog.naver.com/{{ row.item.blogId }}
+          <a :href="'https://blog.naver.com/' + row.item.blogId">
+            https://blog.naver.com/{{ row.item.blogId }}
+          </a>
         </template>
         <template #cell(email)="row">
           {{ row.item.blogId }}@naver.com

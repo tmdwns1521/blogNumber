@@ -262,16 +262,28 @@
                       disabled
                       :value="empty"
                     ></b-form-input>
-                    <b-form-input
+                    <b-form-select
                       v-else
+                      v-model="paymentType"
                       :disabled="!updateTag"
-                      v-model="currentData.cardData.creditCardCompany"
-                    ></b-form-input>
+                    >
+                      <b-form-select-option value="card"
+                        >카드결제</b-form-select-option
+                      >
+                      <b-form-select-option value="cash"
+                        >계좌이체</b-form-select-option
+                      >
+                    </b-form-select>
                   </template>
                   <template v-else>
-                    <b-form-input
-                      v-model="newData.creditCardCompany"
-                    ></b-form-input>
+                    <b-form-select v-model="paymentType"
+                      ><b-form-select-option value="card"
+                        >카드결제</b-form-select-option
+                      >
+                      <b-form-select-option value="cash"
+                        >계좌이체</b-form-select-option
+                      ></b-form-select
+                    >
                   </template>
                 </b-td>
                 <b-th>결제금액</b-th>
@@ -306,12 +318,13 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.creditCardCompany"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
+                      :disabled="paymentType == 'cash'"
                       v-model="newData.creditCardCompany"
                     ></b-form-input>
                   </template>
@@ -326,12 +339,15 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.cardholder"
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input v-model="newData.cardholder"></b-form-input>
+                    <b-form-input
+                      :disabled="paymentType == 'cash'"
+                      v-model="newData.cardholder"
+                    ></b-form-input>
                   </template>
                 </b-td>
                 <b-th>카드번호</b-th>
@@ -344,12 +360,13 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.creditCardNumber"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
+                      :disabled="paymentType == 'cash'"
                       v-model="newData.creditCardNumber"
                     ></b-form-input>
                   </template>
@@ -366,12 +383,13 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.CardValidityPeriod"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
+                      :disabled="paymentType == 'cash'"
                       v-model="newData.CardValidityPeriod"
                     ></b-form-input>
                   </template>
@@ -386,12 +404,13 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.ApprovalNumber"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
+                      :disabled="paymentType == 'cash'"
                       v-model="newData.ApprovalNumber"
                     ></b-form-input> </template
                 ></b-td>
@@ -405,12 +424,13 @@
                     ></b-form-input>
                     <b-form-input
                       v-else
-                      :disabled="!updateTag"
+                      :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.installmentMonth"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
+                      :disabled="paymentType == 'cash'"
                       v-model="newData.installmentMonth"
                     ></b-form-input> </template
                 ></b-td>
@@ -519,6 +539,8 @@
         </b-col>
       </b-row>
     </div>
+    {{ currentData }}
+    {{ newData }}
     <Tabs @onRowSelected="onRowSelected" :salesItems="salesItems" />
   </div>
 </template>
@@ -553,6 +575,7 @@ export default {
         CardValidityPeriod: null,
         ContractNumber: new Date().setHours(new Date().getHours() + 9),
       },
+      paymentType: "card",
       addTag: false,
       updateTag: false,
       empty: "-",
@@ -565,7 +588,10 @@ export default {
   methods: {
     // 신규등록 완료
     async addData() {
-      const data = await this.$axios.post("http://49.247.32.231:5000/api/saleData", this.newData);
+      const data = await this.$axios.post(
+        "http://49.247.32.231:5000/api/saleData",
+        this.newData
+      );
       console.log(data);
       // const isAllEmpty = (object) =>
       //   !Object.values(object).every((x) => x !== null && x !== "");
@@ -603,6 +629,11 @@ export default {
       this.addTag = false;
       items = items[0];
       this.currentData = { ...items };
+      if (this.currentData.cardData.creditCardNumber !== "") {
+        this.paymentType = "card";
+      } else {
+        this.paymentType = "cash";
+      }
 
       this.managerPricePredicted = 0;
       this.managerPriceConfirm = 0;
@@ -639,7 +670,9 @@ export default {
       });
     },
     async getSalesData() {
-      const data = await this.$axios.get("http://49.247.32.231:5000/api/salesData");
+      const data = await this.$axios.get(
+        "http://49.247.32.231:5000/api/salesData"
+      );
       // console.log(data.data);
 
       const datas = data.data;

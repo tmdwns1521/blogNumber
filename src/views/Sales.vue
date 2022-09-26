@@ -539,8 +539,8 @@
         </b-col>
       </b-row>
     </div>
-    {{ currentData }}
-    {{ newData }}
+    <!-- {{ currentData }}
+    {{ newData }} -->
     <Tabs @onRowSelected="onRowSelected" :salesItems="salesItems" />
   </div>
 </template>

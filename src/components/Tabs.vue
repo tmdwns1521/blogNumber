@@ -141,7 +141,7 @@
           }}
         </template>
         <template #cell(AmountOfPayment)="row">
-          {{ numberToString(row.item.AmountOfPayment) }}원
+          {{ numberToString(row.item.AmountOfPayment) }}
         </template>
 
         <template #cell(Design)="row">

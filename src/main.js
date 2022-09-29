@@ -71,5 +71,27 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 new Vue({
   router,
   store,
+  created() {
+    const isToken = localStorage.getItem("token");
+    if (isToken) {
+      const tokenData = JSON.parse(isToken);
+      this.$store.dispatch("setToken", tokenData);
+    }
+    // const isServiceId = localStorage.getItem("serviceId");
+    // if (isServiceId) {
+    //   const serviceIdData = JSON.parse(isServiceId);
+    //   this.$store.dispatch("setServiceId", serviceIdData);
+    // }
+    // const isRole = localStorage.getItem("role");
+    // if (isRole) {
+    //   const roleData = JSON.parse(isRole);
+    //   this.$store.dispatch("setRole", roleData);
+    // }
+    // const isName = localStorage.getItem("name");
+    // if (isName) {
+    //   const nameData = JSON.parse(isName);
+    //   this.$store.dispatch("setName", nameData);
+    // }
+  },
   render: (h) => h(App),
 }).$mount("#app");

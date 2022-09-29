@@ -322,7 +322,7 @@
                       :value="empty"
                     ></b-form-input>
                     <b-form-input
-                      v-else
+                      v-else-if="currentData.cardData"
                       :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.creditCardCompany"
                     ></b-form-input>
@@ -343,7 +343,7 @@
                       :value="empty"
                     ></b-form-input>
                     <b-form-input
-                      v-else
+                      v-else-if="currentData.cardData"
                       :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.cardholder"
                     ></b-form-input>
@@ -364,7 +364,7 @@
                       :value="empty"
                     ></b-form-input>
                     <b-form-input
-                      v-else
+                      v-else-if="currentData.cardData"
                       :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.creditCardNumber"
                     ></b-form-input>
@@ -387,7 +387,7 @@
                       :value="empty"
                     ></b-form-input>
                     <b-form-input
-                      v-else
+                      v-else-if="currentData.cardData"
                       :disabled="!updateTag || paymentType == 'cash'"
                       v-model="currentData.cardData.CardValidityPeriod"
                     ></b-form-input>
@@ -536,6 +536,7 @@
                   class="ms-2"
                   variant="danger"
                   :disabled="isEmpty(currentData)"
+                  @click="deleteData(currentData._id)"
                   >삭제</b-btn
                 >
               </template>
@@ -591,6 +592,43 @@ export default {
     };
   },
   methods: {
+    // 삭제
+    async deleteData(item) {
+      this.$bvModal
+        .msgBoxConfirm("기록을 삭제하시겠습니까?", {
+          title: "처리기록 삭제",
+          size: "sm",
+          buttonSize: "sm",
+          okVariant: "danger",
+          okTitle: "삭제",
+          cancelTitle: "취소",
+          footerClass: "p-2",
+          centered: true,
+          noCloseOnBackdrop: true,
+          titleClass: "fw-900",
+          footerBgVariant: "white",
+        })
+        .then((value) => {
+          if (value) {
+            console.log(item);
+            const data = this.$axios
+              .delete("http://49.247.32.231:5000/api/salesData", {
+                data: { id: item },
+                headers: {},
+              })
+              .then((res) => {
+                console.log(res);
+                if (res.data.result === "fail") {
+                  window.alert("삭제 권한 없음");
+                } else {
+                  window.alert("삭제 완료");
+                  this.getSalesData();
+                }
+              });
+            console.log(data);
+          }
+        });
+    },
     // 신규등록 완료
     async addData() {
       const data = await this.$axios.post(

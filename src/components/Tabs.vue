@@ -141,7 +141,11 @@
           }}
         </template>
         <template #cell(AmountOfPayment)="row">
-          {{ numberToString(row.item.AmountOfPayment) }}
+          {{
+            row.item.AmountOfPayment
+              ? numberToString(row.item.AmountOfPayment)
+              : "0"
+          }}
         </template>
 
         <template #cell(Design)="row">

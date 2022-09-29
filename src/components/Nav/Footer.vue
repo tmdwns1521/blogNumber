@@ -4,14 +4,18 @@
     <b-container class="d-none d-lg-block py-5">
       <div class="d-flex align-items-center justify-content-between mb-4">
         <h1 class="text-25 fw-900 m-0">오늘의 픽</h1>
-        <b-nav-item-dropdown right>
+        <!-- <b-nav-item-dropdown right v-if="$store.getters.isLogin">
           <template #button-content>
             <b-avatar></b-avatar>
-            <span>회원이름</span>
+            <span>{{ $store.state.serviceId }}</span>
           </template>
           <b-dropdown-item href="/manage">관리페이지</b-dropdown-item>
-          <b-dropdown-item href="#">로그아웃</b-dropdown-item>
-        </b-nav-item-dropdown>
+          <b-dropdown-item href="#" @click="logout()">로그아웃</b-dropdown-item>
+        </b-nav-item-dropdown> -->
+        <b-btn v-if="$store.getters.isLogin" @click="logout()">
+          로그아웃
+        </b-btn>
+        <b-btn v-else @click="login()"> 로그인 </b-btn>
       </div>
       <div class="d-flex" style="gap: 20px">
         <p>
@@ -52,6 +56,14 @@
 <script>
 export default {
   name: "Footer",
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
+    login() {
+      this.$router.push("/login");
+    },
+  },
 };
 </script>
 

@@ -71,7 +71,11 @@
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
-                <b-th>담당자</b-th>
+                <b-th
+                  >담당자<font-awesome-icon
+                    class="ms-1 fa-xs text-danger"
+                    icon="fa-solid fa-star-of-life"
+                /></b-th>
                 <b-td>
                   <template v-if="!addTag">
                     <b-form-input
@@ -107,7 +111,11 @@
                     <b-form-input v-model="newData.businessName"></b-form-input>
                   </template>
                 </b-td>
-                <b-th>대표자</b-th>
+                <b-th
+                  >대표자<font-awesome-icon
+                    class="ms-1 fa-xs text-danger"
+                    icon="fa-solid fa-star-of-life"
+                /></b-th>
                 <b-td>
                   <template v-if="!addTag">
                     <b-form-input
@@ -560,6 +568,7 @@ export default {
     return {
       salesItems: null,
       currentData: {},
+      cachedData: {},
       newData: {
         AmountOfPayment: null,
         manager: null,
@@ -631,24 +640,21 @@ export default {
     },
     // 신규등록 완료
     async addData() {
-      const data = await this.$axios.post(
-        "http://49.247.32.231:5000/api/saleData",
-        this.newData
-      );
-      console.log(data);
-      // const isAllEmpty = (object) =>
-      //   !Object.values(object).every((x) => x !== null && x !== "");
-
-      // if (isAllEmpty(this.newData)) {
-      //   window.alert("필수 값들을 모두 입력해주세요.", {
-      //     title: "필수 값 미입력",
-      //   });
-      // } else {
-      //   this.addTag = false;
-      // }
-      window.alert("신규등록 성공");
-      this.addTag = false;
-      this.getSalesData();
+      await this.$axios
+        .post("http://49.247.32.231:5000/api/saleData", this.newData)
+        .then((res) => {
+          console.log(res);
+          window.alert("신규등록 성공");
+          this.addTag = false;
+          this.getSalesData();
+        })
+        .catch((error) => {
+          if (error.response.status == "500") {
+            window.alert("필수 값들을 모두 입력해주세요.", {
+              title: "필수 값 미입력",
+            });
+          }
+        });
     },
     // 신규등록 취소
     addCancel() {
@@ -661,21 +667,26 @@ export default {
     },
     // 수정 취소
     updateCancel() {
-      this.salesItems.forEach((el) => {
-        if (this.currentData._id === el._id) {
-          this.currentData = { ...el };
-        }
-      });
+      this.currentData = Object.assign({}, this.cachedData);
+      this.currentData.cardData = Object.assign({}, this.cachedData.cardData);
+
       this.updateTag = false;
     },
     onRowSelected(items) {
       this.addTag = false;
       items = items[0];
       this.currentData = { ...items };
-      if (this.currentData.cardData.creditCardNumber !== "") {
-        this.paymentType = "card";
-      } else {
+
+      this.cachedData = Object.assign({}, this.currentData);
+      this.cachedData.cardData = Object.assign({}, this.currentData.cardData);
+
+      if (
+        !this.currentData.cardData ||
+        this.currentData.cardData.creditCardNumber === ""
+      ) {
         this.paymentType = "cash";
+      } else {
+        this.paymentType = "card";
       }
 
       this.managerPricePredicted = 0;

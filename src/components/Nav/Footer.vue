@@ -23,6 +23,10 @@
           민경재
         </p>
         <p>
+          <span class="fw-900">상호</span>
+          엔에스엠(NSM)
+        </p>
+        <p>
           <span class="fw-900">사업자등록번호</span>
           417-16-97188
         </p>

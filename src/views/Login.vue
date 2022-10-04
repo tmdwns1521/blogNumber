@@ -82,8 +82,8 @@ export default {
       if (data.data.token) {
         this.$store.dispatch("setToken", data.data.token);
         //   this.$store.dispatch("setServiceId", data.data.id);
-        this.$store.dispatch("setRole", data.data.role);
-        //   // this.$store.dispatch("setName", data.data.name);
+        // this.$store.dispatch("setRole", data.data.role);
+        //    this.$store.dispatch("setName", data.data.name);
         this.$router.push("/manage");
       } else {
         window.alert(data.data.result);

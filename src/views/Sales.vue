@@ -145,7 +145,7 @@
                     ></b-form-input>
                     <template v-else>
                       <a
-                        :href="'https://blog.naver.com/' + currentData.blogId"
+                        :href="'https://m.blog.naver.com/' + currentData.blogId"
                         target="_blank"
                       >
                         https://blog.naver.com/{{ currentData.blogId }}

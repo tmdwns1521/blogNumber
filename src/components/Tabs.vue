@@ -100,7 +100,7 @@
         </template>
         <template #cell(url)="row">
           <a
-            :href="'https://blog.naver.com/' + row.item.blogId"
+            :href="'https://m.blog.naver.com/' + row.item.blogId"
             target="_blank"
           >
             https://blog.naver.com/{{ row.item.blogId }}

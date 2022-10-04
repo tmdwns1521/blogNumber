@@ -10,6 +10,7 @@
       <b-nav-item
         to="/manage/order"
         :class="path.includes('/order') ? 'active' : ''"
+        v-if="$store.getters.isSuper"
       >
         <span>주문관리</span>
       </b-nav-item>

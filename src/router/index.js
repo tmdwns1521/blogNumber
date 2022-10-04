@@ -10,6 +10,7 @@ import Home from "@/views/Home.vue";
 import Sales from "@/views/Sales.vue";
 import Order from "@/views/Order.vue";
 import Login from "@/views/Login.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
 
@@ -40,7 +41,7 @@ const routes = [
         path: "sales",
         name: "Sales",
         component: Sales,
-        meta: { requiresAuth: true, roleSuper: "A" },
+        meta: { requiresAuth: true },
       },
       {
         path: "order",
@@ -60,7 +61,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const isUser = localStorage.getItem("token");
-  const isSuper = localStorage.getItem("role");
+  const isSuper = store.state.role;
   const roleSuper = to.meta.roleSuper;
 
   if (to.matched.some((record) => record.meta.requiresAuth)) {
@@ -80,11 +81,11 @@ router.beforeEach((to, from, next) => {
     next();
   }
   if (roleSuper) {
-    if (isSuper !== '"A"') {
+    if (!isSuper) {
       // console.log(roleSuper)
-      // console.log(isSuper)
+      // console.log(isSuper);
       alert("접근불가");
-      next("/");
+      next("/manage");
       return;
     }
     next();

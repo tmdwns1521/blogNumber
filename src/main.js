@@ -71,6 +71,22 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 new Vue({
   router,
   store,
+  // methods: {
+  //   async mySize() {
+  //     const isToken = localStorage.getItem("token");
+  //     const tokenData = JSON.parse(isToken);
+
+  //     const data = await this.$axios.post(
+  //       "http://49.247.32.231:5000/api/MySize",
+  //       { userToken: tokenData }
+  //     );
+  //     console.log("mySize: ", data.data.Size);
+  //     this.$store.dispatch("setRole", data.data.Size);
+  //   },
+  // },
+  // mounted() {
+  //   this.mySize();
+  // },
   created() {
     const isToken = localStorage.getItem("token");
     if (isToken) {

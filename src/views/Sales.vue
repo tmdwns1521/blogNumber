@@ -622,7 +622,7 @@ export default {
             console.log(item);
             const data = this.$axios
               .delete("http://49.247.32.231:5000/api/salesData", {
-                data: { id: item },
+                data: { id: item, size: this.$store.state.role },
                 headers: {},
               })
               .then((res) => {
@@ -765,9 +765,21 @@ export default {
         }
       });
     },
+    async mySize() {
+      const isToken = localStorage.getItem("token");
+      const tokenData = JSON.parse(isToken);
+
+      const data = await this.$axios.post(
+        "http://49.247.32.231:5000/api/MySize",
+        { userToken: tokenData }
+      );
+      console.log("mySize: ", data.data.Size);
+      this.$store.dispatch("setRole", data.data.Size);
+    },
   },
   mounted() {
     this.getSalesData();
+    this.mySize();
   },
   computed: {},
 };

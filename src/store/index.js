@@ -31,7 +31,7 @@ export default new Vuex.Store({
     // },
     setRole(state, _role) {
       state.role = _role;
-      localStorage.setItem("role", JSON.stringify(_role));
+      // localStorage.setItem("role", JSON.stringify(_role));
     },
     // setName(state, _name) {
     //   state.name = _name;

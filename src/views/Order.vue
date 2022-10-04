@@ -74,7 +74,7 @@
           <!-- {{ selectData }} -->
         </b-col>
         <!-- 데이터 수정 -->
-        <b-col>
+        <!-- <b-col>
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
@@ -234,7 +234,7 @@
           </b-table-simple>
           <b-row class="justify-content-between align-items-center">
             <b-col class="text-end">
-              <!-- 수정일 때 -->
+            
               <template v-if="updateTag == true">
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
@@ -243,7 +243,7 @@
                   >취소</b-btn
                 >
               </template>
-              <!-- 기본 -->
+              
               <template v-else>
                 <b-btn
                   class="ms-2"
@@ -260,7 +260,7 @@
               </template>
             </b-col>
           </b-row>
-        </b-col>
+        </b-col> -->
       </b-row>
     </div>
     <Tabs

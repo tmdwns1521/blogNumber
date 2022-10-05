@@ -7,7 +7,7 @@
         <b-nav-item-dropdown right v-if="$store.getters.isLogin">
           <template #button-content>
             <b-avatar></b-avatar>
-            <span>관리자</span>
+            <span>{{ $store.state.serviceId }}</span>
           </template>
           <b-dropdown-item href="/manage">관리페이지</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">로그아웃</b-dropdown-item>

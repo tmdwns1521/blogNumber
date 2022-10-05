@@ -6,7 +6,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    // serviceId: null,
+    serviceId: null,
     // name: null,
     role: null,
     token: null,
@@ -25,10 +25,10 @@ export default new Vuex.Store({
       localStorage.setItem("token", JSON.stringify(_token));
       axios.defaults.headers.common["Authorization"] = _token;
     },
-    // setServiceId(state, _serviceId) {
-    //   state.serviceId = _serviceId;
-    //   localStorage.setItem("serviceId", JSON.stringify(_serviceId));
-    // },
+    setServiceId(state, _serviceId) {
+      state.serviceId = _serviceId;
+      localStorage.setItem("serviceId", JSON.stringify(_serviceId));
+    },
     setRole(state, _role) {
       state.role = _role;
       // localStorage.setItem("role", JSON.stringify(_role));
@@ -47,9 +47,9 @@ export default new Vuex.Store({
     setToken: ({ commit }, _token) => {
       commit("setToken", _token);
     },
-    // setServiceId: ({ commit }, _serviceId) => {
-    //   commit("setServiceId", _serviceId);
-    // },
+    setServiceId: ({ commit }, _serviceId) => {
+      commit("setServiceId", _serviceId);
+    },
     setRole: ({ commit }, _role) => {
       commit("setRole", _role);
     },

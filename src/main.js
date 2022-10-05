@@ -93,11 +93,11 @@ new Vue({
       const tokenData = JSON.parse(isToken);
       this.$store.dispatch("setToken", tokenData);
     }
-    // const isServiceId = localStorage.getItem("serviceId");
-    // if (isServiceId) {
-    //   const serviceIdData = JSON.parse(isServiceId);
-    //   this.$store.dispatch("setServiceId", serviceIdData);
-    // }
+    const isServiceId = localStorage.getItem("serviceId");
+    if (isServiceId) {
+      const serviceIdData = JSON.parse(isServiceId);
+      this.$store.dispatch("setServiceId", serviceIdData);
+    }
     // const isRole = localStorage.getItem("role");
     // if (isRole) {
     //   const roleData = JSON.parse(isRole);

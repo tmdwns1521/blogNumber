@@ -11,6 +11,16 @@
               :style="{ height: '50px' }"
             />
           </b-navbar-brand>
+          <b-nav-item-dropdown right v-if="$store.getters.isLogin">
+            <template #button-content>
+              <b-avatar></b-avatar>
+              <span>{{ $store.state.serviceId }}</span>
+            </template>
+            <b-dropdown-item href="/manage">관리페이지</b-dropdown-item>
+            <b-dropdown-item href="#" @click="logout()"
+              >로그아웃</b-dropdown-item
+            >
+          </b-nav-item-dropdown>
           <!-- <b-nav-item-dropdown right>
             <template #button-content>
               <b-avatar></b-avatar>
@@ -33,8 +43,10 @@ export default {
   props: {
     topBanner: Boolean,
   },
-  user: {
-    name: "황준",
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
+    },
   },
 };
 </script>

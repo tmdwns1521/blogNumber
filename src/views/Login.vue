@@ -1,7 +1,7 @@
 <template>
-  <div class="w-30 my-5 m-auto">
+  <div class="w-30 my-5 m-auto d-flex align-items-center">
     <b-container>
-      <h1 class="text-center mb-5">로그인</h1>
+      <h1 class="text-center mb-5">관리자 로그인</h1>
       <validation-observer ref="observer" v-slot="{ handleSubmit }">
         <b-form @submit.prevent="handleSubmit(login)">
           <div>

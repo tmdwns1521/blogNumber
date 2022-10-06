@@ -40,7 +40,7 @@ export default new Vuex.Store({
     logout() {
       localStorage.clear();
       axios.defaults.headers.common["Authorization"] = undefined;
-      location.replace("/");
+      location.replace("/login");
     },
   },
   actions: {

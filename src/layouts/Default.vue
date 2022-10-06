@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header :topBanner="true" />
-    <router-view />
+    <router-view style="min-height: 75vh" />
     <Footer />
   </div>
 </template>

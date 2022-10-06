@@ -95,59 +95,49 @@
         emptyFilteredText="찾으시는 검색어와 일치하는 정보가 없습니다."
         emptyText="데이터 정보가 없습니다."
       >
+        <template #cell()="data">
+          <span
+            v-clipboard:copy="data.value"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{ data.value }}
+          </span>
+        </template>
+
+        <!-- No -->
         <template #cell(index)="row">
           {{ row.item.index + 1 }}
         </template>
-        <template #cell(url)="row">
-          <a
-            :href="'https://m.blog.naver.com/' + row.item.blogId"
-            target="_blank"
-          >
-            https://blog.naver.com/{{ row.item.blogId }}
-          </a>
-        </template>
-        <template #cell(email)="row">
-          {{ row.item.blogId }}@naver.com
-        </template>
+        <!-- 계약번호 -->
         <template #cell(ContractNumber)="row">
-          {{ dateFormat1(row.item.ContractNumber) }}
+          <span
+            v-clipboard:copy="dateFormat1(row.item.ContractNumber)"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{ dateFormat1(row.item.ContractNumber) }}
+          </span>
         </template>
-
-        <template #cell(payDate)="row">
-          {{ dateFormat2(row.item.ContractNumber) }}
-        </template>
-
-        <template #cell(trafficDataCreated)="row">
-          {{
-            row.item.trafficData
-              ? dateFormat2(row.item.trafficData.start_date)
-              : empty
-          }}
-        </template>
-
-        <template #cell(trafficDataExpiration)="row">
-          {{
-            row.item.trafficData
-              ? dateFormat2(row.item.trafficData.cexpiration_date)
-              : empty
-          }}
-        </template>
-
+        <!-- 실시간트래픽 -->
         <template #cell(trafficDataTodayCount)="row">
-          {{
-            row.item.trafficData
-              ? isNegative(row.item.trafficData.today_remain_count)
-              : empty
-          }}
+          <span
+            v-clipboard:copy="
+              row.item.trafficData
+                ? isNegative(row.item.trafficData.today_remain_count)
+                : empty
+            "
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{
+              row.item.trafficData
+                ? isNegative(row.item.trafficData.today_remain_count)
+                : empty
+            }}
+          </span>
         </template>
-        <template #cell(AmountOfPayment)="row">
-          {{
-            row.item.AmountOfPayment
-              ? numberToString(row.item.AmountOfPayment)
-              : "0"
-          }}
-        </template>
-
+        <!-- 디자인 -->
         <template #cell(Design)="row">
           <div class="text-center">
             <font-awesome-icon
@@ -163,7 +153,7 @@
             />
           </div>
         </template>
-
+        <!-- 트래픽 -->
         <template #cell(Traffic)="row">
           <div class="text-center">
             <font-awesome-icon
@@ -179,7 +169,7 @@
             />
           </div>
         </template>
-
+        <!-- 확인 -->
         <template #cell(Approved)="row">
           <div class="text-center">
             <font-awesome-icon
@@ -194,6 +184,88 @@
               icon="fa-solid fa-circle-xmark"
             />
           </div>
+        </template>
+        <!-- 결제금액 -->
+        <template #cell(AmountOfPayment)="row">
+          <span
+            v-clipboard:copy="row.item.AmountOfPayment"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{
+              row.item.AmountOfPayment
+                ? numberToString(row.item.AmountOfPayment)
+                : "0"
+            }}
+          </span>
+        </template>
+        <!-- 이메일 -->
+        <template #cell(email)="row">
+          <span
+            v-clipboard:copy="row.item.blogId + '@naver.com'"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{ row.item.blogId }}@naver.com
+          </span>
+        </template>
+        <!-- URL -->
+        <template #cell(url)="row">
+          <a
+            :href="'https://m.blog.naver.com/' + row.item.blogId"
+            target="_blank"
+            v-clipboard:copy="'https://blog.naver.com/' + row.item.blogId"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            https://blog.naver.com/{{ row.item.blogId }}
+          </a>
+        </template>
+        <!-- 결제일 -->
+        <template #cell(payDate)="row">
+          <span
+            v-clipboard:copy="dateFormat2(row.item.ContractNumber)"
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{ dateFormat2(row.item.ContractNumber) }}
+          </span>
+        </template>
+        <!-- 시작일 -->
+        <template #cell(trafficDataCreated)="row">
+          <span
+            v-clipboard:copy="
+              row.item.trafficData
+                ? dateFormat2(row.item.trafficData.start_date)
+                : empty
+            "
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{
+              row.item.trafficData
+                ? dateFormat2(row.item.trafficData.start_date)
+                : empty
+            }}
+          </span>
+        </template>
+        <!-- 종료일 -->
+        <template #cell(trafficDataExpiration)="row">
+          <span
+            v-clipboard:copy="
+              row.item.trafficData
+                ? dateFormat2(row.item.trafficData.cexpiration_date)
+                : empty
+            "
+            v-clipboard:success="onCopy"
+            v-clipboard:error="onError"
+          >
+            {{
+              row.item.trafficData
+                ? dateFormat2(row.item.trafficData.cexpiration_date)
+                : empty
+            }}
+          </span>
         </template>
       </b-table>
     </b-tab>
@@ -374,7 +446,44 @@ export default {
       this.$emit("onRowSelected", items);
     },
   },
+  mounted: function () {
+    var thElm;
+    var startOffset;
+
+    Array.prototype.forEach.call(
+      document.querySelectorAll("table th"),
+      function (th) {
+        th.style.position = "relative";
+        // th.style.display = "block";
+
+        var grip = document.createElement("div");
+        grip.innerHTML = "&nbsp;";
+        grip.style.top = 0;
+        grip.style.right = 0;
+        grip.style.bottom = 0;
+        grip.style.width = "5px";
+        grip.style.position = "absolute";
+        grip.style.cursor = "col-resize";
+        grip.addEventListener("mousedown", function (e) {
+          thElm = th;
+          startOffset = th.offsetWidth - e.pageX;
+        });
+
+        th.appendChild(grip);
+      }
+    );
+
+    document.addEventListener("mousemove", function (e) {
+      if (thElm) {
+        thElm.style.width = startOffset + e.pageX + "px";
+      }
+    });
+
+    document.addEventListener("mouseup", function () {
+      thElm = undefined;
+    });
+  },
 };
 </script>
 
-<style></style>
+<style scoped></style>

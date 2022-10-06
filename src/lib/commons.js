@@ -7,9 +7,17 @@ export default {
       },
       filters: {},
       methods: {
+        onCopy: function (e) {
+          alert(
+            "클립보드에 복사되었습니다.<br/><strong>" + e.text + "</strong>"
+          );
+        },
+        onError: function (e) {
+          alert("Failed to copy texts");
+        },
         isNegative(value) {
           if (value <= 0) {
-            value = 0;
+            value = "0";
           }
           return value;
         },

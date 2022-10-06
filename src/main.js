@@ -68,6 +68,10 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 //   }
 // );
 
+// 클립보드
+import VueClipboard from "vue-clipboard2";
+Vue.use(VueClipboard);
+
 new Vue({
   router,
   store,

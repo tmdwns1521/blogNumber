@@ -241,6 +241,31 @@ export default {
           thClass: "table-secondary",
         },
         {
+          key: "trafficDataTodayCount",
+          label: "실시간트래픽",
+          thClass: "table-secondary",
+        },
+        {
+          key: "Design",
+          label: "디자인",
+          thClass: "table-secondary",
+        },
+        {
+          key: "Traffic",
+          label: "트래픽",
+          thClass: "table-secondary",
+        },
+        {
+          key: "AmountOfPayment",
+          label: "결제금액",
+          thClass: "table-secondary",
+        },
+        {
+          key: "Approved",
+          label: "확인",
+          thClass: "table-secondary",
+        },
+        {
           key: "phone",
           label: "연락처",
           thClass: "table-secondary",
@@ -280,36 +305,13 @@ export default {
           label: "계약상품",
           thClass: "table-secondary",
         },
-        {
-          key: "trafficDataTodayCount",
-          label: "실시간트래픽",
-          thClass: "table-secondary",
-        },
-        {
-          key: "Design",
-          label: "디자인",
-          thClass: "table-secondary",
-        },
-        {
-          key: "Traffic",
-          label: "트래픽",
-          thClass: "table-secondary",
-        },
+
         {
           key: "trafficDataCreated",
           label: "시작일",
           thClass: "table-secondary",
         },
-        {
-          key: "AmountOfPayment",
-          label: "결제금액",
-          thClass: "table-secondary",
-        },
-        {
-          key: "Approved",
-          label: "확인",
-          thClass: "table-secondary",
-        },
+
         {
           key: "Term",
           label: "계약기간",

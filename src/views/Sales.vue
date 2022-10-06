@@ -619,8 +619,9 @@ export default {
         })
         .then((value) => {
           if (value) {
-            console.log(item);
-            const data = this.$axios
+            // console.log(item);
+            // const data =
+            this.$axios
               .delete("http://49.247.32.231:5000/api/salesData", {
                 data: { id: item, size: this.$store.state.role },
                 headers: {},
@@ -634,7 +635,7 @@ export default {
                   this.getSalesData();
                 }
               });
-            console.log(data);
+            // console.log(data);
           }
         });
     },
@@ -773,7 +774,7 @@ export default {
         "http://49.247.32.231:5000/api/MySize",
         { userToken: tokenData }
       );
-      console.log("mySize: ", data.data.Size);
+      // console.log("mySize: ", data.data.Size);
       this.$store.dispatch("setRole", data.data.Size);
     },
   },

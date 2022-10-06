@@ -340,11 +340,12 @@ export default {
         contractProduct: this.selectData.contractProduct,
         blogId: this.selectData.blogId,
       };
-      const data = await this.$axios.post(
+      // const data =
+      await this.$axios.post(
         "http://49.247.32.231:5000/api/saleAproveData",
         form
       );
-      console.log(data);
+      // console.log(data);
       // window.alert("승인 성공");
       this.getSalesData();
     },
@@ -380,7 +381,7 @@ export default {
       const data = await this.$axios.get(
         "http://49.247.32.231:5000/api/salesData"
       );
-      console.log(data.data);
+      // console.log(data.data);
 
       const datas = data.data;
       const dataList = [];
@@ -397,7 +398,7 @@ export default {
 
       this.salesItems.forEach((el, index) => {
         this.$set(el, "index", index);
-        console.log(el.Approved);
+        // console.log(el.Approved);
       });
     },
   },

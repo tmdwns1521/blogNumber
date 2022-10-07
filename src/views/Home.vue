@@ -143,27 +143,29 @@
           </b-row>
         </b-container>
       </article>
-      <article class="main-0 d-lg-none d-lg-none mobile">
-        <div class="bg text-center text-white">
-          <p class="fw-600 text-20 mb-3">
-            오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
-            한번에 도와드립니다.
-          </p>
-          <span class="d-block text-14 mb-3"
-            >검색하는 잠재고객에게 매장을 알리고 <br />리뷰/후기를 노출해 가게의
-            신뢰도를 높여보세요.</span
-          >
-          <b-btn pill class="mb-3 startBtn" @click="upDown()"
-            >무료로 광고 시작하기
-            <font-awesome-icon icon="fa-solid fa-chevron-right"
-          /></b-btn>
-          <span class="d-block text-14">상위노출 효과를 직접 경험하세요!</span>
-        </div>
+      <article class="main-0 d-lg-none d-block mobile">
         <div
-          class="bg-white p-5 shadow"
-          :class="{ shake: disabled }"
-          style="border-radius: 20px"
+          class="bg text-center text-white d-flex align-items-center justify-content-center"
         >
+          <div>
+            <p class="fw-600 text-20 mb-3">
+              오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
+              한번에 도와드립니다.
+            </p>
+            <span class="d-block text-14 mb-3"
+              >검색하는 잠재고객에게 매장을 알리고 <br />리뷰/후기를 노출해
+              가게의 신뢰도를 높여보세요.</span
+            >
+            <b-btn pill class="mb-3 startBtn" @click="upDown()"
+              >무료로 광고 시작하기
+              <font-awesome-icon icon="fa-solid fa-chevron-right"
+            /></b-btn>
+            <span class="d-block text-14"
+              >상위노출 효과를 직접 경험하세요!</span
+            >
+          </div>
+        </div>
+        <div class="bg-white p-5 shadow" :class="{ shake: disabled }" style="">
           <validation-observer ref="observer" v-slot="{ handleSubmit }">
             <b-form @submit.prevent="handleSubmit(submit)">
               <div>
@@ -278,12 +280,19 @@
       <!-- main 1 -->
       <article class="main-1">
         <b-container class="py-5" fluid>
-          <p class="text-center fw-600 text-30 mb-2">
+          <p class="text-center fw-600 text-30 mb-2 d-none d-lg-block">
             수년간 국내 대형 브랜드부터 소형 브랜드까지
           </p>
-          <span class="d-block text-center"
+          <p class="text-center fw-600 text-26 mb-4 d-block d-lg-none">
+            수년간 국내 대형 브랜드부터 <br />소형 브랜드까지
+          </p>
+          <span class="d-block text-center d-none d-lg-block"
             >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서 오늘의 픽을
             이용하고 있습니다.</span
+          >
+          <span class="d-block text-center d-block d-lg-none pb-4"
+            >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서<br />
+            오늘의 픽을 이용하고 있습니다.</span
           >
           <div class="logo_banner1 logo_banner"></div>
           <div class="logo_banner2 logo_banner"></div>
@@ -292,9 +301,13 @@
       <!-- main 2 -->
       <article class="main-2">
         <b-container class="py-5" fluid>
-          <p class="text-center fw-600 text-30 mb-4">
+          <p class="text-center fw-600 text-30 mb-4 d-none d-lg-block">
             검색결과 상위에 노출되어 보다 많은 <br />잠재고객에게 가게를
             알려보세요.
+          </p>
+          <p class="text-center fw-600 text-26 mb-4 d-block d-lg-none">
+            검색결과 상위에 노출되어<br />
+            보다 많은 잠재고객에게 가게를 알려보세요.
           </p>
           <span class="d-block text-center"
             >상위노출이 어려운 키워드에서도 노출이 가능한지 <br />오늘의 픽
@@ -303,41 +316,41 @@
           <div class="text-center btns my-5">
             <b-btn
               pill
-              class="mx-2"
+              class="m-2"
               @click="activeBtn = 'btn1'"
               :class="{ active: activeBtn === 'btn1' }"
               >맛집</b-btn
             >
             <b-btn
               pill
-              class="mx-2"
+              class="m-2"
               @click="activeBtn = 'btn2'"
               :class="{ active: activeBtn === 'btn2' }"
               >카페</b-btn
             >
             <b-btn
               pill
-              class="mx-2"
+              class="m-2"
               @click="activeBtn = 'btn3'"
               :class="{ active: activeBtn === 'btn3' }"
               >음식명</b-btn
             >
             <b-btn
               pill
-              class="mx-2"
+              class="m-2"
               @click="activeBtn = 'btn4'"
               :class="{ active: activeBtn === 'btn4' }"
               >미용실/네일샵</b-btn
             >
             <b-btn
               pill
-              class="mx-2"
+              class="m-2"
               @click="activeBtn = 'btn5'"
               :class="{ active: activeBtn === 'btn5' }"
               >제품</b-btn
             >
           </div>
-          <div class="contents">
+          <div class="contents d-none d-lg-block">
             <article :class="{ 'd-block': activeBtn === 'btn1' }">
               <img
                 src="@/assets/images/main_2_famous.png"
@@ -362,10 +375,27 @@
               />
             </article>
           </div>
+          <div class="contents d-block d-lg-none overflow-scroll">
+            <article :class="{ 'd-block': activeBtn === 'btn1' }">
+              <img src="@/assets/images/main_2_famous.png" class="" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn2' }">
+              <img src="@/assets/images/main_2_cafe.png" class="" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn3' }">
+              <img src="@/assets/images/main_2_food.png" class="" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn4' }">
+              <img src="@/assets/images/main_2_shop.png" class="" alt="" />
+            </article>
+            <article :class="{ 'd-block': activeBtn === 'btn5' }">
+              <img src="@/assets/images/main_2_product.png" class="" alt="" />
+            </article>
+          </div>
         </b-container>
       </article>
       <!-- main 3 -->
-      <article class="main-3">
+      <article class="main-3 d-none d-lg-block">
         <b-container class="py-5">
           <div class="m-auto text-center">
             <b-row>
@@ -412,6 +442,14 @@
             </b-row>
           </div>
         </b-container>
+      </article>
+      <article class="main-3 d-block d-lg-none mobile">
+        <slick :options="main3">
+          <img src="https://picsum.photos/1024/480/?image=21" alt="" />
+          <img src="https://picsum.photos/1024/480/?image=22" alt="" />
+          <img src="https://picsum.photos/1024/480/?image=23" alt="" />
+          <img src="https://picsum.photos/1024/480/?image=24" alt="" />
+        </slick>
       </article>
       <!-- main 4 -->
       <article class="main-4">
@@ -555,12 +593,22 @@
 <script>
 import BottomBanner from "@/components/Banner/BottomBanner.vue";
 import Check from "@/components/Modal/Check.vue";
+import Slick from "vue-slick";
+import "slick-carousel/slick/slick.css";
 
 export default {
   name: "Home",
-  components: { BottomBanner, Check },
+  components: { BottomBanner, Check, Slick },
   data() {
     return {
+      main3: {
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+      },
       activeBtn: "btn1",
       activeBtn2: "btn1",
       input: {

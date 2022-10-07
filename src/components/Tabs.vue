@@ -313,6 +313,11 @@ export default {
           thClass: "table-secondary",
         },
         {
+          key: "contractProduct",
+          label: "계약상품",
+          thClass: "table-secondary",
+        },
+        {
           key: "trafficDataTodayCount",
           label: "실시간트래픽",
           thClass: "table-secondary",
@@ -370,11 +375,6 @@ export default {
         {
           key: "blogPW",
           label: "비밀번호",
-          thClass: "table-secondary",
-        },
-        {
-          key: "contractProduct",
-          label: "계약상품",
           thClass: "table-secondary",
         },
 

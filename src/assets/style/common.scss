@@ -9,6 +9,10 @@ li {
   list-style: none;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 // input[type="checkbox"] {
 //   cursor: pointer;
 //   appearance: none;
@@ -295,6 +299,7 @@ button.close {
 
 .dataTable {
   background-color: #fff;
+  margin: 0 !important;
   &.salesTable {
     &.b-table-sticky-header {
       max-height: 100% !important;
@@ -305,12 +310,18 @@ button.close {
       background-color: aliceblue;
     }
   }
-  margin: 0 !important;
   th {
     white-space: nowrap;
   }
   td {
     white-space: nowrap;
+    .ellipsis {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 50px;
+      display: block;
+    }
   }
 }
 

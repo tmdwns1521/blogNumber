@@ -198,6 +198,7 @@
         <!-- 이메일 -->
         <template #cell(email)="row">
           <span
+            :class="{ ellipsis: isEllipsis }"
             v-clipboard:copy="row.item.blogId + '@naver.com'"
             v-clipboard:success="onCopy"
           >

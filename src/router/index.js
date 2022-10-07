@@ -10,6 +10,7 @@ import Home from "@/views/Home.vue";
 import Sales from "@/views/Sales.vue";
 import Order from "@/views/Order.vue";
 import Login from "@/views/Login.vue";
+import Signup from "@/views/Signup.vue";
 import store from "../store";
 
 Vue.use(VueRouter);
@@ -29,6 +30,11 @@ const routes = [
         name: "Login",
         component: Login,
         meta: { isLogin: true },
+      },
+      {
+        path: "/signup",
+        name: "Signup",
+        component: Signup,
       },
     ],
   },

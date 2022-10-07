@@ -18,7 +18,7 @@
           variant="link"
           class="text-secondary text-decoration-none"
         >
-          로그인
+          관리자
         </b-btn>
       </div>
       <div class="d-flex" style="gap: 20px">

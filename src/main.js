@@ -68,9 +68,15 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 //   }
 // );
 
-// 클립보드
+// Clipboard
 import VueClipboard from "vue-clipboard2";
 Vue.use(VueClipboard);
+
+// Month Picker
+import { MonthPicker } from "vue-month-picker";
+import { MonthPickerInput } from "vue-month-picker";
+Vue.use(MonthPicker);
+Vue.use(MonthPickerInput);
 
 new Vue({
   router,

@@ -4,56 +4,50 @@
       <div class="justify-content-between align-items-center mb-3 d-flex">
         <h2 class="fw-900 m-0">DATA</h2>
         <b-row class="justify-content-end align-items-center">
-          <!-- 딜력 검색 Start Date -->
-          <b-col cols="3">
-            <b-input-group>
-              <b-form-input
-                id="schStartDate"
-                v-model="schStartDate"
-                type="text"
-                placeholder="시작일"
-                autocomplete="off"
-              ></b-form-input>
-              <b-input-group-append>
-                <b-form-datepicker
-                  v-model="schStartDate"
-                  button-only
-                  right
-                  locale="ko"
-                  aria-controls="schStartDate"
-                  hide-header
-                ></b-form-datepicker>
-              </b-input-group-append>
-            </b-input-group>
-          </b-col>
-          <!-- 딜력 검색 End Date -->
-          <b-col cols="3">
-            <b-input-group>
-              <b-form-input
-                id="schEndDate"
-                v-model="schEndDate"
-                type="text"
-                placeholder="종료일"
-                autocomplete="off"
-              ></b-form-input>
-              <b-input-group-append>
-                <b-form-datepicker
-                  v-model="schEndDate"
-                  button-only
-                  right
-                  locale="ko"
-                  aria-controls="schEndDate"
-                  hide-header
-                ></b-form-datepicker>
-              </b-input-group-append>
-            </b-input-group>
+          <!-- 달력 검색 -->
+          <b-col>
+            <!-- {{ date }} -->
+            <b-form-group v-slot="{ ariaDescribedby }">
+              <b-input-group class="position-relative">
+                <b-form-input
+                  :aria-describedby="ariaDescribedby"
+                  v-model="selectedDate"
+                  class="form-control"
+                  type="text"
+                  placeholder="월별 검색"
+                  readonly
+                  @click="showMonthPicker()"
+                ></b-form-input>
+                <month-picker
+                  class="position-absolute"
+                  style="z-index: 10; top: 3rem"
+                  lang="ko"
+                  editable-year
+                  date-format="%Y년 %n"
+                  no-default
+                  @change="showDate"
+                  v-show="monthPickerVisible"
+                ></month-picker>
+                <b-input-group-append>
+                  <b-btn
+                    @click="clearDate"
+                    :disabled="!date"
+                    variant="outline-dark"
+                    style="
+                      border-top-left-radius: 0;
+                      border-bottom-left-radius: 0;
+                    "
+                    >초기화</b-btn
+                  >
+                </b-input-group-append>
+              </b-input-group>
+            </b-form-group>
           </b-col>
           <!-- 검색어 -->
-          <b-col cols="5">
+          <b-col>
             <b-form-group v-slot="{ ariaDescribedby }">
               <b-input-group>
                 <b-form-input
-                  class="mx-2"
                   id="filter-input"
                   v-model="filter"
                   :aria-describedby="ariaDescribedby"
@@ -298,9 +292,14 @@
 </template>
 
 <script>
+import { MonthPicker } from "vue-month-picker";
+
 export default {
   name: "Tabs",
   props: ["currentData", "salesItems", "orderItems"],
+  components: {
+    MonthPicker,
+  },
   data() {
     return {
       isEllipsis: false,
@@ -460,15 +459,29 @@ export default {
       ],
       filter: "",
       empty: "-",
-      schStartDate: "",
-      schEndDate: "",
+      date: { from: null, to: null, month: null, monthIndex: null, year: null },
+      selectedDate: null,
+      monthPickerVisible: false,
     };
   },
   methods: {
     onRowSelected(items) {
       this.$emit("onRowSelected", items);
     },
+    showDate(date) {
+      this.date = date;
+      this.selectedDate = this.date.year + "년 " + this.date.month;
+    },
+    clearDate() {
+      this.date = null;
+      this.selectedDate = null;
+      this.monthPickerVisible = false;
+    },
+    showMonthPicker() {
+      this.monthPickerVisible = !this.monthPickerVisible;
+    },
   },
+  mounted() {},
 };
 </script>
 

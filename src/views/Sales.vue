@@ -320,7 +320,7 @@
                   </template>
                 </b-td>
               </b-tr>
-              <b-tr>
+              <!-- <b-tr>
                 <b-th>카드사</b-th>
                 <b-td>
                   <template v-if="!addTag">
@@ -447,7 +447,178 @@
                       v-model="newData.installmentMonth"
                     ></b-form-input> </template
                 ></b-td>
-              </b-tr>
+              </b-tr> -->
+              <!-- 카드결제 -->
+              <template v-if="paymentType == 'card'">
+                <b-tr>
+                  <b-th>카드사</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag"
+                        v-model="currentData.cardData.creditCardCompany"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        v-model="newData.creditCardCompany"
+                      ></b-form-input>
+                    </template>
+                  </b-td>
+                  <b-th>카드소유자</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag"
+                        v-model="currentData.cardData.cardholder"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input v-model="newData.cardholder"></b-form-input>
+                    </template>
+                  </b-td>
+                  <b-th>카드번호</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag"
+                        v-model="currentData.cardData.creditCardNumber"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        v-model="newData.creditCardNumber"
+                      ></b-form-input>
+                    </template>
+                  </b-td>
+                </b-tr>
+                <b-tr>
+                  <b-th>카드유효기간</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag || paymentType == 'cash'"
+                        v-model="currentData.cardData.CardValidityPeriod"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        :disabled="paymentType == 'cash'"
+                        v-model="newData.CardValidityPeriod"
+                      ></b-form-input>
+                    </template>
+                  </b-td>
+                  <b-th>카드승인번호</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else
+                        :disabled="!updateTag || paymentType == 'cash'"
+                        v-model="currentData.ApprovalNumber"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        :disabled="paymentType == 'cash'"
+                        v-model="newData.ApprovalNumber"
+                      ></b-form-input> </template
+                  ></b-td>
+                  <b-th>할부개월</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else
+                        :disabled="!updateTag || paymentType == 'cash'"
+                        v-model="currentData.installmentMonth"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        :disabled="paymentType == 'cash'"
+                        v-model="newData.installmentMonth"
+                      ></b-form-input> </template
+                  ></b-td>
+                </b-tr>
+              </template>
+              <!-- 계좌이체 -->
+              <template v-else>
+                <b-tr>
+                  <b-th>이체은행</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag"
+                        v-model="currentData.cardData.creditCardCompany"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input
+                        v-model="newData.creditCardCompany"
+                      ></b-form-input>
+                    </template>
+                  </b-td>
+                  <b-th>입금자명</b-th>
+                  <b-td>
+                    <template v-if="!addTag">
+                      <b-form-input
+                        v-if="isEmpty(currentData)"
+                        disabled
+                        :value="empty"
+                      ></b-form-input>
+                      <b-form-input
+                        v-else-if="currentData.cardData"
+                        :disabled="!updateTag"
+                        v-model="currentData.cardData.cardholder"
+                      ></b-form-input>
+                    </template>
+                    <template v-else>
+                      <b-form-input v-model="newData.cardholder"></b-form-input>
+                    </template>
+                  </b-td>
+                  <b-th></b-th>
+                  <b-td></b-td>
+                </b-tr>
+              </template>
               <b-tr>
                 <b-th>계약기간</b-th>
                 <b-td>
@@ -593,7 +764,7 @@ export default {
       paymentType: "card",
       addTag: false,
       updateTag: false,
-      empty: "-",
+      empty: "",
       totalPricePredicted: null,
       totalPriceConfirm: null,
       managerPricePredicted: null,

@@ -30,16 +30,17 @@
                 ></month-picker>
                 <b-input-group-append>
                   <b-btn
-                    @click="clearDate"
-                    :disabled="!date"
+                    @click="[clearDate(), getCurrentMonthsalesData()]"
                     variant="outline-dark"
-                    style="
-                      border-top-left-radius: 0;
-                      border-bottom-left-radius: 0;
-                    "
+                    style="border-radius: 0"
                     >초기화</b-btn
                   >
                 </b-input-group-append>
+                <b-btn
+                  @click="[clearDate(), getSalesData()]"
+                  variant="outline-dark"
+                  >전체데이터 보기</b-btn
+                >
               </b-input-group>
             </b-form-group>
           </b-col>
@@ -470,9 +471,23 @@ export default {
     onRowSelected(items) {
       this.$emit("onRowSelected", items);
     },
-    showDate(date) {
+    async showDate(date) {
       this.date = date;
       this.selectedDate = this.date.year + "년 " + this.date.month;
+
+      const data = await this.$axios.post(
+        "http://49.247.32.231:5000/api/MonthsalesData",
+        { month: this.date.monthIndex }
+      );
+      console.log(data);
+
+      this.$emit("onMonthsalesData", data);
+    },
+    getSalesData() {
+      this.$emit("getSalesData");
+    },
+    getCurrentMonthsalesData() {
+      this.$emit("getCurrentMonthsalesData");
     },
     clearDate() {
       this.date = null;
@@ -484,6 +499,15 @@ export default {
     },
   },
   mounted() {},
+  watch: {
+    date(n, o) {
+      // console.log(n, o);
+      if (n) {
+        // console.log(n);
+        this.monthPickerVisible = false;
+      }
+    },
+  },
 };
 </script>
 

@@ -726,7 +726,13 @@
     </div>
     <!-- {{ currentData }}
     {{ newData }} -->
-    <Tabs @onRowSelected="onRowSelected" :salesItems="salesItems" />
+    <Tabs
+      @onRowSelected="onRowSelected"
+      @onMonthsalesData="onMonthsalesData"
+      @getCurrentMonthsalesData="getCurrentMonthsalesData"
+      @getSalesData="getSalesData"
+      :salesItems="salesItems"
+    />
   </div>
 </template>
 
@@ -760,6 +766,7 @@ export default {
         creditCardNumber: null,
         CardValidityPeriod: null,
         ContractNumber: new Date().setHours(new Date().getHours() + 9),
+        paymentType: null,
       },
       paymentType: "card",
       addTag: false,
@@ -812,6 +819,14 @@ export default {
     },
     // 신규등록 완료
     async addData() {
+      if (this.paymentType == "card") {
+        this.newData.paymentType = "card";
+        // console.log(this.newData.paymentType);
+      } else {
+        this.newData.paymentType = "cash";
+        // console.log(this.newData.paymentType);
+      }
+
       await this.$axios
         .post("http://49.247.32.231:5000/api/saleData", this.newData)
         .then((res) => {
@@ -895,12 +910,38 @@ export default {
         }
       });
     },
+    async getCurrentMonthsalesData() {
+      const data = await this.$axios.get(
+        "http://49.247.32.231:5000/api/CurrentMonthsalesData"
+      );
+      // console.log(data.data);
+      this.onList(data);
+    },
     async getSalesData() {
       const data = await this.$axios.get(
         "http://49.247.32.231:5000/api/salesData"
       );
       // console.log(data.data);
+      this.onList(data);
+    },
+    async mySize() {
+      const isToken = localStorage.getItem("token");
+      const tokenData = JSON.parse(isToken);
 
+      const data = await this.$axios.post(
+        "http://49.247.32.231:5000/api/MySize",
+        { userToken: tokenData }
+      );
+      // console.log("mySize: ", data.data.Size);
+      this.$store.dispatch("setRole", data.data.Size);
+    },
+
+    onMonthsalesData(data) {
+      // console.log("onMonthsalesData", data);
+      this.onList(data);
+    },
+
+    onList(data) {
       const datas = data.data;
       const dataList = [];
 
@@ -937,20 +978,9 @@ export default {
         }
       });
     },
-    async mySize() {
-      const isToken = localStorage.getItem("token");
-      const tokenData = JSON.parse(isToken);
-
-      const data = await this.$axios.post(
-        "http://49.247.32.231:5000/api/MySize",
-        { userToken: tokenData }
-      );
-      // console.log("mySize: ", data.data.Size);
-      this.$store.dispatch("setRole", data.data.Size);
-    },
   },
   mounted() {
-    this.getSalesData();
+    this.getCurrentMonthsalesData();
     this.mySize();
   },
   computed: {},

@@ -6,7 +6,7 @@
         <b-form @submit.prevent="handleSubmit(signup)">
           <div>
             <validation-provider
-              name="아이디"
+              name="이름"
               :rules="{ required: true }"
               v-slot="validationContext"
             >
@@ -14,12 +14,31 @@
                 <b-form-input
                   id="name-input"
                   name="name-input"
-                  v-model="input.id"
-                  placeholder="아이디"
+                  v-model="input.fullName"
+                  placeholder="이름"
                   :state="getValidationState(validationContext)"
                   aria-describedby="name-input-feedback"
                 ></b-form-input>
                 <b-form-invalid-feedback id="name-input-feedback">{{
+                  validationContext.errors[0]
+                }}</b-form-invalid-feedback>
+              </b-form-group>
+            </validation-provider>
+            <validation-provider
+              name="아이디"
+              :rules="{ required: true }"
+              v-slot="validationContext"
+            >
+              <b-form-group id="id-input-group" class="mb-3">
+                <b-form-input
+                  id="id-input"
+                  name="id-input"
+                  v-model="input.id"
+                  placeholder="아이디"
+                  :state="getValidationState(validationContext)"
+                  aria-describedby="id-input-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback id="id-input-feedback">{{
                   validationContext.errors[0]
                 }}</b-form-invalid-feedback>
               </b-form-group>
@@ -85,6 +104,7 @@ export default {
   data() {
     return {
       input: {
+        fullName: null,
         id: null,
         password: null,
       },
@@ -93,17 +113,18 @@ export default {
   },
   methods: {
     async signup() {
-      // console.log("회원가입");
-      // const data = await this.$axios.post(
-      //   "http://49.247.32.231:5000/api/login",
-      //   this.input
-      // );
-      // console.log(data);
+      console.log("회원가입");
+      const data = await this.$axios
+        .post("http://49.247.32.231:5000/api/register", this.input)
+        .then((res) => {
+          console.log(res);
+          window.alert("회원가입 성공");
+          this.$router.push("/login");
+        });
+      console.log(data);
       // if (data.data.token) {
       //   this.$store.dispatch("setToken", data.data.token);
       //   this.$store.dispatch("setServiceId", this.input.id);
-      //   // this.$store.dispatch("setRole", data.data.role);
-      //   //    this.$store.dispatch("setName", data.data.name);
       //   this.$router.push("/manage");
       // } else {
       //   window.alert(data.data.result);

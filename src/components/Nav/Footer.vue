@@ -42,13 +42,13 @@
               서울시 영등포구 경인로 775, 1동 215호(에이스하이테크시티)
             </p>
           </div>
-          <span>© 오늘의 픽. All rights reserved.</span>
+          <span>© 오늘부터 마케팅. All rights reserved.</span>
         </b-col>
       </b-row>
     </b-container>
     <!-- Mobile -->
     <b-container class="d-lg-none d-block py-3">
-      <h1 class="text-20 fw-900 pb-2">오늘의 픽</h1>
+      <h1 class="text-20 fw-900 pb-2">오늘부터 마케팅</h1>
       <p class="m-0">
         <span class="fw-900">대표</span>
         민경재
@@ -61,7 +61,7 @@
         <span class="fw-900">주소</span>
         서울시 영등포구 경인로 775, 1동 215호(에이스하이테크시티)
       </p>
-      <span>© 오늘의 픽. All rights reserved.</span>
+      <span>© 오늘부터 마케팅. All rights reserved.</span>
     </b-container>
   </div>
 </template>

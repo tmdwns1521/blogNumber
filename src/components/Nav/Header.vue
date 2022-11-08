@@ -7,7 +7,7 @@
           <b-navbar-brand href="/">
             <img
               src="@/assets/images/today-logo.png"
-              alt="오늘의 픽 로고"
+              alt="오늘부터 마케팅 로고"
               :style="{ height: '50px' }"
             />
           </b-navbar-brand>

@@ -7,7 +7,7 @@
           <b-row class="align-items-center h-100">
             <b-col class="text-white"
               ><p class="fw-600 text-30 mb-5">
-                오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와
+                오늘부터 마케팅에서 네이버 블로그 상위노출로 <br />바이럴 홍보와
                 판매를 한번에 도와드립니다.
               </p>
               <span class="d-block mb-4"
@@ -149,7 +149,7 @@
         >
           <div>
             <p class="fw-600 text-20 mb-3">
-              오늘의 픽에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
+              오늘부터 마케팅에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
               한번에 도와드립니다.
             </p>
             <span class="d-block text-14 mb-3"
@@ -287,12 +287,12 @@
             수년간 국내 대형 브랜드부터 <br />소형 브랜드까지
           </p>
           <span class="d-block text-center d-none d-lg-block"
-            >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서 오늘의 픽을
+            >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서 오늘부터 마케팅을
             이용하고 있습니다.</span
           >
           <span class="d-block text-center d-block d-lg-none pb-4"
             >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서<br />
-            오늘의 픽을 이용하고 있습니다.</span
+            오늘부터 마케팅을 이용하고 있습니다.</span
           >
           <div class="logo_banner1 logo_banner"></div>
           <div class="logo_banner2 logo_banner"></div>
@@ -310,7 +310,7 @@
             보다 많은 잠재고객에게 가게를 알려보세요.
           </p>
           <span class="d-block text-center"
-            >상위노출이 어려운 키워드에서도 노출이 가능한지 <br />오늘의 픽
+            >상위노출이 어려운 키워드에서도 노출이 가능한지 <br />오늘부터 마케팅
             인플루언서들의 검증된 실력을 직접 확인해보세요.</span
           >
           <div class="text-center btns my-5">
@@ -436,7 +436,7 @@
                 </p>
                 <span>
                   직원관리도 힘드신데 대표님은 일만 하세요. <br />
-                  진짜 광고는 오늘의 픽이 책임지겠습니다.
+                  진짜 광고는 오늘부터 마케팅이 책임지겠습니다.
                 </span>
               </b-col>
             </b-row>
@@ -455,7 +455,7 @@
       <article class="main-4">
         <b-container class="py-5">
           <p class="text-center text-white fw-600 text-30 mb-4">
-            마케팅이 더 쉬워지는 오늘의 픽 솔루션
+            마케팅이 더 쉬워지는 오늘부터 마케팅 솔루션
           </p>
           <div class="text-center btns">
             <b-btn

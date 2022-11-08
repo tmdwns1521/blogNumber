@@ -17,7 +17,7 @@
             <b-row class="justify-content-between align-items-center">
               <b-col class="text-18 border-end">
                 <b-card-title class="opacity-50" v-if="!currentData.manager">
-                  오늘의 픽
+                  오늘부터 마케팅
                 </b-card-title>
                 <b-card-title class="fw-900" v-else>
                   {{ currentData.manager }}

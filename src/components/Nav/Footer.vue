@@ -6,7 +6,7 @@
         <b-col cols="2"><h3 class="fw-900">엔에스엠(NSM)</h3></b-col>
         <b-col>
           <div class="d-flex align-items-center justify-content-between mb-4">
-            <h1 class="text-25 fw-900 m-0">오늘의 픽</h1>
+            <h1 class="text-25 fw-900 m-0">오늘부터 마케팅</h1>
             <!-- <b-nav-item-dropdown right v-if="$store.getters.isLogin">
           <template #button-content>
             <b-avatar></b-avatar>

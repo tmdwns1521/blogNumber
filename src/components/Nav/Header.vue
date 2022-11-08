@@ -6,7 +6,7 @@
         <div class="justify-content-between align-items-center d-flex">
           <b-navbar-brand href="/">
             <img
-              src="@/assets/images/logo.svg"
+              src="@/assets/images/today-logo.png"
               alt="오늘의 픽 로고"
               :style="{ height: '50px' }"
             />

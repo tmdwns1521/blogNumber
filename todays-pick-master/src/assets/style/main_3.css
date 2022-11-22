@@ -1,0 +1,21 @@
+.Main3{
+    max-width: 1440px; margin: 90px auto 0; 
+}
+.Main3 div:first-child{
+    width: 100%;
+}
+.Main3 div:first-child > p:first-child{
+    font-size: 38px; font-weight: bold; margin-bottom: 60px;text-align: center;
+}
+.Main3 div:first-child > p mark{
+    background: none; color: #0DCAF0;
+}
+.Main3 div:first-child > p:nth-child(2){
+    font-size: 20px; margin-bottom: 10px; text-align: center;
+}
+.Main3 figure{
+    display: flex; align-items: center;
+}
+.Main3 figure figcaption p:first-child{
+    font-size: 35px; font-weight: bold;
+}

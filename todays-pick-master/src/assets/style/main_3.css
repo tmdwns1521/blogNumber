@@ -1,88 +1,262 @@
-.Main3Div{
-    max-width: 1440px; margin: 90px auto 0; 
-}
-.Main3Div div{
-    width: 100%;
-}
-.Main3Div > p:first-child{
-    font-size: 38px; font-weight: bold; margin-bottom: 60px; text-align: center;
-}
-.Main3Div > p mark{
-    background: none; color: #0DCAF0;
-}
-.Main3Div > p:nth-child(2){
-    font-size: 20px; margin-bottom: 10px; text-align: center;
-}
 
+/* @media screen and (max-width: 280px){
+    .main-0{
+        box-shadow: none; background:url(http://localhost:8080/img/main_banner.5bb231f0.png) no-repeat;
+        height: 590px;
+    }
+    .main-0 .text-white{
+        padding: 60px 0 40px;
+    }
+    .main-0 .m-ConappBtn{
+        background: #00eadc; font-weight: bold; font-size: 24px;  border-radius: 30px;
+    }
+    .main-0 .m-ConappBtn:hover{
+        background: #5c636a !important;
+    }
+    .valibox{
+        padding: 10% 10% 90px;
+    }
+    .main-1{
+        padding-top: 14rem;
+    }
+    .Main3 figure:last-child{
+        margin-bottom: 90px;
+    }
+    .Main3Div{
+        max-width: 1200px; margin: 90px auto 0; width: 100%; padding: 0 15px;
+    }
+    .Main3Div div{
+        width: 100%;
+    }
+    .Main3Div > p:first-child{
+        font-size: 21px; font-weight: bold; margin-bottom: 40px; text-align: center;
+    }
+    .Main3Div > p mark{
+        background: none; color: #0DCAF0;
+    }
+    .Main3Div > p:nth-child(2){
+        font-size: 18px; margin-bottom: 80px; text-align: center;
+    }
+    .Main3Div figure figcaption p:first-child{
+        font-size: 35px; font-weight: bold; margin-bottom: 45px;
+    }
 
+    .Main3Div figure{
+        text-align: center;
+    }
+    .Main3Div figure img{
+        width: 70%;
+    }
+    .Main3Div figure .main3_bar{
+        display: block; border: 1px solid #000; width: 70%; margin-bottom: 60px;
+    }
+    .Main3Div figure .main3_bar{
+        margin-left: 15%;
+    }
+    .Main3Div figure figcaption p:last-child{
+        font-size: 18px; line-height: 30px;
+    }
+    .Main3 > div:last-of-type{
+        text-align: center; background: #00EADC;
+    }
+    .Main3 div:last-child div{
+        background: rgba(0, 0, 0, 0.2); padding: 50px 0 0;
+    }
+    .Main3 > div:last-child p{
+        font-size: 38px; font-weight: bold; color: #fff; margin-bottom: 40px;
+    }
+    .Main3 > div:last-child p mark{
+        background: none; color: #fff; font-size: 50px;
+    }
+    .Main3 > div:last-child button{
+        border: 1px solid #07D6FF; border-radius: 30px; line-height: 50px; width: 50%;
+        font-size: 25px; font-weight: bold; color: #fff; background: #00EADC;
+    }
+    .Main3 > div:last-child button:hover{
+        background: #5c636a; transition-duration: 0.5s;
+    }
+    .main-4 > div{
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .main-4 .row{
+        display: block;
+    }
+    .main-4 .contents-text{
+        color: #fff; width: 100%; text-align: center;
+    }
+    .main-4 .main4-btn{
+        margin-bottom: 30px;
+    }
+    .main-4 .bg-img img{
+        width: 100%;
+    }
+} */
 
-.Main3Div figure{
-    display: flex; align-items: center;
-}
-.Main3Div figure .main3_left{
-    animation: slide1 2s ease-in-out;
-}
-.Main3Div figure .main3_right{
-    animation: slide2 2s ease-in-out;
-}
-.Main3Div figure figcaption p:first-child{
-    font-size: 35px; font-weight: bold; margin-bottom: 45px;
-}
+@media screen and (min-width: 700px) and (max-width: 1279px) {
+    .main-0{
+        box-shadow: none; background:url(http://localhost:8080/img/main_banner.5bb231f0.png) no-repeat;
+        height: 590px;
+    }
+    .text-white{
+        padding: 60px 0 40px;
+    }
+    .ConappBtn{
+        background: #00eadc; font-weight: bold; font-size: 24px;  border-radius: 30px;
+    }
+    .ConappBtn:hover{
+        background: #5c636a !important;
+    }
+    .valibox{
+        padding: 10% 10% 90px;
+    }
+    .main-1{
+        padding-top: 14rem;
+    }
+    .Main3 figure:last-child{
+        margin-bottom: 90px;
+    }
+    .Main3Div{
+        max-width: 1200px; margin: 90px auto 0; width: 100%; padding: 0 15px;
+    }
+    .Main3Div div{
+        width: 100%;
+    }
+    .Main3Div > p:first-child{
+        font-size: 21px; font-weight: bold; margin-bottom: 40px; text-align: center;
+    }
+    .Main3Div > p mark{
+        background: none; color: #0DCAF0;
+    }
+    .Main3Div > p:nth-child(2){
+        font-size: 18px; margin-bottom: 80px; text-align: center;
+    }
+    .Main3Div figure figcaption p:first-child{
+        font-size: 35px; font-weight: bold; margin-bottom: 45px;
+    }
 
-
-@keyframes slide1{
-    from{
-        margin-left: 10%;
-        opacity: 0;
-    }to{
-        margin-left: 0%;
-        opacity: 1;
+    .Main3Div figure{
+        text-align: center;
+    }
+    .Main3Div figure img{
+        width: 70%;
+    }
+    .Main3Div figure .main3_bar{
+        display: block; border: 1px solid #000; width: 70%; margin-bottom: 60px;
+    }
+    .Main3Div figure .main3_bar{
+        margin-left: 15%;
+    }
+    .Main3Div figure figcaption p:last-child{
+        font-size: 18px; line-height: 30px;
+    }
+    .Main3 > div:last-of-type{
+        text-align: center; background: #00EADC;
+    }
+    .Main3 div:last-child div{
+        background: rgba(0, 0, 0, 0.2); padding: 50px 0 0;
+    }
+    .Main3 > div:last-child p{
+        font-size: 38px; font-weight: bold; color: #fff; margin-bottom: 40px;
+    }
+    .Main3 > div:last-child p mark{
+        background: none; color: #fff; font-size: 50px;
+    }
+    .Main3 > div:last-child button{
+        border: 1px solid #07D6FF; border-radius: 30px; line-height: 50px; width: 50%;
+        font-size: 25px; font-weight: bold; color: #fff; background: #00EADC;
+    }
+    .Main3 > div:last-child button:hover{
+        background: #5c636a; transition-duration: 0.5s;
+    }
+    .main-4 > div{
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .main-4 .row{
+        display: block;
+    }
+    .main-4 .contents-text{
+        color: #fff; width: 100%; text-align: center;
+    }
+    .main-4 .main4-btn{
+        margin-bottom: 30px;
+    }
+    .main-4 .bg-img img{
+        width: 100%;
     }
 }
 
-@keyframes slide2{
-    from{
-        margin-right: 10%;
-        opacity: 0;
-    }to{
-        margin-right: 0%;
-        opacity: 1;
+@media screen and (min-width: 1280px){
+    .main-0{
+        background:url(http://localhost:8080/img/main_banner.5bb231f0.png) no-repeat;
     }
-}
+    .conappBtn{
+        background: #00eadc; font-weight: bold; font-size: 24px; border-radius: 30px; 
+      }
+    .conappBtn:hover{
+        background-color: #6c757d;
+    }
+    .Main3Div{
+        max-width: 1440px; margin: 90px auto 0; 
+    }
+    .Main3Div div{
+        width: 100%;
+    }
+    .Main3Div > p:first-child{
+        font-size: 38px; font-weight: bold; margin-bottom: 60px; text-align: center;
+    }
+    .Main3Div > p mark{
+        background: none; color: #0DCAF0;
+    }
+    .Main3Div > p:nth-child(2){
+        font-size: 20px; margin-bottom: 10px; text-align: center;
+    }
 
+    .Main3Div figure{
+        display: flex; align-items: center;
+    }
+    .Main3Div figure figcaption p:first-child{
+        font-size: 35px; font-weight: bold; margin-bottom: 45px;
+    }
+    .Main3Div figure:nth-child(2n-1){
+        text-align: right; order: 1;
+    }
 
+    .Main3Div figure:nth-child(2n-1) img{
+        order: 1;
+    }
 
-
-
-
-.Main3Div figure:nth-child(2n-1){
-    text-align: right;
-}
-.Main3Div figure .main3_bar{
-    display: block; border: 1px solid #000; width: 70%; margin-bottom: 60px;
-}
-.Main3Div figure:nth-child(odd) .main3_bar{
-    margin-left: 30%; 
-}
-.Main3Div figure figcaption p:last-child{
-    font-size: 18px; line-height: 30px;
-}
-.Main3 > div:last-of-type{
-    text-align: center; background: #00EADC;
-}
-.Main3 div:last-child div{
-    background: rgba(0, 0, 0, 0.2); padding: 60px 0 120px;
-}
-.Main3 > div:last-child p{
-    font-size: 38px; font-weight: bold; color: #fff; margin-bottom: 60px;
-}
-.Main3 > div:last-child p mark{
-    background: none; color: #07D6FF;
-}
-.Main3 > div:last-child button{
-    border: 1px solid #07D6FF; border-radius: 30px; line-height: 60px; width: 20%;
-    font-size: 30px; font-weight: bold; color: #fff; background: #00EADC;
-}
-.main-4 > div{
-    background: rgba(0, 0, 0, 0.2);
+    .Main3Div figure .main3_bar{
+        display: block; border: 1px solid #000; width: 70%; margin-bottom: 60px;
+    }
+    .Main3Div figure:nth-child(odd) .main3_bar{
+        margin-left: 30%; 
+    }
+    .Main3Div figure figcaption p:last-child{
+        font-size: 18px; line-height: 30px;
+    }
+    .Main3 figure:last-child{
+        margin-bottom: 90px;
+    }
+    .Main3 > div:last-of-type{
+        text-align: center; background: #00EADC;
+    }
+    .Main3 div:last-child div{
+        background: rgba(0, 0, 0, 0.2); padding: 60px 0 120px;
+    }
+    .Main3 > div:last-child p{
+        font-size: 38px; font-weight: bold; color: #fff; margin-bottom: 60px;
+    }
+    .Main3 > div:last-child p mark{
+        background: none; color: #fff; font-size: 50px;
+    }
+    .Main3 > div:last-child button{
+        border: 1px solid #07D6FF; border-radius: 30px; line-height: 60px; width: 20%;
+        font-size: 30px; font-weight: bold; color: #fff; background: #00EADC;
+    }
+    .main-4 > div{
+        background: rgba(0, 0, 0, 0.2);
+    }
+    .main-4 .contents-text{
+        color: #fff; 
+    }
 }

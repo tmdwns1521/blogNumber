@@ -22,7 +22,7 @@
             </b-col>
             <b-col cols="5">
               <div
-                class="bg-white p-5 shadow"
+                class="bg-white p-5"
                 :class="{ shake: disabled }"
                 style="border-radius: 20px"
               >
@@ -124,17 +124,7 @@
                           }}</b-form-invalid-feedback>
                         </b-form-checkbox-group>
                       </validation-provider>
-                      <b-btn
-                        type="submit"
-                        pill
-                        class="mt-4 w-100 border-0 shadow-sm"
-                        style="
-                          background: #00eadc;
-                          font-weight: bold;
-                          font-size: 24px;
-                        "
-                        >무료 상담 신청하기</b-btn
-                      >
+                      <b-btn type="submit" class="mt-4 w-100 border-0 shadow-sm ConappBtn" style="none">무료 상담 신청하기</b-btn>
                     </div>
                   </b-form>
                 </validation-observer>
@@ -143,11 +133,10 @@
           </b-row>
         </b-container>
       </article>
+
       <article class="main-0 d-lg-none d-block mobile">
-        <div
-          class="bg text-center text-white d-flex align-items-center justify-content-center"
-        >
-          <div>
+        <div class="bg text-center text-white d-flex align-items-center justify-content-center">
+          <div style="padding: 40px 0;">
             <p class="fw-600 text-20 mb-3">
               오늘부터 마케팅에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
               한번에 도와드립니다.
@@ -165,7 +154,7 @@
             >
           </div>
         </div>
-        <div class="bg-white p-5 shadow" :class="{ shake: disabled }" style="">
+        <div class="bg-white valibox" :class="{ shake: disabled }" style="padding: 10%;">
           <validation-observer ref="observer" v-slot="{ handleSubmit }">
             <b-form @submit.prevent="handleSubmit(submit)">
               <div>
@@ -261,17 +250,7 @@
                     }}</b-form-invalid-feedback>
                   </b-form-checkbox-group>
                 </validation-provider>
-                <b-btn
-                  type="submit"
-                  pill
-                  class="mt-4 w-100 border-0 shadow-sm"
-                  style="
-                    background: #00eadc;
-                    font-weight: bold;
-                    font-size: 24px;
-                  "
-                  >무료 상담 신청하기</b-btn
-                >
+                <b-btn type="submit" pill class="mt-4 w-100 border-0 shadow-sm m-ConappBtn">무료 상담 신청하기</b-btn>
               </div>
             </b-form>
           </validation-observer>
@@ -279,7 +258,7 @@
       </article>
       <!-- main 1 -->
       <article class="main-1">
-        <b-container class="py-5" fluid>
+        <b-container class="py-5" fluid style="margin-top: 60px;">
           <p class="text-center fw-600 text-40 d-none d-lg-block" style="margin-bottom: 30px;">
             수년간 국내 대형 브랜드부터 소형 브랜드까지
           </p>
@@ -405,23 +384,19 @@
           <p>광고, 홍보를 어떻게 해야할지 모르는 대표님들, 직원관리도 힘드신데 대표님은 일만 하세요. <mark>진짜 광고</mark>는 <mark>오늘부터 마케팅</mark>이 <mark>책임</mark>지겠습니다.</p>
           <p>브랜드의 성장 가능성을 열고, 매출 상승의 가속화를직접 경험하세요.</p>
           <figure>
-            <figcaption class="main3_scroll1L main3_float_L main3_left">
+            <img src="../assets/images/main_3_1.png" alt="바이럴 마케팅 이미지">
+            <figcaption>
               <p>1. 바이럴 마케팅</p>
               <span class="main3_bar"></span>
               <p>바이러스(Virus)처럼 퍼진다는 의미를 가진 바이럴(Viral)은 끊임없이 전달되는 마케팅 기법입니다. 블로그나 카페, SNS등 매체를 통해 널리 확산하는 방식의
                   소문을 통해 홍보되는 방식으로 자연스럽게 홍보할 수 있는 방법이 있는 마케팅입니다. 적은 비용으로 효과적인 매출 상승을 도와주고 매체를 통해 빠르게 전달되는 효과를 추구합니다. 
                   업종과 서비스에 맞는 매체 활용으로 다양한 소식들이나 홍보 내용을 연령, 성별 상관없이 최적화된 타겟을 대상으로 노출할 수 있습니다.</p>
             </figcaption>
-            <div class="main3_scroll1R Fimg main3_right">
-              <img src="../assets/images/main_3_1.png" alt="">
-            </div>
           </figure>
 
           <figure>
-            <div class="main3_scroll2L main3_float_L Fimg main3_left">
-              <img src="../assets/images/main_3_2.png" alt="">
-            </div>
-            <figcaption class="main3_scroll2R main3_right">
+            <img src="../assets/images/main_3_2.png" alt="블로그 마케팅 이미지">
+            <figcaption>
               <p>2. 블로그 마케팅</p>
               <span class="main3_bar"></span>
               <p>바이럴 마케팅의 한 종류입니다. 블로그는 네이버 블로그 / 다음 블로그 / 카카오 티스토리 등 다양한 블로그 매체가 존재합니다. 목적에 따라서 그 활용도가 달라지고 마케팅 목적의 블로그는 주로 네이버 블로그가 활용됩니다.
@@ -430,21 +405,18 @@
           </figure>
 
           <figure>
-            <figcaption class="main3_scroll3L main3_float_L main3_left">
+              <img src="../assets/images/main_3_3.png" alt="SNS 마케팅 이미지">
+            <figcaption>
               <p>3. SNS 마케팅</p>
               <span class="main3_bar"></span>
               <p>흔히들 알고계시는 스폰서광고나 플루언서 마케팅등 다양한 기법의 마케팅 활용이 가능합니다. 업종이나 서비스에 맞춰서 효과를 극대화 할 수 있는 마케팅이고
                   사진이라는 가시적이고 담백한 정보와 짧은 영상으로 확실한 임팩트를 전달하는게 가능합니다. 주로 후기성의 목적으로의 마케팅 활용에 효과적입니다.</p>
             </figcaption>
-            <div class="main3_scroll3R Fimg main3_right">
-              <img src="../assets/images/main_3_3.png" alt="">
-            </div>
+            
           </figure>
 
           <figure>
-            <div class="main3_scroll4L main3_float_L Fimg main3_left">
-              <img src="../assets/images/main_3_4.png" alt="">
-            </div>
+              <img src="../assets/images/main_3_4.png" alt="플레이스 이미지">
             <figcaption class="main3_scroll4R main3_right">
               <p>4. 플레이스</p>
               <span class="main3_bar"></span>
@@ -469,7 +441,7 @@
             <p class="text-center text-white fw-600 text-40 mb-4">
               마케팅이 더 쉬워지는 오늘부터 마케팅 솔루션
             </p>
-            <div class="text-center btns">
+            <div class="text-center btns main4-btn">
               <b-btn
                 style="padding: 10px 2%"
                 pill
@@ -499,11 +471,11 @@
               <article :class="{ 'd-block': activeBtn2 === 'btn1' }">
                 <b-row class="align-items-center">
                   <b-col>
-                    <h1 class="text-white text-30 mb-4">
+                    <h1 class="contents-text text-30 mb-4">
                       진행한 모든 광고의 <br />
                       성과 데이터를 한 곳에서!
                     </h1>
-                    <p class="m-0 text-white text-20">
+                    <p class="m-0 contents-text text-20">
                       실시간 제공되는 광고 집행 데이터 <br />필요할 때 언제나
                       원하는 방식으로 비교해 보세요.
                     </p>
@@ -516,11 +488,11 @@
               <article :class="{ 'd-block': activeBtn2 === 'btn2' }">
                 <b-row class="align-items-center">
                   <b-col>
-                    <h1 class="text-white text-30 mb-4">
+                    <h1 class="contents-text text-30 mb-4">
                       소재 제작 요청과 <br />
                       데이터 분석을 더 간편하게
                     </h1>
-                    <p class="m-0 text-white text-20">
+                    <p class="m-0 contents-text text-20">
                       한눈에 보이는 고효율 소재와 상세 데이터 <br />신규 소재
                       제작도 쉽고 빠르게 요청하세요.
                     </p>
@@ -533,11 +505,11 @@
               <article :class="{ 'd-block': activeBtn2 === 'btn3' }">
                 <b-row class="align-items-center">
                   <b-col>
-                    <h1 class="text-white text-30 mb-4">
+                    <h1 class="contents-text text-30 mb-4">
                       다양한 데이터 인사이트를 <br />
                       쉽고 친절하게
                     </h1>
-                    <p class="m-0 text-white text-20">
+                    <p class="m-0 contents-text text-20">
                       데이터의 제공보다 더 중요한 데이터 해석 <br />담당 AE의
                       코멘트로 매주 확인하세요.
                     </p>
@@ -661,34 +633,6 @@ export default {
     },
   },
 };
-
-let main3_1L = document.querySelector("main3_scroll1L");
-let main3_1R = document.querySelector("main3_scroll1R");
-let main3_2L = document.querySelector("main3_scroll2L");
-let main3_2R = document.querySelector("main3_scroll2R");
-
-window.addEventListener('scroll',function(){
-    let value = window.scrollY;
-    console.log("scrollY", value);
-   
-    if(value > 1000 && value < 2000){
-        main3_1L.style.animation="slide1 1.7s ease-in-out";
-        main3_1R.style.animation="slide2 1.7s ease-in-out";
-    }else{
-        main3_1L.style.animation="desappear1 1.7s ease-in-out forwards";
-        main3_1R.style.animation="desappear2 1.7s ease-in-out forwards";
-    }
-    
-    if((value > 1500) && (value < 2800)){
-        main3_2L.style.animation="slide1 2s ease-in-out";
-        main3_2R.style.animation="slide2 2s ease-in-out";
-    }else{
-        main3_2L.style.animation="desappear3 1.7s ease-in-out forwards";
-        main3_2R.style.animation="desappear4 1.7s ease-in-out forwards";
-    }
-});
-
-
 
 </script>
 

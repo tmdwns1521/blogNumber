@@ -6,6 +6,7 @@ import axios from "axios";
 import AxiosPlugin from "vue-axios-cors";
 import commons from "./lib/commons";
 
+
 // Style
 import "normalize.css";
 import "@/assets/style/common.scss";

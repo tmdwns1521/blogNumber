@@ -1,21 +1,88 @@
-.Main3{
+.Main3Div{
     max-width: 1440px; margin: 90px auto 0; 
 }
-.Main3 div:first-child{
+.Main3Div div{
     width: 100%;
 }
-.Main3 div:first-child > p:first-child{
-    font-size: 38px; font-weight: bold; margin-bottom: 60px;text-align: center;
+.Main3Div > p:first-child{
+    font-size: 38px; font-weight: bold; margin-bottom: 60px; text-align: center;
 }
-.Main3 div:first-child > p mark{
+.Main3Div > p mark{
     background: none; color: #0DCAF0;
 }
-.Main3 div:first-child > p:nth-child(2){
+.Main3Div > p:nth-child(2){
     font-size: 20px; margin-bottom: 10px; text-align: center;
 }
-.Main3 figure{
+
+
+
+.Main3Div figure{
     display: flex; align-items: center;
 }
-.Main3 figure figcaption p:first-child{
-    font-size: 35px; font-weight: bold;
+.Main3Div figure .main3_left{
+    animation: slide1 2s ease-in-out;
+}
+.Main3Div figure .main3_right{
+    animation: slide2 2s ease-in-out;
+}
+.Main3Div figure figcaption p:first-child{
+    font-size: 35px; font-weight: bold; margin-bottom: 45px;
+}
+
+
+@keyframes slide1{
+    from{
+        margin-left: 10%;
+        opacity: 0;
+    }to{
+        margin-left: 0%;
+        opacity: 1;
+    }
+}
+
+@keyframes slide2{
+    from{
+        margin-right: 10%;
+        opacity: 0;
+    }to{
+        margin-right: 0%;
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+.Main3Div figure:nth-child(2n-1){
+    text-align: right;
+}
+.Main3Div figure .main3_bar{
+    display: block; border: 1px solid #000; width: 70%; margin-bottom: 60px;
+}
+.Main3Div figure:nth-child(odd) .main3_bar{
+    margin-left: 30%; 
+}
+.Main3Div figure figcaption p:last-child{
+    font-size: 18px; line-height: 30px;
+}
+.Main3 > div:last-of-type{
+    text-align: center; background: #00EADC;
+}
+.Main3 div:last-child div{
+    background: rgba(0, 0, 0, 0.2); padding: 60px 0 120px;
+}
+.Main3 > div:last-child p{
+    font-size: 38px; font-weight: bold; color: #fff; margin-bottom: 60px;
+}
+.Main3 > div:last-child p mark{
+    background: none; color: #07D6FF;
+}
+.Main3 > div:last-child button{
+    border: 1px solid #07D6FF; border-radius: 30px; line-height: 60px; width: 20%;
+    font-size: 30px; font-weight: bold; color: #fff; background: #00EADC;
+}
+.main-4 > div{
+    background: rgba(0, 0, 0, 0.2);
 }

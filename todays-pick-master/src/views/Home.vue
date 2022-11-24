@@ -14,18 +14,13 @@
                 >검색하는 잠재고객에게 매장을 알리고 <br />리뷰/후기를 노출해
                 가게의 신뢰도를 높여보세요.</span
               >
-              <b-btn pill class="mb-5 startBtn" @click="upDown()"
-                >무료로 광고 시작하기
+              <b-btn pill class="mb-5 startBtn" @click="upDown()">무료로 광고 시작하기
                 <font-awesome-icon icon="fa-solid fa-chevron-right"
               /></b-btn>
               <span class="d-block">상위노출 효과를 직접 경험하세요!</span>
             </b-col>
             <b-col cols="5">
-              <div
-                class="bg-white p-5"
-                :class="{ shake: disabled }"
-                style="border-radius: 20px"
-              >
+              <div class="bg-white p-5" :class="{ shake: disabled }" style="border-radius: 20px">
                 <validation-observer ref="observer" v-slot="{ handleSubmit }">
                   <b-form @submit.prevent="handleSubmit(submit)">
                     <div>
@@ -124,7 +119,7 @@
                           }}</b-form-invalid-feedback>
                         </b-form-checkbox-group>
                       </validation-provider>
-                      <b-btn type="submit" class="mt-4 w-100 border-0 shadow-sm ConappBtn" style="none">무료 상담 신청하기</b-btn>
+                      <b-btn type="submit" class="mt-4 w-100 border-0 m-ConappBtn">무료 상담 신청하기</b-btn>
                     </div>
                   </b-form>
                 </validation-observer>
@@ -137,7 +132,7 @@
       <article class="main-0 d-lg-none d-block mobile">
         <div class="bg text-center text-white d-flex align-items-center justify-content-center">
           <div style="padding: 40px 0;">
-            <p class="fw-600 text-20 mb-3">
+            <p class="fw-600 mb-3">
               오늘부터 마케팅에서 네이버 블로그 상위노출로 <br />바이럴 홍보와 판매를
               한번에 도와드립니다.
             </p>
@@ -249,7 +244,7 @@
                       validationContext.errors[0]
                     }}</b-form-invalid-feedback>
                   </b-form-checkbox-group>
-                </validation-provider>
+                </validation-provider> 
                 <b-btn type="submit" pill class="mt-4 w-100 border-0 shadow-sm m-ConappBtn">무료 상담 신청하기</b-btn>
               </div>
             </b-form>
@@ -258,7 +253,7 @@
       </article>
       <!-- main 1 -->
       <article class="main-1">
-        <b-container class="py-5" fluid style="margin-top: 60px;">
+        <b-container class="py-5" fluid style="margin-top: 10px;">
           <p class="text-center fw-600 text-40 d-none d-lg-block" style="margin-bottom: 30px;">
             수년간 국내 대형 브랜드부터 소형 브랜드까지
           </p>
@@ -269,7 +264,7 @@
             >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서 오늘부터 마케팅을
             이용하고 있습니다.</span
           >
-          <span class="d-block text-center d-block d-lg-none pb-4"
+          <span class="d-block text-center d-block d-lg-none pb-4 text15"
             >약 5000개 이상의 소상공인 업체와 프랜차이즈 본사에서<br />
             오늘부터 마케팅을 이용하고 있습니다.</span>
           <div class="logo_banner1 logo_banner"></div>
@@ -283,17 +278,17 @@
             검색결과 상위에 노출되어 보다 많은 <br />잠재고객에게 가게를
             알려보세요.
           </p>
-          <p class="text-center fw-600 text-26 mb-4 d-block d-lg-none">
+          <p class="text-center fw-600 text-20 mb-4 d-block d-lg-none">
             검색결과 상위에 노출되어<br />
             보다 많은 잠재고객에게 가게를 알려보세요.
           </p>
-          <span class="d-block text-center text-20"
+          <span class="d-block text-center text-16"
             >상위노출이 어려운 키워드에서도 노출이 가능한지 <br />오늘부터 마케팅
             인플루언서들의 검증된 실력을 직접 확인해보세요.</span
           >
           <div class="text-center btns" style="margin-top: 60px; margin-bottom: 90px;">
             <b-btn
-              style="padding: 10px 2%"
+              style="padding: 8px 2%"
               pill
               class="m-2"
               @click="activeBtn = 'btn1'" 
@@ -301,14 +296,14 @@
               >맛집
             </b-btn>
             <b-btn
-              style="padding: 10px 2%"
+              style="padding: 8px 2%"
               pill
               class="m-2"
               @click="activeBtn = 'btn2'"
               :class="{ active: activeBtn === 'btn2' }"
               >카페
             </b-btn>
-            <b-btn style="padding: 10px 2%"
+            <b-btn style="padding: 8px 2%"
               pill
               class="m-2"
               @click="activeBtn = 'btn3'"
@@ -316,7 +311,7 @@
               >음식명
             </b-btn>
             <b-btn
-              style="padding: 10px 2%"
+              style="padding: 8px 2%"
               pill
               class="m-2"
               @click="activeBtn = 'btn4'"
@@ -324,7 +319,7 @@
               >미용실/네일샵
             </b-btn>
             <b-btn
-              style="padding: 10px 2%"
+              style="padding: 8px 2%"
               pill
               class="m-2"
               @click="activeBtn = 'btn5'"
@@ -357,7 +352,7 @@
               />
             </article>
           </div>
-          <div class="contents d-block d-lg-none overflow-scroll">
+          <div class="contents d-block d-lg-none" style="overflow-x:scroll;">
             <article :class="{ 'd-block': activeBtn === 'btn1' }">
               <img src="@/assets/images/main_2_famous.png" class="" alt="" />
             </article>

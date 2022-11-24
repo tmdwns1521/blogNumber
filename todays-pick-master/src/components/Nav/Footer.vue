@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <!-- PC -->
-    <b-container class="d-none d-lg-block py-5">
+    <b-container class="d-none d-lg-block py-5" styl>
       <b-row class="align-items-center">
         <b-col>
           <div class="d-flex align-items-center justify-content-between mb-4">

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <TopBanner :show="topBanner" />
+    <TopBanner :show="topBanner" class="topBanner" />
     <header class="shadow-sm position-relative" >
       <b-container>
-        <div class="justify-content-between align-items-center d-flex">
+        <div class="justify-content-between align-items-center d-flex logoCenter">
           <b-navbar-brand href="/">
             <img
               src="@/assets/images/today-logo.png"

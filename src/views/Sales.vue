@@ -10,10 +10,7 @@
       <!-- 담당자 매출정보 -->
       <b-row class="mb-4">
         <b-col>
-          <div
-            class="text-center h-100 bg-white border p-4"
-            style="border-radius: 10px"
-          >
+          <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
               <b-col class="text-18 border-end">
                 <b-card-title class="opacity-50" v-if="!currentData.manager">

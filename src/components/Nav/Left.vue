@@ -19,14 +19,14 @@
 </template>
 
 <script>
-export default {
-  name: "Left",
-  computed: {
-    path() {
-      return this.$route.path;
+  export default {
+    name: "Left",
+    computed: {
+      path() {
+        return this.$route.path;
+      },
     },
-  },
-};
+  };
 </script>
 
 <style></style>

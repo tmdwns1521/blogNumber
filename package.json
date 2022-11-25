@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "dependencies": {
     "16": "^0.0.2",
     "css-loader": "^3.6.0",
@@ -9,8 +8,7 @@
   },
   "devDependencies": {
     "expose-loader": "^4.0.0"
-  }
-=======
+  },
   "name": "todays-pick",
   "version": "0.1.0",
   "private": true,
@@ -72,5 +70,4 @@
     "last 2 versions",
     "not dead"
   ]
->>>>>>> d2ddb6175a0bd9a5fe4eb6bee220e51a17dd260c
 }

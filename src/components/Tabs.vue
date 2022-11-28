@@ -298,7 +298,7 @@ import { MonthPicker } from "vue-month-picker";
 
 export default {
   name: "Tabs",
-  props: ["currentData", "salesItems", "orderItems"],
+  props: ["currentData", "salesItems", "orderItems", "numberItems"],
   components: {
     MonthPicker,
   },

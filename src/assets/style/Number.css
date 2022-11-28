@@ -1,0 +1,74 @@
+@media screen and (min-width: 1280px){
+    .number-page{
+        margin-top: 90px;
+    }
+    .number-page::after{
+        display: block; content: ''; visibility: hidden; clear: both;
+    }
+    .number-page [class ^= 'tbox']{
+        width: 30%; float: left;
+    }
+    .number-page [class ^='tbox'] tbody tr{
+        border-bottom: 1px solid #78C5D6;
+    }
+    .number-page [class ^= 'tbox'] td{
+        font-size: 18px;
+    }
+    .number-page .tbox1{
+        max-width: 450px;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr th{
+        background: #78C5D6; line-height: 50px; color: #fff; text-align: center;
+        font-size: 22px; box-sizing: border-box;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr th:first-child{
+        border-radius: 15px 0 0 0;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr th:last-child{
+        border-radius: 0 15px 0 0;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr td{
+        line-height: 50px; text-align: center;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr th:first-child,
+    .number-page .tbox1 .NumTable1 tbody tr td:first-child{
+        border-right: 1px solid #fff;
+    }
+    .number-page .tbox1 .NumTable1 tbody tr td input{
+        border: none;
+    }
+    .number-page .tbox1 table{
+        float: left;
+    }
+
+
+
+    .number-page .tbox2{
+        position: relative; max-width: 500px;
+    }
+    .number-page .tbox2 input{
+        position: absolute; right: 0; top: -40px;
+    }    
+    .number-page .tbox2 .NumTable2{
+        text-align: center; width: 100%;
+    }
+    .number-page .tbox2 .NumTable2 thead th{
+        background: #78C5D6; line-height: 50px; color: #fff; font-size: 22px;
+        border-bottom: 1px solid #fff;
+    }
+    .number-page .tbox2 .NumTable2 thead tr:first-child th:first-child{
+        border-radius: 15px 0 0 0; width: 50%; border-right: 1px solid #fff;
+    }
+    .number-page .tbox2 .NumTable2 thead tr:first-child th:last-child{
+        border-radius: 0 15px 0 0;
+    }
+    .number-page .tbox2 .NumTable2 thead tr:last-child th:not(:last-child){
+        border-right: 1px solid #fff;
+    }
+    .number-page .tbox2 .NumTable2 tbody tr{
+        line-height: 50px;
+    }
+    .number-page .tbox2 .NumTable2 tbody tr td:not(:first-child){
+        border-left: 1px solid #fff;
+    }
+}   

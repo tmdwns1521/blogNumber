@@ -6,7 +6,7 @@
         <h1 class="text-25 m-0">주문관리</h1>
       </b-col>
     </b-row>
-    <div style="max-width: 1500px" class="mb-4">
+    <div style="max-width: 1850px" class="mb-4">
       <b-row>
         <!-- 승인 설정 -->
         <b-col>
@@ -267,6 +267,7 @@
       @onRowSelected="onRowSelected"
       :orderItems="orderItems"
       :salesItems="salesItems"
+      :numberItems="numberItems"
     />
   </div>
 </template>

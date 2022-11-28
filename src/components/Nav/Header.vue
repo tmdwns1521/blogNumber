@@ -25,6 +25,12 @@
                 >
                   <span>주문관리</span>
                 </b-nav-item>
+                <b-nav-item to="/manage/number"
+                  :class="path.includes('/number') ? 'active' : ''"
+                  v-if="$store.getters.isSuper"
+                >
+                  <span>번호관리</span>
+                </b-nav-item>
               </b-navbar-nav>
             </nav>
           </template>

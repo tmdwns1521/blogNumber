@@ -1,0 +1,13 @@
+
+.left-nav{
+    max-width: 800px; width: 100%;
+}
+.navbar-nav{
+    display: block;
+}
+.navbar-nav:after{
+    display: block; content: ''; visibility: hidden; clear: both;
+}
+.navbar-nav li{
+    float: left; width: 33.33%;
+}

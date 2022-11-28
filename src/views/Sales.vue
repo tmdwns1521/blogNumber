@@ -6,7 +6,7 @@
         <h1 class="text-25 m-0">매출관리</h1>
       </b-col>
     </b-row>
-    <div style="max-width: 1500px">
+    <div style="max-width: 1850px">
       <!-- 담당자 매출정보 -->
       <b-row class="mb-4">
         <b-col>

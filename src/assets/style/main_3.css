@@ -1,3 +1,9 @@
+.col-2{
+    display: none;
+}
+.col-10{
+    width: 100%;
+}
 @media screen and (max-width: 280px){
     .main-0 .ms-2{
         font-size: 10px;
@@ -38,7 +44,7 @@
     }
     .main-0{
         box-shadow: none; background:url(http://localhost:8080/img/main_banner.5bb231f0.png) no-repeat;
-        height: 590px; 
+        height: 590px;  
     }
     .main-0 .text-white{
         padding: 60px 0 40px;

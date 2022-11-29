@@ -2,14 +2,16 @@
     <section class="number-page">
         <div class="tbox1">
             <table class="NumTable1">
+                <thead>
+                    <tr>
+                        <th class="thRadiusL">ID</th>
+                        <th class="thRadiusR">PWD</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
-                        <th>ID</th>
-                        <th>PWD</th>
-                    </tr>
-                    <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                        <td><input type="text" style="width: 150px;"></td>
+                        <td><input type="text" style="width: 174px;"></td>
                     </tr>
                     <tr>
                         <td>KingJeb</td>
@@ -33,24 +35,23 @@
                     </tr>
                 </tbody>
             </table>
-            <div>
-                <button>+</button>
-                <button>-</button>
+            <div class="PMbtnBox">
+                <input type="button" value="+"><br>
+                <input type="button" value="-">
             </div>
         </div>
     <!-- <input type="button" value="+">
     <input type="button" value="-"> -->
-
 
     <div class="tbox2">
         <input type="button" value="파일 저장">
         <table class="NumTable2">
             <thead>
                 <tr>
-                    <th colspan="2">조회완료</th>
-                    <th colspan="2">5</th>
+                    <th colspan="2" class="thRadiusL lookup">조회완료</th>
+                    <th class="thRadiusR phoneNum">5</th>
                 </tr>
-                <tr>
+                <tr> 
                     <th>번호</th>
                     <th>ID</th>
                     <th>전화번호</th>
@@ -88,18 +89,20 @@
 
 
     <div class="tbox3">    
-        <input type="text">
-        <button>저장</button>
         <table class="NumTable3">
-            <tbody>
+            <input type="text">
+            <input type="button" value="저장">
+            <thead>
                 <tr>
-                    <th>조회예정</th>
-                    <th>1,000</th>
+                    <th class="thRadiusL">조회예정</th>
+                    <th class="thRadiusR">1,000</th>
                 </tr>
                 <tr>
                     <th>번호</th>
                     <th>ID</th>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
                     <td>5</td>
                     <td>KingJeb</td>

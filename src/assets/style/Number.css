@@ -6,7 +6,7 @@
         display: block; content: ''; visibility: hidden; clear: both;
     }
     .number-page [class ^= 'tbox']{
-        width: 30%; float: left;
+        float: left;
     }
     .number-page [class ^='tbox'] tbody tr{
         border-bottom: 1px solid #78C5D6;
@@ -41,7 +41,7 @@
         float: left;
     }
     .number-page .tbox2{
-        position: relative; max-width: 500px;
+        position: relative; max-width: 600px;
     }
     .number-page .tbox2 input{
         position: absolute; right: 0; top: -40px;

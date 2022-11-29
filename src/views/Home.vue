@@ -419,13 +419,6 @@
                 근처에 있는 곳부터 멀리있는 곳까지쉽게 서치로 원하는 정보를 얻을 수 있습니다.</p>
             </figcaption>
           </figure>
-
-        </div>
-        <div>
-          <div>
-            <p>어제까지 낸 수수료<br><mark>오늘부터</mark> 안 내두 돼</p>
-            <button onclick="window.scrollTo(0,0);">무료 상담신청 ↑</button>
-          </div>
         </div>
       </article>
 
@@ -568,7 +561,15 @@
         <b-container class="d-lg-none d-block"> </b-container>
       </article>
     </main>
-    <BottomBanner />
+    <div class="bottomText">
+      <div>
+        <p>어제까지 낸 수수료<br><mark>오늘부터</mark> 안 내두 돼</p>
+        <div>
+          <button onclick="window.scrollTo(0,0);">무료 상담신청 ↑</button>
+        </div>
+      </div>
+      
+    </div>
     <Check />
   </div>
 </template>

@@ -24,7 +24,7 @@
               관리자
             </b-btn>
           </div>
-          <div class="d-flex" style="gap: 20px">
+          <div class="d-flex" style="gap: 16px">
             <p>
               <span class="fw-900">대표</span>
               민경재

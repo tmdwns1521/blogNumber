@@ -9,12 +9,12 @@
               alt="오늘부터 마케팅 로고"
               :style="{ height: '100px'}"/>
           </b-navbar-brand>
-          <template>
             <nav class="left-nav p-4">
               <b-navbar-nav>
                 <b-nav-item
                   to="/manage/sales"
                   :class="path.includes('/sales') ? 'active' : ''"
+                  v-if="$store.getters.isSuper"
                 >
                   <span>매출관리</span>
                 </b-nav-item>
@@ -33,7 +33,6 @@
                 </b-nav-item>
               </b-navbar-nav>
             </nav>
-          </template>
           <b-nav-item-dropdown right v-if="$store.getters.isLogin">
             <template #button-content>
               <b-avatar></b-avatar>

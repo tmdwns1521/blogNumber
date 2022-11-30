@@ -2,7 +2,7 @@
   <div>
     <TopBanner :show="topBanner" class="topBanner" />
     <header class="shadow-sm position-relative" >
-      <b-container>
+      <b-container class="header1">
         <div class="justify-content-between align-items-center d-flex logoCenter">
           <b-navbar-brand href="/">
             <img src="@/assets/images/today-logo.png"

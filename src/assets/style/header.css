@@ -1,6 +1,12 @@
+@media (min-width: 1900px){
+    .header1{
+        max-width: 1820px;
+    }
+}
+
 
 .left-nav{
-    max-width: 800px; width: 100%;
+    max-width: 1480px; width: 100%; margin-left: 50px;
 }
 .navbar-nav{
     display: block;
@@ -9,5 +15,5 @@
     display: block; content: ''; visibility: hidden; clear: both;
 }
 .navbar-nav li{
-    float: left; width: 33.33%;
+    float: left; width: 15%;
 }

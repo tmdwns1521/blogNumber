@@ -27,7 +27,7 @@ const routes = [
         component: Home,
       },
       {
-        path: "/login",
+        path: "/admin",
         name: "Login",
         component: Login,
         meta: { isLogin: true },

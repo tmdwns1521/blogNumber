@@ -15,14 +15,18 @@
           <b-dropdown-item href="/manage">관리페이지</b-dropdown-item>
           <b-dropdown-item href="#" @click="logout()">로그아웃</b-dropdown-item>
         </b-nav-item-dropdown> -->
-            <b-btn
+
+
+            <!-- <b-btn
               v-if="$store.getters.isLogin === false"
               @click="login()"
               variant="link"
               class="text-secondary text-decoration-none"
             >
               관리자
-            </b-btn>
+            </b-btn> -->
+
+
           </div>
           <div class="d-flex" style="gap: 16px">
             <p>

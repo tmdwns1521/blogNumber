@@ -97,7 +97,7 @@ export default {
         this.$store.dispatch("setServiceId", this.input.id);
         // this.$store.dispatch("setRole", data.data.role);
         //    this.$store.dispatch("setName", data.data.name);
-        this.$router.push("/manage");
+        this.$router.push("/");
       } else {
         window.alert(data.data.result);
       }

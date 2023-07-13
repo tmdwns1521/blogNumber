@@ -23,15 +23,16 @@ const routes = [
     children: [
       {
         path: "/",
-        name: "Home",
-        component: Home,
-      },
-      {
-        path: "/admin",
         name: "Login",
         component: Login,
         meta: { isLogin: true },
       },
+      // {
+      //   path: "/admin",
+      //   name: "Login",
+      //   component: Login,
+      //   meta: { isLogin: true },
+      // },
       {
         path: "/signup",
         name: "Signup",
@@ -77,14 +78,14 @@ router.beforeEach((to, from, next) => {
   const isSuper = store.state.role;
   const roleSuper = to.meta.roleSuper;
 
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (!isUser) {
-      window.alert("관리자만 접근할수있습니다.");
-      next("/");
-      return;
-    }
-    next();
-  }
+  // if (to.matched.some((record) => record.meta.requiresAuth)) {
+  //   if (!isUser) {
+  //     window.alert("관리자만 접근할수있습니다.");
+  //     next("/");
+  //     return;
+  //   }
+  //   next();
+  // }
   if (to.matched.some((record) => record.meta.isLogin)) {
     if (isUser) {
       // alert('로그인상태입니다');

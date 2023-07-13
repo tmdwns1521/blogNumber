@@ -51,19 +51,19 @@
               style="background: #00eadc; font-weight: bold; font-size: 24px"
               >로그인</b-btn
             >
-            <b-btn
-              @click="$router.push('/signup')"
-              pill
-              class="mt-4 w-100 border-0 shadow-sm"
-              style="
-                border: 1px solid #00eadc !important;
-                color: #00eadc;
-                background: #fff;
-                font-weight: bold;
-                font-size: 24px;
-              "
-              >회원가입</b-btn
-            >
+<!--            <b-btn-->
+<!--              @click="$router.push('/signup')"-->
+<!--              pill-->
+<!--              class="mt-4 w-100 border-0 shadow-sm"-->
+<!--              style="-->
+<!--                border: 1px solid #00eadc !important;-->
+<!--                color: #00eadc;-->
+<!--                background: #fff;-->
+<!--                font-weight: bold;-->
+<!--                font-size: 24px;-->
+<!--              "-->
+<!--              >회원가입</b-btn-->
+<!--            >-->
           </div>
         </b-form>
       </validation-observer>

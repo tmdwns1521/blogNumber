@@ -2,46 +2,17 @@
   <div class="sales-page">
     <!-- 매출관리 -->
     <b-row class="justify-content-between align-items-center mb-3">
-      <b-col>
-        <h1 class="text-25 m-0">매출관리</h1>
-      </b-col>
     </b-row>
     <div style="max-width: 1850px">
-      <!-- 담당자 매출정보 -->
+      <!--  매출정보 -->
       <b-row class="mb-4">
         <b-col>
           <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
-              <b-col class="text-18 border-end">
-                <b-card-title class="opacity-50" v-if="!currentData.manager">
-                  오늘부터 마케팅
-                </b-card-title>
-                <b-card-title class="fw-900" v-else>
-                  {{ currentData.manager }}
-                </b-card-title>
-              </b-col>
-              <b-col class="text-18 border-end">
-                <strong class="">예상 총매출</strong>
+              <b-col class="text-18 border-end" v-for="(key, value) in couponList">
+                <strong>{{ Number(value).toLocaleString() }}원</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span>
-                  <template v-if="!currentData.manager">{{
-                    numberToString(totalPricePredicted)
-                  }}</template>
-                  <template v-else
-                    >{{ numberToString(managerPricePredicted) }}
-                  </template>
-                </p>
-              </b-col>
-              <b-col class="text-18">
-                <strong>확정 매출</strong>
-                <p class="opacity-50 m-0">
-                  <span>\</span>
-                  <template v-if="!currentData.manager">{{
-                    numberToString(totalPriceConfirm)
-                  }}</template>
-                  <template v-else
-                    >{{ numberToString(managerPriceConfirm) }}
-                  </template>
+                  <span>{{ key }}EA</span>
                 </p>
               </b-col>
               <!-- <b-col class="text-18 border-end">
@@ -68,11 +39,7 @@
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
-                <b-th
-                  >담당자<font-awesome-icon
-                    class="ms-1 fa-xs text-danger"
-                    icon="fa-solid fa-star-of-life"
-                /></b-th>
+                <b-th>시리얼 넘버</b-th>
                 <b-td>
                   <template v-if="!addTag">
                     <b-form-input
@@ -83,14 +50,15 @@
                     <b-form-input
                       v-else
                       :disabled="!updateTag"
-                      v-model="currentData.manager"
+                      v-model="couponData.serialNum"
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input v-model="newData.manager"></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>상호명</b-th>
+                    <b-form-input
+                      v-model="couponData.serialNum"
+                    ></b-form-input> </template
+                ></b-td>
+                <b-th>가격</b-th>
                 <b-td>
                   <template v-if="!addTag">
                     <b-form-input
@@ -101,76 +69,16 @@
                     <b-form-input
                       v-else
                       :disabled="!updateTag"
-                      v-model="currentData.businessName"
+                      v-model="couponData.serialPrice"
+                      @change="formatAfreecaPrice"
                     ></b-form-input>
                   </template>
                   <template v-else>
-                    <b-form-input v-model="newData.businessName"></b-form-input>
-                  </template>
-                </b-td>
-                <b-th
-                  >대표자<font-awesome-icon
-                    class="ms-1 fa-xs text-danger"
-                    icon="fa-solid fa-star-of-life"
-                /></b-th>
-                <b-td>
-                  <template v-if="!addTag">
                     <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.owner"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input v-model="newData.owner"></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
-                <b-th>URL</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <template v-else>
-                      <a
-                        :href="'https://m.blog.naver.com/' + currentData.blogId"
-                        target="_blank"
-                      >
-                        https://blog.naver.com/{{ currentData.blogId }}
-                      </a></template
-                    >
-                  </template>
-                  <template v-else>
-                    https://blog.naver.com/{{ newData.blogId }}
-                  </template>
-                </b-td>
-                <b-th>아이디</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.blogId"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input v-model="newData.blogId"></b-form-input>
-                  </template>
-                </b-td>
+                      v-model="couponData.serialPrice"
+                      @change="formatAfreecaPrice"
+                    ></b-form-input> </template
+                ></b-td>
                 <b-th>비밀번호</b-th>
                 <b-td>
                   <template v-if="!addTag">
@@ -182,496 +90,12 @@
                     <b-form-input
                       v-else
                       :disabled="!updateTag"
-                      v-model="currentData.blogPW"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input v-model="newData.blogPW"></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
-                <b-th>사업자등록번호</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.CompanyNumber"
+                      v-model="couponData.serialPassword"
                     ></b-form-input>
                   </template>
                   <template v-else>
                     <b-form-input
-                      v-model="newData.CompanyNumber"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>연락처</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.phone"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input v-model="newData.phone"></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>이메일</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <template v-else>
-                      {{ currentData.blogId }}@naver.com
-                    </template>
-                  </template>
-                  <template v-else> {{ newData.blogId }}@naver.com </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
-                <b-th>주소</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.address"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.address"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>결제방법</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-select
-                      v-else
-                      v-model="paymentType"
-                      :disabled="!updateTag"
-                    >
-                      <b-form-select-option value="card"
-                        >카드결제</b-form-select-option
-                      >
-                      <b-form-select-option value="cash"
-                        >계좌이체</b-form-select-option
-                      >
-                    </b-form-select>
-                  </template>
-                  <template v-else>
-                    <b-form-select v-model="paymentType"
-                      ><b-form-select-option value="card"
-                        >카드결제</b-form-select-option
-                      >
-                      <b-form-select-option value="cash"
-                        >계좌이체</b-form-select-option
-                      ></b-form-select
-                    >
-                  </template>
-                </b-td>
-                <b-th>결제금액</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.AmountOfPayment"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.AmountOfPayment"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <!-- <b-tr>
-                <b-th>카드사</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else-if="currentData.cardData"
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.cardData.creditCardCompany"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.creditCardCompany"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>카드소유자</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else-if="currentData.cardData"
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.cardData.cardholder"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.cardholder"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>카드번호</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else-if="currentData.cardData"
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.cardData.creditCardNumber"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.creditCardNumber"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
-                <b-th>카드유효기간</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else-if="currentData.cardData"
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.cardData.CardValidityPeriod"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.CardValidityPeriod"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>카드승인번호</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.ApprovalNumber"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.ApprovalNumber"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>할부개월</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag || paymentType == 'cash'"
-                      v-model="currentData.installmentMonth"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="paymentType == 'cash'"
-                      v-model="newData.installmentMonth"
-                    ></b-form-input> </template
-                ></b-td>
-              </b-tr> -->
-              <!-- 카드결제 -->
-              <template v-if="paymentType == 'card'">
-                <b-tr>
-                  <b-th>카드사</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag"
-                        v-model="currentData.cardData.creditCardCompany"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        v-model="newData.creditCardCompany"
-                      ></b-form-input>
-                    </template>
-                  </b-td>
-                  <b-th>카드소유자</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag"
-                        v-model="currentData.cardData.cardholder"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input v-model="newData.cardholder"></b-form-input>
-                    </template>
-                  </b-td>
-                  <b-th>카드번호</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag"
-                        v-model="currentData.cardData.creditCardNumber"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        v-model="newData.creditCardNumber"
-                      ></b-form-input>
-                    </template>
-                  </b-td>
-                </b-tr>
-                <b-tr>
-                  <b-th>카드유효기간</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag || paymentType == 'cash'"
-                        v-model="currentData.cardData.CardValidityPeriod"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        :disabled="paymentType == 'cash'"
-                        v-model="newData.CardValidityPeriod"
-                      ></b-form-input>
-                    </template>
-                  </b-td>
-                  <b-th>카드승인번호</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else
-                        :disabled="!updateTag || paymentType == 'cash'"
-                        v-model="currentData.ApprovalNumber"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        :disabled="paymentType == 'cash'"
-                        v-model="newData.ApprovalNumber"
-                      ></b-form-input> </template
-                  ></b-td>
-                  <b-th>할부개월</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else
-                        :disabled="!updateTag || paymentType == 'cash'"
-                        v-model="currentData.installmentMonth"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        :disabled="paymentType == 'cash'"
-                        v-model="newData.installmentMonth"
-                      ></b-form-input> </template
-                  ></b-td>
-                </b-tr>
-              </template>
-              <!-- 계좌이체 -->
-              <template v-else>
-                <b-tr>
-                  <b-th>이체은행</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag"
-                        v-model="currentData.cardData.creditCardCompany"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input
-                        v-model="newData.creditCardCompany"
-                      ></b-form-input>
-                    </template>
-                  </b-td>
-                  <b-th>입금자명</b-th>
-                  <b-td>
-                    <template v-if="!addTag">
-                      <b-form-input
-                        v-if="isEmpty(currentData)"
-                        disabled
-                        :value="empty"
-                      ></b-form-input>
-                      <b-form-input
-                        v-else-if="currentData.cardData"
-                        :disabled="!updateTag"
-                        v-model="currentData.cardData.cardholder"
-                      ></b-form-input>
-                    </template>
-                    <template v-else>
-                      <b-form-input v-model="newData.cardholder"></b-form-input>
-                    </template>
-                  </b-td>
-                  <b-th></b-th>
-                  <b-td></b-td>
-                </b-tr>
-              </template>
-              <b-tr>
-                <b-th>계약기간</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.Term"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.Term"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>계약상품</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.contractProduct"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.contractProduct"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>비고</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="currentData.Note"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.Note"
+                      v-model="couponData.serialPassword"
                     ></b-form-input> </template
                 ></b-td>
               </b-tr>
@@ -720,6 +144,100 @@
           </b-row>
         </b-col>
       </b-row>
+      <b-row class="mb-4">
+        <b-col>
+          <b-table-simple small bordered fixed class="currentTable">
+            <b-tbody>
+              <b-tr>
+                <b-th>PlatForm</b-th>
+                <b-td>
+                    <b-form-select v-model="paymentType"
+                      ><b-form-select-option value="AB"
+                        >아프리카</b-form-select-option
+                      >
+                      <b-form-select-option value="CL"
+                        >컬쳐랜드</b-form-select-option
+                      ><b-form-select-option value="BL"
+                        >북앤라이프</b-form-select-option
+                      ><b-form-select-option value="HM"
+                        >해피머니</b-form-select-option
+                      ></b-form-select
+                    >
+                </b-td>
+                <b-th>AF ID</b-th>
+                <b-td>
+                    <b-form-input
+                      v-model="newData.afId"
+                    ></b-form-input>
+                </b-td>
+                <b-th>AF PW</b-th>
+                <b-td>
+                    <b-form-input
+                      v-model="newData.afPw"
+                    ></b-form-input>
+                </b-td>
+              </b-tr>
+                <b-tr>
+                  <b-th>ID</b-th>
+                  <b-td>
+                    <template v-if="paymentType === 'AB'">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="newData.platformId"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.platformId"
+                    ></b-form-input> </template
+                    >
+                  </b-td>
+                  <b-th>PW</b-th>
+                  <b-td>
+                    <template v-if="paymentType === 'AB'">
+                    <b-form-input
+                      v-if="isEmpty(currentData)"
+                      disabled
+                      :value="empty"
+                    ></b-form-input>
+                    <b-form-input
+                      v-else
+                      :disabled="!updateTag"
+                      v-model="newData.platformPw"
+                    ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="newData.platformPw"
+                    ></b-form-input> </template
+                >
+                  </b-td>
+                  <b-th>PRICE</b-th>
+                  <b-td>
+                    <b-form-input
+                      v-model="newData.chargedPrice"
+                      @change="formatChargedPrice"
+                    ></b-form-input>
+                  </b-td>
+                </b-tr>
+              <!-- 계좌이체 -->
+            </b-tbody>
+          </b-table-simple>
+          <b-row class="justify-content-between align-items-center">
+            <b-col class="text-end">
+              <b-btn variant="dark" class="ms-2" @click="chaging()"
+                >충전하기</b-btn
+              >
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
     </div>
     <!-- {{ currentData }}
     {{ newData }} -->
@@ -729,43 +247,37 @@
       @getCurrentMonthsalesData="getCurrentMonthsalesData"
       @getSalesData="getSalesData"
       :salesItems="salesItems"
+      :couponItems="couponItems"
     />
   </div>
 </template>
 
 <script>
 import Tabs from "@/components/Tabs.vue";
+import axios from 'axios';
 export default {
   name: "Sales",
   components: { Tabs },
   data() {
     return {
       salesItems: null,
+      couponItems: null,
+      couponList: {},
       currentData: {},
       cachedData: {},
-      newData: {
-        AmountOfPayment: null,
-        manager: null,
-        owner: null,
-        blogId: null,
-        blogPW: null,
-        businessName: null,
-        phone: null,
-        contractProduct: null,
-        address: null,
-        CompanyNumber: null,
-        Term: null,
-        installmentMonth: null,
-        ApprovalNumber: null,
-        Note: null,
-        cardholder: null,
-        creditCardCompany: null,
-        creditCardNumber: null,
-        CardValidityPeriod: null,
-        ContractNumber: new Date().setHours(new Date().getHours() + 9),
-        paymentType: null,
+      couponData: {
+        serialNum: null,
+        serialPrice: null,
+        serialPassword: null,
       },
-      paymentType: "card",
+      newData: {
+        afId: null,
+        afPw: null,
+        platformId: null,
+        platformPw: null,
+        chargedPrice: null,
+      },
+      paymentType: "AB",
       addTag: false,
       updateTag: false,
       empty: "",
@@ -776,6 +288,16 @@ export default {
     };
   },
   methods: {
+    async formatAfreecaPrice() {
+      if (!this.couponData.serialPrice) return; // 입력값이 없을 경우 빠른 리턴
+
+      this.couponData.serialPrice = Number(this.couponData.serialPrice).toLocaleString();
+    },
+    async formatChargedPrice() {
+      if (!this.newData.chargedPrice) return; // 입력값이 없을 경우 빠른 리턴
+
+      this.newData.chargedPrice = Number(this.newData.chargedPrice).toLocaleString();
+    },
     // 삭제
     async deleteData(item) {
       this.$bvModal
@@ -816,29 +338,23 @@ export default {
     },
     // 신규등록 완료
     async addData() {
-      if (this.paymentType == "card") {
-        this.newData.paymentType = "card";
-        // console.log(this.newData.paymentType);
-      } else {
-        this.newData.paymentType = "cash";
-        // console.log(this.newData.paymentType);
-      }
-
-      await this.$axios
-        .post("http://49.247.32.231:5000/api/saleData", this.newData)
-        .then((res) => {
-          console.log(res);
-          window.alert("신규등록 성공");
-          this.addTag = false;
-          this.getSalesData();
-        })
-        .catch((error) => {
-          if (error.response.status == "500") {
-            window.alert("필수 값들을 모두 입력해주세요.", {
-              title: "필수 값 미입력",
-            });
-          }
-        });
+      const result = await axios.post('http://49.247.38.210:3001/charge/serialRegist', {
+        serialNum: this.couponData.serialNum,
+        serialPrice: this.couponData.serialPrice,
+        serialPassword: this.couponData.serialPassword,
+      });
+      console.log(result);
+    },
+    chaging() {
+      this.$axios.post('http://49.247.38.210:3001/charge/AfreecaCharge', {
+        card: this.paymentType,
+        afId: this.newData.afId,
+        afPw: this.newData.afPw,
+        Id: this.newData.platformId,
+        Pw: this.newData.platformPw,
+        price: this.newData.chargedPrice,
+      });
+      window.location.reload();
     },
     // 신규등록 취소
     addCancel() {
@@ -909,17 +425,24 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        "http://49.247.32.231:5000/api/CurrentMonthsalesData"
+        "http://49.247.38.210:3001/charge/chargeOnAir"
       );
-      // console.log(data.data);
-      this.onList(data);
+      const couponData = await this.$axios.get(
+          "http://49.247.38.210:3001/charge/couponList"
+      );
+      this.onList(data, couponData);
     },
     async getSalesData() {
       const data = await this.$axios.get(
-        "http://49.247.32.231:5000/api/salesData"
+        "http://49.247.38.210:3001/charge/chargeOnAir"
       );
-      // console.log(data.data);
-      this.onList(data);
+
+
+      const couponData = await this.$axios.get(
+          "http://49.247.38.210:3001/charge/couponList"
+      );
+
+      this.onList(data, couponData);
     },
     async mySize() {
       const isToken = localStorage.getItem("token");
@@ -934,13 +457,15 @@ export default {
     },
 
     onMonthsalesData(data) {
-      // console.log("onMonthsalesData", data);
+      console.log("onMonthsalesData", data);
       this.onList(data);
     },
 
-    onList(data) {
+    onList(data, couponData) {
+      const couponItems = couponData.data;
       const datas = data.data;
       const dataList = [];
+      const couponLists = [];
 
       const totalPList = [];
       const totalCList = [];
@@ -948,14 +473,56 @@ export default {
       this.totalPricePredicted = 0;
       this.totalPriceConfirm = 0;
 
+      for (const i of couponItems) {
+        couponLists.push(i);
+      }
+
       for (const i of datas) {
         dataList.push(i);
-        totalPList.push(i.AmountOfPayment);
-        if (i.Approved === true) {
-          totalCList.push(i.AmountOfPayment);
-        }
       }
+      this.couponItems = couponLists.reverse();
+      this.couponItems.forEach((e) => {
+        if (e.normal === 0 && e.used === 0) {
+          if (this.couponList[e.price]) {
+            this.couponList[e.price] += 1
+          } else {
+            this.couponList[e.price] = 1
+          }
+        }
+        if (e.normal === 0) {
+          e.normal = '정상';
+        } else {
+          e.normal = '비정상';
+        }
+        if (e.used === 0) {
+          e.used = '미사용';
+        } else {
+          e.used = '사용';
+        }
+        e.price = Number(e.price).toLocaleString();
+      });
       this.salesItems = dataList.reverse();
+      this.salesItems.forEach((e) => {
+        if (e.platform === 'AB') {
+          e.platform = '아프리카';
+        } else if (e.platform === 'CL') {
+          e.platform = '컬쳐랜드';
+        } else if (e.platform === 'BL') {
+          e.platform = '도서문화상품권';
+        } else if (e.platform === 'HM') {
+          e.platform = '해피머니';
+        }
+        if (e.success === 0) {
+          e.success = '결제 실패'
+        } else if (e.success === 1) {
+          e.success = '결제 완료'
+        } else if (e.success === 2) {
+          e.success = '결제 진행중'
+        }
+        e.chared_price = Number(e.chared_price).toLocaleString();
+        e.complete_chared_price = Number(e.complete_chared_price).toLocaleString();
+        e.failed_price = Number(e.failed_price).toLocaleString();
+      })
       this.totalPList = totalPList;
       this.totalCList = totalCList;
 

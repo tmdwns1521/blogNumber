@@ -380,22 +380,22 @@ export default {
     },
     async getSalesData() {
       const data = await this.$axios.get(
-        "http://49.247.32.231:5000/api/salesData"
+        "http://49.247.38.210:3001/charge/chargeOnAir"
       );
-      // console.log(data.data);
+
+      const couponData = await this.$axios.get('http://49.247.38.210:3001/charge/couponList');
 
       const datas = data.data;
       const dataList = [];
-      const orderList = [];
+      const couponList = [];
       for (const i of datas) {
-        if (i.Approved === false) {
-          orderList.push(i);
-        } else {
-          dataList.push(i);
-        }
+        dataList.push(i);
+      }
+      for (const i of couponData) {
+        couponList.push(i);
       }
       this.salesItems = dataList.reverse();
-      this.orderItems = orderList.reverse();
+      this.orderItems = couponList.reverse();
 
       this.salesItems.forEach((el, index) => {
         this.$set(el, "index", index);

@@ -96,7 +96,7 @@
           </div>
         </template>
         <template #cell()="data">
-          <span v-clipboard:copy="data.value" v-clipboard:success="onCopy">
+          <span>
             {{ data.value ? data.value : empty }}
           </span>
         </template>
@@ -107,23 +107,13 @@
         </template>
         <!-- 계약번호 -->
         <template #cell(ContractNumber)="row">
-          <span
-            v-clipboard:copy="dateFormat1(row.item.ContractNumber)"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ dateFormat1(row.item.ContractNumber) }}
           </span>
         </template>
         <!-- 실시간트래픽 -->
         <template #cell(trafficDataTodayCount)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? isNegative(row.item.trafficData.today_remain_count)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? isNegative(row.item.trafficData.today_remain_count)
@@ -181,14 +171,7 @@
         </template>
         <!-- 결제금액 -->
         <template #cell(AmountOfPayment)="row">
-          <span
-            v-clipboard:copy="
-              row.item.AmountOfPayment
-                ? numberToString(row.item.AmountOfPayment)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.AmountOfPayment
                 ? numberToString(row.item.AmountOfPayment)
@@ -198,11 +181,7 @@
         </template>
         <!-- 이메일 -->
         <template #cell(email)="row">
-          <span
-            :class="{ ellipsis: isEllipsis }"
-            v-clipboard:copy="row.item.blogId + '@naver.com'"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ row.item.blogId ? row.item.blogId + "@naver.com" : empty }}
           </span>
         </template>
@@ -213,11 +192,7 @@
           </div>
         </template> -->
         <template #cell(address)="row">
-          <div
-            :class="{ ellipsis: isEllipsis }"
-            v-clipboard:copy="row.item.address"
-            v-clipboard:success="onCopy"
-          >
+          <div>
             {{ row.item.address ? row.item.address : empty }}
           </div>
         </template>
@@ -233,34 +208,20 @@
             :class="{ ellipsis: isEllipsis }"
             :href="'https://m.blog.naver.com/' + row.item.blogId"
             target="_blank"
-            v-clipboard:copy="
-              row.item.blogId ? 'https://blog.naver.com/' + row.item.blogId : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+            >
             {{ "https://blog.naver.com/" + row.item.blogId }}
           </a>
           <span v-else>{{ empty }}</span>
         </template>
         <!-- 결제일 -->
         <template #cell(payDate)="row">
-          <span
-            v-clipboard:copy="dateFormat2(row.item.ContractNumber)"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ dateFormat2(row.item.ContractNumber) }}
           </span>
         </template>
         <!-- 시작일 -->
         <template #cell(trafficDataCreated)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.start_date)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? dateFormat2(row.item.trafficData.start_date)
@@ -270,14 +231,7 @@
         </template>
         <!-- 종료일 -->
         <template #cell(trafficDataExpiration)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.cexpiration_date)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? dateFormat2(row.item.trafficData.cexpiration_date)
@@ -383,7 +337,7 @@
           </div>
         </template>
         <template #cell()="data">
-          <span v-clipboard:copy="data.value" v-clipboard:success="onCopy">
+          <span>
             {{ data.value ? data.value : empty }}
           </span>
         </template>
@@ -394,23 +348,13 @@
         </template>
         <!-- 계약번호 -->
         <template #cell(ContractNumber)="row">
-          <span
-            v-clipboard:copy="dateFormat1(row.item.ContractNumber)"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ dateFormat1(row.item.ContractNumber) }}
           </span>
         </template>
         <!-- 실시간트래픽 -->
         <template #cell(trafficDataTodayCount)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? isNegative(row.item.trafficData.today_remain_count)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? isNegative(row.item.trafficData.today_remain_count)
@@ -468,14 +412,7 @@
         </template>
         <!-- 결제금액 -->
         <template #cell(AmountOfPayment)="row">
-          <span
-            v-clipboard:copy="
-              row.item.AmountOfPayment
-                ? numberToString(row.item.AmountOfPayment)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.AmountOfPayment
                 ? numberToString(row.item.AmountOfPayment)
@@ -485,11 +422,7 @@
         </template>
         <!-- 이메일 -->
         <template #cell(email)="row">
-          <span
-            :class="{ ellipsis: isEllipsis }"
-            v-clipboard:copy="row.item.blogId + '@naver.com'"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ row.item.blogId ? row.item.blogId + "@naver.com" : empty }}
           </span>
         </template>
@@ -500,11 +433,7 @@
           </div>
         </template> -->
         <template #cell(address)="row">
-          <div
-            :class="{ ellipsis: isEllipsis }"
-            v-clipboard:copy="row.item.address"
-            v-clipboard:success="onCopy"
-          >
+          <div>
             {{ row.item.address ? row.item.address : empty }}
           </div>
         </template>
@@ -520,34 +449,20 @@
             :class="{ ellipsis: isEllipsis }"
             :href="'https://m.blog.naver.com/' + row.item.blogId"
             target="_blank"
-            v-clipboard:copy="
-              row.item.blogId ? 'https://blog.naver.com/' + row.item.blogId : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+            >
             {{ "https://blog.naver.com/" + row.item.blogId }}
           </a>
           <span v-else>{{ empty }}</span>
         </template>
         <!-- 결제일 -->
         <template #cell(payDate)="row">
-          <span
-            v-clipboard:copy="dateFormat2(row.item.ContractNumber)"
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{ dateFormat2(row.item.ContractNumber) }}
           </span>
         </template>
         <!-- 시작일 -->
         <template #cell(trafficDataCreated)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.start_date)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? dateFormat2(row.item.trafficData.start_date)
@@ -557,14 +472,7 @@
         </template>
         <!-- 종료일 -->
         <template #cell(trafficDataExpiration)="row">
-          <span
-            v-clipboard:copy="
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.cexpiration_date)
-                : ''
-            "
-            v-clipboard:success="onCopy"
-          >
+          <span>
             {{
               row.item.trafficData
                 ? dateFormat2(row.item.trafficData.cexpiration_date)

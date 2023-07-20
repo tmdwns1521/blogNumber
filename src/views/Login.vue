@@ -86,18 +86,17 @@ export default {
     async login() {
       // console.log("로그인");
       const data = await this.$axios.post(
-        "http://49.247.32.231:5000/api/login",
+        "http://49.247.38.210:3001/api/login",
         this.input
       );
 
-      // console.log(data);
 
-      if (data.data.token) {
-        this.$store.dispatch("setToken", data.data.token);
-        this.$store.dispatch("setServiceId", this.input.id);
+      if (data.data.result) {
+        await this.$store.dispatch("setToken", data.data.result);
+        // await this.$store.dispatch("setServiceId", this.input.id);
         // this.$store.dispatch("setRole", data.data.role);
         //    this.$store.dispatch("setName", data.data.name);
-        this.$router.push("/");
+        await this.$router.push("/manage/sales");
       } else {
         window.alert(data.data.result);
       }

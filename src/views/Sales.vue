@@ -2,6 +2,9 @@
   <div class="sales-page">
     <!-- 매출관리 -->
     <b-row class="justify-content-between align-items-center mb-3">
+      <b-btn variant="dark" class="ms-2" @click="logout()"
+                  >로그아웃</b-btn
+                >
     </b-row>
     <div style="max-width: 1850px">
       <!--  매출정보 -->
@@ -33,117 +36,144 @@
           </div>
         </b-col>
       </b-row>
-      <!-- 확인/수정/등록 데이터정보 -->
       <b-row class="mb-4">
         <b-col>
-          <b-table-simple small bordered fixed class="currentTable">
-            <b-tbody>
-              <b-tr>
-                <b-th>시리얼 넘버</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="couponData.serialNum"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="couponData.serialNum"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>가격</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="couponData.serialPrice"
-                      @change="formatAfreecaPrice"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="couponData.serialPrice"
-                      @change="formatAfreecaPrice"
-                    ></b-form-input> </template
-                ></b-td>
-                <b-th>비밀번호</b-th>
-                <b-td>
-                  <template v-if="!addTag">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="couponData.serialPassword"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="couponData.serialPassword"
-                    ></b-form-input> </template
-                ></b-td>
-              </b-tr>
-            </b-tbody>
-          </b-table-simple>
+          <b-form-select v-model="chargePrice" class="mb-3"
+            ><b-form-select-option value="10000"
+              >10,000</b-form-select-option
+            >
+            <b-form-select-option value="30000"
+              >30,000</b-form-select-option
+            ><b-form-select-option value="50000"
+              >50,000</b-form-select-option
+            ><b-form-select-option value="100000"
+              >100,000</b-form-select-option
+            ></b-form-select
+          >
+          <b-form-textarea class="mb-3" v-model="couponDatas" placeholder="BABABABABA123456(비번)000000
+BABABABABA123456(비번)000000
+BABABABABA123456(비번)000000
+BABABABABA123456(비번)000000"></b-form-textarea>
           <b-row class="justify-content-between align-items-center">
             <b-col class="text-end">
-              <!-- 신규등록일 때 -->
-              <template v-if="addTag == true">
-                <b-btn variant="dark" class="ms-2" @click="addData()"
-                  >등록완료</b-btn
-                >
-                <b-btn class="ms-2" variant="danger" @click="addCancel()"
-                  >취소</b-btn
-                >
-              </template>
-              <!-- 수정일 때 -->
-              <template v-else-if="updateTag == true">
-                <b-btn variant="dark" class="ms-2" @click="updateData()"
-                  >수정완료</b-btn
-                >
-                <b-btn class="ms-2" variant="danger" @click="updateCancel()"
-                  >취소</b-btn
-                >
-              </template>
-              <!-- 기본 -->
-              <template v-else>
-                <b-btn variant="dark" class="ms-2" @click="addTag = true"
-                  >신규등록</b-btn
-                >
-                <b-btn
-                  class="ms-2"
-                  @click="updateTag = true"
-                  :disabled="isEmpty(currentData)"
-                  >수정</b-btn
-                >
-                <b-btn
-                  class="ms-2"
-                  variant="danger"
-                  :disabled="isEmpty(currentData)"
-                  @click="deleteData(currentData._id)"
-                  >삭제</b-btn
-                >
-              </template>
+              <b-btn variant="dark" class="ms-2" @click="addData()">
+                등록완료
+              </b-btn>
             </b-col>
           </b-row>
         </b-col>
       </b-row>
+      <!-- 확인/수정/등록 데이터정보 -->
+<!--      <b-row class="mb-4">-->
+<!--        <b-col>-->
+<!--          <b-table-simple small bordered fixed class="currentTable">-->
+<!--            <b-tbody>-->
+<!--              <b-tr>-->
+<!--                <b-th>시리얼 넘버</b-th>-->
+<!--                <b-td>-->
+<!--                  <template v-if="!addTag">-->
+<!--                    <b-form-input-->
+<!--                      v-if="isEmpty(currentData)"-->
+<!--                      disabled-->
+<!--                      :value="empty"-->
+<!--                    ></b-form-input>-->
+<!--                    <b-form-input-->
+<!--                      v-else-->
+<!--                      :disabled="!updateTag"-->
+<!--                      v-model="couponData.serialNum"-->
+<!--                    ></b-form-input>-->
+<!--                  </template>-->
+<!--                  <template v-else>-->
+<!--                    <b-form-input-->
+<!--                      v-model="couponData.serialNum"-->
+<!--                    ></b-form-input> </template-->
+<!--                ></b-td>-->
+<!--                <b-th>가격</b-th>-->
+<!--                <b-td>-->
+<!--                  <template v-if="!addTag">-->
+<!--                    <b-form-input-->
+<!--                      v-if="isEmpty(currentData)"-->
+<!--                      disabled-->
+<!--                      :value="empty"-->
+<!--                    ></b-form-input>-->
+<!--                    <b-form-input-->
+<!--                      v-else-->
+<!--                      :disabled="!updateTag"-->
+<!--                      v-model="couponData.serialPrice"-->
+<!--                      @change="formatAfreecaPrice"-->
+<!--                    ></b-form-input>-->
+<!--                  </template>-->
+<!--                  <template v-else>-->
+<!--                    <b-form-input-->
+<!--                      v-model="couponData.serialPrice"-->
+<!--                      @change="formatAfreecaPrice"-->
+<!--                    ></b-form-input> </template-->
+<!--                ></b-td>-->
+<!--                <b-th>비밀번호</b-th>-->
+<!--                <b-td>-->
+<!--                  <template v-if="!addTag">-->
+<!--                    <b-form-input-->
+<!--                      v-if="isEmpty(currentData)"-->
+<!--                      disabled-->
+<!--                      :value="empty"-->
+<!--                    ></b-form-input>-->
+<!--                    <b-form-input-->
+<!--                      v-else-->
+<!--                      :disabled="!updateTag"-->
+<!--                      v-model="couponData.serialPassword"-->
+<!--                    ></b-form-input>-->
+<!--                  </template>-->
+<!--                  <template v-else>-->
+<!--                    <b-form-input-->
+<!--                      v-model="couponData.serialPassword"-->
+<!--                    ></b-form-input> </template-->
+<!--                ></b-td>-->
+<!--              </b-tr>-->
+<!--            </b-tbody>-->
+<!--          </b-table-simple>-->
+<!--          <b-row class="justify-content-between align-items-center">-->
+<!--            <b-col class="text-end">-->
+<!--              &lt;!&ndash; 신규등록일 때 &ndash;&gt;-->
+<!--              <template v-if="addTag == true">-->
+<!--                <b-btn variant="dark" class="ms-2" @click="addData()"-->
+<!--                  >등록완료</b-btn-->
+<!--                >-->
+<!--                <b-btn class="ms-2" variant="danger" @click="addCancel()"-->
+<!--                  >취소</b-btn-->
+<!--                >-->
+<!--              </template>-->
+<!--              &lt;!&ndash; 수정일 때 &ndash;&gt;-->
+<!--              <template v-else-if="updateTag == true">-->
+<!--                <b-btn variant="dark" class="ms-2" @click="updateData()"-->
+<!--                  >수정완료</b-btn-->
+<!--                >-->
+<!--                <b-btn class="ms-2" variant="danger" @click="updateCancel()"-->
+<!--                  >취소</b-btn-->
+<!--                >-->
+<!--              </template>-->
+<!--              &lt;!&ndash; 기본 &ndash;&gt;-->
+<!--              <template v-else>-->
+<!--                <b-btn variant="dark" class="ms-2" @click="addTag = true"-->
+<!--                  >신규등록</b-btn-->
+<!--                >-->
+<!--                <b-btn-->
+<!--                  class="ms-2"-->
+<!--                  @click="updateTag = true"-->
+<!--                  :disabled="isEmpty(currentData)"-->
+<!--                  >수정</b-btn-->
+<!--                >-->
+<!--                <b-btn-->
+<!--                  class="ms-2"-->
+<!--                  variant="danger"-->
+<!--                  :disabled="isEmpty(currentData)"-->
+<!--                  @click="deleteData(currentData._id)"-->
+<!--                  >삭제</b-btn-->
+<!--                >-->
+<!--              </template>-->
+<!--            </b-col>-->
+<!--          </b-row>-->
+<!--        </b-col>-->
+<!--      </b-row>-->
       <b-row class="mb-4">
         <b-col>
           <b-table-simple small bordered fixed class="currentTable">
@@ -255,16 +285,19 @@
 <script>
 import Tabs from "@/components/Tabs.vue";
 import axios from 'axios';
+import async from "async";
 export default {
   name: "Sales",
   components: { Tabs },
   data() {
     return {
+      chargePrice: 10000,
       salesItems: null,
       couponItems: null,
       couponList: {},
       currentData: {},
       cachedData: {},
+      couponDatas: '',
       couponData: {
         serialNum: null,
         serialPrice: null,
@@ -338,12 +371,13 @@ export default {
     },
     // 신규등록 완료
     async addData() {
+      const couponDatas = this.couponDatas.split('\n');
+      // eslint-disable-next-line no-unused-vars
       const result = await axios.post('http://49.247.38.210:3001/charge/serialRegist', {
-        serialNum: this.couponData.serialNum,
-        serialPrice: this.couponData.serialPrice,
-        serialPassword: this.couponData.serialPassword,
+        chargePrice: this.chargePrice,
+        couponDatas,
       });
-      console.log(result);
+      window.location.reload();
     },
     chaging() {
       this.$axios.post('http://49.247.38.210:3001/charge/AfreecaCharge', {
@@ -422,6 +456,29 @@ export default {
           this.managerPriceConfirm += parseInt(item);
         }
       });
+    },
+    async logout() {
+      localStorage.removeItem('token');
+      await this.$router.push('/');
+    },
+    async pageLoad() {
+      // 저장된 토큰을 가져오는 함수
+      let token = localStorage.getItem('token');
+      if (!token) {
+        await this.$router.push('/');
+      }
+      token = token.replaceAll('"', '');
+      // eslint-disable-next-line no-unused-vars
+      const data = await this.$axios.post(
+        "http://49.247.38.210:3001/api/verify-token", null, {
+          headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
+      );
+      if (data.data.isValid === false) {
+        await this.$router.push('/');
+      }
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
@@ -545,7 +602,8 @@ export default {
   },
   mounted() {
     this.getCurrentMonthsalesData();
-    this.mySize();
+    // this.mySize();
+    this.pageLoad();
   },
   computed: {},
 };

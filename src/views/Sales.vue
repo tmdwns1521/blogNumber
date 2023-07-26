@@ -603,7 +603,7 @@ export default {
   mounted() {
     this.getCurrentMonthsalesData();
     // this.mySize();
-    this.pageLoad();
+    // this.pageLoad();
   },
   computed: {},
 };

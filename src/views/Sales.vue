@@ -279,7 +279,6 @@
       @onRowSelected="onRowSelected"
       @onMonthsalesData="onMonthsalesData"
       @getCurrentMonthsalesData="getCurrentMonthsalesData"
-      @getSalesData="getSalesData"
       :blogsItems="blogsItems"
       :couponItems="couponItems"
     />
@@ -364,7 +363,7 @@ export default {
             // console.log(item);
             // const data =
             this.$axios
-              .delete("http://49.247.32.231:5000/api/salesData", {
+              .delete("http://49.247.41.160:3001/api/salesData", {
                 data: { id: item, size: this.$store.state.role },
                 headers: {},
               })
@@ -388,17 +387,6 @@ export default {
       const result = await axios.post('http://49.247.38.210:3001/charge/serialRegist', {
         chargePrice: this.chargePrice,
         couponDatas,
-      });
-      window.location.reload();
-    },
-    chaging() {
-      this.$axios.post('http://49.247.38.210:3001/charge/AfreecaCharge', {
-        card: this.paymentType,
-        afId: this.newData.afId,
-        afPw: this.newData.afPw,
-        Id: this.newData.platformId,
-        Pw: this.newData.platformPw,
-        price: this.newData.chargedPrice,
       });
       window.location.reload();
     },
@@ -475,7 +463,7 @@ export default {
     },
     async getBlogInfo() {
       try {
-        const blogs = await this.$axios.get("http://localhost:3001/blog/getBlogs");
+        const blogs = await this.$axios.get("http://49.247.41.160:3001/blog/getBlogs");
         this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
         this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
         this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
@@ -486,7 +474,7 @@ export default {
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }
-      // const NumberBlogs = await this.$axios.get("http://localhost:3001/blog/getNumberBlogs");
+      // const NumberBlogs = await this.$axios.get("http://49.247.41.160:3001/blog/getNumberBlogs");
       // console.log(NumberBlogs);
     },
     async pageLoad() {
@@ -510,28 +498,16 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        "http://localhost:3001/blog/getNumberBlogs"
+        "http://49.247.41.160:3001/blog/getNumberBlogs"
       );
       this.onList(data);
-    },
-    async getSalesData() {
-      const data = await this.$axios.get(
-        "http://49.247.38.210:3001/charge/chargeOnAir"
-      );
-
-
-      const couponData = await this.$axios.get(
-          "http://49.247.38.210:3001/charge/couponList"
-      );
-
-      this.onList(data, couponData);
     },
     async mySize() {
       const isToken = localStorage.getItem("token");
       const tokenData = JSON.parse(isToken);
 
       const data = await this.$axios.post(
-        "http://49.247.32.231:5000/api/MySize",
+        "http://49.247.41.160:3001/api/MySize",
         { userToken: tokenData }
       );
       // console.log("mySize: ", data.data.Size);

@@ -57,7 +57,7 @@ axios.defaults.headers.common["Content-Type"] =
   "application/x-www-form-urlencoded";
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 // Vue.prototype.$axios = axios;
-// axios.defaults.baseURL = "http://49.247.32.231:5000/api";
+// axios.defaults.baseURL = "http://49.247.41.160:3001/api";
 // axios.interceptors.response.use(
 //   (response) => {
 //     return response;
@@ -90,7 +90,7 @@ new Vue({
   //     const tokenData = JSON.parse(isToken);
 
   //     const data = await this.$axios.post(
-  //       "http://49.247.32.231:5000/api/MySize",
+  //       "http://49.247.41.160:3001/api/MySize",
   //       { userToken: tokenData }
   //     );
   //     console.log("mySize: ", data.data.Size);

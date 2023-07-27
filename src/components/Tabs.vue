@@ -301,12 +301,8 @@ export default {
       this.$emit("onRowSelected", items);
     },
     async showDate() {
-      const data = await this.$axios.get(
-        "http://49.247.38.210:3001/charge/chargeOnAir"
-      );
-      console.log(data);
-
-      this.$emit("onMonthsalesData", data);
+      // pass
+      // this.$emit("onMonthsalesData", data);
     },
     getSalesData() {
       this.$emit("getSalesData");

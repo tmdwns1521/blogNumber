@@ -12,57 +12,61 @@
         <b-col>
           <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
-              <b-col class="text-18 border-end" v-for="(key, value) in couponList">
-                <strong>{{ Number(value).toLocaleString() }}원</strong>
+              <b-col class="text-18 border-end">
+                <strong>전체 블로그</strong>
                 <p class="opacity-50 m-0">
-                  <span>{{ key }}EA</span>
+                  <span>{{ blogInfo.blogs }}</span>
                 </p>
               </b-col>
-              <!-- <b-col class="text-18 border-end">
-                <strong>취소 매출</strong>
+              <b-col class="text-18 border-end">
+                <strong>16년 이전 블로그</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span> 0
-                  
+                  <span>{{ blogInfo.checkBLogsOnCount }} / {{ blogInfo.checkBlogsCount }}</span>
                 </p>
               </b-col>
-              <b-col class="text-18">
-                <strong>합계</strong>
+              <b-col class="text-18 bordeㅋr-end">
+                <strong>최적화 블로그</strong>
                 <p class="opacity-50 m-0">
-                  <span>\</span> 0
-                 
+                  <span>{{ blogInfo.OptimizationBlogsOnCount }} / {{ blogInfo.OptimizationBlogsCount }}</span>
                 </p>
-              </b-col> -->
+              </b-col>
+              <b-col class="text-18 border-end">
+                <strong>번호 추출 블로그</strong>
+                <p class="opacity-50 m-0">
+                  <span>{{ blogInfo.UsedBlogsOnCount }} / {{ blogInfo.UsedBlogsCount }}</span>
+                </p>
+              </b-col>
             </b-row>
           </div>
         </b-col>
       </b-row>
-      <b-row class="mb-4">
-        <b-col>
-          <b-form-select v-model="chargePrice" class="mb-3"
-            ><b-form-select-option value="10000"
-              >10,000</b-form-select-option
-            >
-            <b-form-select-option value="30000"
-              >30,000</b-form-select-option
-            ><b-form-select-option value="50000"
-              >50,000</b-form-select-option
-            ><b-form-select-option value="100000"
-              >100,000</b-form-select-option
-            ></b-form-select
-          >
-          <b-form-textarea class="mb-3" v-model="couponDatas" placeholder="BABABABABA123456(비번)000000
-BABABABABA123456(비번)000000
-BABABABABA123456(비번)000000
-BABABABABA123456(비번)000000"></b-form-textarea>
-          <b-row class="justify-content-between align-items-center">
-            <b-col class="text-end">
-              <b-btn variant="dark" class="ms-2" @click="addData()">
-                등록완료
-              </b-btn>
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
+<!--      <b-row class="mb-4">-->
+<!--        <b-col>-->
+<!--          <b-form-select v-model="chargePrice" class="mb-3"-->
+<!--            ><b-form-select-option value="10000"-->
+<!--              >10,000</b-form-select-option-->
+<!--            >-->
+<!--            <b-form-select-option value="30000"-->
+<!--              >30,000</b-form-select-option-->
+<!--            ><b-form-select-option value="50000"-->
+<!--              >50,000</b-form-select-option-->
+<!--            ><b-form-select-option value="100000"-->
+<!--              >100,000</b-form-select-option-->
+<!--            ></b-form-select-->
+<!--          >-->
+<!--          <b-form-textarea class="mb-3" v-model="couponDatas" placeholder="BABABABABA123456(비번)000000-->
+<!--BABABABABA123456(비번)000000-->
+<!--BABABABABA123456(비번)000000-->
+<!--BABABABABA123456(비번)000000"></b-form-textarea>-->
+<!--          <b-row class="justify-content-between align-items-center">-->
+<!--            <b-col class="text-end">-->
+<!--              <b-btn variant="dark" class="ms-2" @click="addData()">-->
+<!--                등록완료-->
+<!--              </b-btn>-->
+<!--            </b-col>-->
+<!--          </b-row>-->
+<!--        </b-col>-->
+<!--      </b-row>-->
       <!-- 확인/수정/등록 데이터정보 -->
 <!--      <b-row class="mb-4">-->
 <!--        <b-col>-->
@@ -174,100 +178,100 @@ BABABABABA123456(비번)000000"></b-form-textarea>
 <!--          </b-row>-->
 <!--        </b-col>-->
 <!--      </b-row>-->
-      <b-row class="mb-4">
-        <b-col>
-          <b-table-simple small bordered fixed class="currentTable">
-            <b-tbody>
-              <b-tr>
-                <b-th>PlatForm</b-th>
-                <b-td>
-                    <b-form-select v-model="paymentType"
-                      ><b-form-select-option value="AB"
-                        >아프리카</b-form-select-option
-                      >
-                      <b-form-select-option value="CL"
-                        >컬쳐랜드</b-form-select-option
-                      ><b-form-select-option value="BL"
-                        >북앤라이프</b-form-select-option
-                      ><b-form-select-option value="HM"
-                        >해피머니</b-form-select-option
-                      ></b-form-select
-                    >
-                </b-td>
-                <b-th>AF ID</b-th>
-                <b-td>
-                    <b-form-input
-                      v-model="newData.afId"
-                    ></b-form-input>
-                </b-td>
-                <b-th>AF PW</b-th>
-                <b-td>
-                    <b-form-input
-                      v-model="newData.afPw"
-                    ></b-form-input>
-                </b-td>
-              </b-tr>
-                <b-tr>
-                  <b-th>ID</b-th>
-                  <b-td>
-                    <template v-if="paymentType === 'AB'">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="newData.platformId"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.platformId"
-                    ></b-form-input> </template
-                    >
-                  </b-td>
-                  <b-th>PW</b-th>
-                  <b-td>
-                    <template v-if="paymentType === 'AB'">
-                    <b-form-input
-                      v-if="isEmpty(currentData)"
-                      disabled
-                      :value="empty"
-                    ></b-form-input>
-                    <b-form-input
-                      v-else
-                      :disabled="!updateTag"
-                      v-model="newData.platformPw"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="newData.platformPw"
-                    ></b-form-input> </template
-                >
-                  </b-td>
-                  <b-th>PRICE</b-th>
-                  <b-td>
-                    <b-form-input
-                      v-model="newData.chargedPrice"
-                      @change="formatChargedPrice"
-                    ></b-form-input>
-                  </b-td>
-                </b-tr>
-              <!-- 계좌이체 -->
-            </b-tbody>
-          </b-table-simple>
-          <b-row class="justify-content-between align-items-center">
-            <b-col class="text-end">
-              <b-btn variant="dark" class="ms-2" @click="chaging()"
-                >충전하기</b-btn
-              >
-            </b-col>
-          </b-row>
-        </b-col>
-      </b-row>
+<!--      <b-row class="mb-4">-->
+<!--        <b-col>-->
+<!--          <b-table-simple small bordered fixed class="currentTable">-->
+<!--            <b-tbody>-->
+<!--              <b-tr>-->
+<!--                <b-th>PlatForm</b-th>-->
+<!--                <b-td>-->
+<!--                    <b-form-select v-model="paymentType"-->
+<!--                      ><b-form-select-option value="AB"-->
+<!--                        >아프리카</b-form-select-option-->
+<!--                      >-->
+<!--                      <b-form-select-option value="CL"-->
+<!--                        >컬쳐랜드</b-form-select-option-->
+<!--                      ><b-form-select-option value="BL"-->
+<!--                        >북앤라이프</b-form-select-option-->
+<!--                      ><b-form-select-option value="HM"-->
+<!--                        >해피머니</b-form-select-option-->
+<!--                      ></b-form-select-->
+<!--                    >-->
+<!--                </b-td>-->
+<!--                <b-th>AF ID</b-th>-->
+<!--                <b-td>-->
+<!--                    <b-form-input-->
+<!--                      v-model="newData.afId"-->
+<!--                    ></b-form-input>-->
+<!--                </b-td>-->
+<!--                <b-th>AF PW</b-th>-->
+<!--                <b-td>-->
+<!--                    <b-form-input-->
+<!--                      v-model="newData.afPw"-->
+<!--                    ></b-form-input>-->
+<!--                </b-td>-->
+<!--              </b-tr>-->
+<!--                <b-tr>-->
+<!--                  <b-th>ID</b-th>-->
+<!--                  <b-td>-->
+<!--                    <template v-if="paymentType === 'AB'">-->
+<!--                    <b-form-input-->
+<!--                      v-if="isEmpty(currentData)"-->
+<!--                      disabled-->
+<!--                      :value="empty"-->
+<!--                    ></b-form-input>-->
+<!--                    <b-form-input-->
+<!--                      v-else-->
+<!--                      :disabled="!updateTag"-->
+<!--                      v-model="newData.platformId"-->
+<!--                    ></b-form-input>-->
+<!--                  </template>-->
+<!--                  <template v-else>-->
+<!--                    <b-form-input-->
+<!--                      v-model="newData.platformId"-->
+<!--                    ></b-form-input> </template-->
+<!--                    >-->
+<!--                  </b-td>-->
+<!--                  <b-th>PW</b-th>-->
+<!--                  <b-td>-->
+<!--                    <template v-if="paymentType === 'AB'">-->
+<!--                    <b-form-input-->
+<!--                      v-if="isEmpty(currentData)"-->
+<!--                      disabled-->
+<!--                      :value="empty"-->
+<!--                    ></b-form-input>-->
+<!--                    <b-form-input-->
+<!--                      v-else-->
+<!--                      :disabled="!updateTag"-->
+<!--                      v-model="newData.platformPw"-->
+<!--                    ></b-form-input>-->
+<!--                  </template>-->
+<!--                  <template v-else>-->
+<!--                    <b-form-input-->
+<!--                      v-model="newData.platformPw"-->
+<!--                    ></b-form-input> </template-->
+<!--                >-->
+<!--                  </b-td>-->
+<!--                  <b-th>PRICE</b-th>-->
+<!--                  <b-td>-->
+<!--                    <b-form-input-->
+<!--                      v-model="newData.chargedPrice"-->
+<!--                      @change="formatChargedPrice"-->
+<!--                    ></b-form-input>-->
+<!--                  </b-td>-->
+<!--                </b-tr>-->
+<!--              &lt;!&ndash; 계좌이체 &ndash;&gt;-->
+<!--            </b-tbody>-->
+<!--          </b-table-simple>-->
+<!--          <b-row class="justify-content-between align-items-center">-->
+<!--            <b-col class="text-end">-->
+<!--              <b-btn variant="dark" class="ms-2" @click="chaging()"-->
+<!--                >충전하기</b-btn-->
+<!--              >-->
+<!--            </b-col>-->
+<!--          </b-row>-->
+<!--        </b-col>-->
+<!--      </b-row>-->
     </div>
     <!-- {{ currentData }}
     {{ newData }} -->
@@ -276,7 +280,7 @@ BABABABABA123456(비번)000000"></b-form-textarea>
       @onMonthsalesData="onMonthsalesData"
       @getCurrentMonthsalesData="getCurrentMonthsalesData"
       @getSalesData="getSalesData"
-      :salesItems="salesItems"
+      :blogsItems="blogsItems"
       :couponItems="couponItems"
     />
   </div>
@@ -285,14 +289,22 @@ BABABABABA123456(비번)000000"></b-form-textarea>
 <script>
 import Tabs from "@/components/Tabs.vue";
 import axios from 'axios';
-import async from "async";
 export default {
   name: "Sales",
   components: { Tabs },
   data() {
     return {
+      blogInfo: {
+        OptimizationBlogsCount: 0,
+        OptimizationBlogsOnCount: 0,
+        UsedBlogsCount: 0,
+        UsedBlogsOnCount: 0,
+        blogs: 0,
+        checkBLogsOnCount: 0,
+        checkBlogsCount: 0
+      },
       chargePrice: 10000,
-      salesItems: null,
+      blogsItems: null,
       couponItems: null,
       couponList: {},
       currentData: {},
@@ -461,6 +473,22 @@ export default {
       localStorage.removeItem('token');
       await this.$router.push('/');
     },
+    async getBlogInfo() {
+      try {
+        const blogs = await this.$axios.get("http://localhost:3001/blog/getBlogs");
+        this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
+        this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
+        this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
+        this.blogInfo.UsedBlogsCount = blogs.data.UsedBlogsCount.toLocaleString();
+        this.blogInfo.UsedBlogsOnCount = blogs.data.UsedBlogsOnCount.toLocaleString();
+        this.blogInfo.checkBLogsOnCount = blogs.data.checkBLogsOnCount.toLocaleString();
+        this.blogInfo.checkBlogsCount = blogs.data.checkBlogsCount.toLocaleString();
+      } catch (e) {
+        console.error("Error fetching blogs:", e);
+      }
+      // const NumberBlogs = await this.$axios.get("http://localhost:3001/blog/getNumberBlogs");
+      // console.log(NumberBlogs);
+    },
     async pageLoad() {
       // 저장된 토큰을 가져오는 함수
       let token = localStorage.getItem('token');
@@ -482,12 +510,9 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        "http://49.247.38.210:3001/charge/chargeOnAir"
+        "http://localhost:3001/blog/getNumberBlogs"
       );
-      const couponData = await this.$axios.get(
-          "http://49.247.38.210:3001/charge/couponList"
-      );
-      this.onList(data, couponData);
+      this.onList(data);
     },
     async getSalesData() {
       const data = await this.$axios.get(
@@ -518,92 +543,39 @@ export default {
       this.onList(data);
     },
 
-    onList(data, couponData) {
-      const couponItems = couponData.data;
-      const datas = data.data;
+    onList(data) {
+      const datas = data.data.NumberBlogs;
       const dataList = [];
-      const couponLists = [];
-
-      const totalPList = [];
-      const totalCList = [];
 
       this.totalPricePredicted = 0;
       this.totalPriceConfirm = 0;
 
-      for (const i of couponItems) {
-        couponLists.push(i);
+      for (const i in datas) {
+        datas[i].index = Number(i);
+        dataList.push(datas[i]);
       }
-
-      for (const i of datas) {
-        dataList.push(i);
-      }
-      this.couponItems = couponLists.reverse();
-      this.couponItems.forEach((e) => {
-        if (e.normal === 0 && e.used === 0) {
-          if (this.couponList[e.price]) {
-            this.couponList[e.price] += 1
-          } else {
-            this.couponList[e.price] = 1
-          }
-        }
-        if (e.normal === 0) {
-          e.normal = '정상';
-        } else {
-          e.normal = '비정상';
-        }
-        if (e.used === 0) {
-          e.used = '미사용';
-        } else {
-          e.used = '사용';
-        }
-        e.price = Number(e.price).toLocaleString();
-      });
-      this.salesItems = dataList.reverse();
-      this.salesItems.forEach((e) => {
-        if (e.platform === 'AB') {
-          e.platform = '아프리카';
-        } else if (e.platform === 'CL') {
-          e.platform = '컬쳐랜드';
-        } else if (e.platform === 'BL') {
-          e.platform = '도서문화상품권';
-        } else if (e.platform === 'HM') {
-          e.platform = '해피머니';
-        }
-        if (e.success === 0) {
-          e.success = '결제 실패'
-        } else if (e.success === 1) {
-          e.success = '결제 완료'
-        } else if (e.success === 2) {
-          e.success = '결제 진행중'
-        }
-        e.chared_price = Number(e.chared_price).toLocaleString();
-        e.complete_chared_price = Number(e.complete_chared_price).toLocaleString();
-        e.failed_price = Number(e.failed_price).toLocaleString();
-      })
-      this.totalPList = totalPList;
-      this.totalCList = totalCList;
+      this.blogsItems = dataList;
+      console.log(this.blogsItems);
 
       this.salesItems.forEach((el, index) => {
         this.$set(el, "index", index);
       });
-      this.totalPList.forEach((item) => {
-        item = parseInt(item);
-        if (isNaN(item) === false) {
-          this.totalPricePredicted += parseInt(item);
-        }
-      });
-      this.totalCList.forEach((item) => {
-        item = parseInt(item);
-        if (isNaN(item) === false) {
-          this.totalPriceConfirm += parseInt(item);
-        }
-      });
     },
+  },
+  beforeDestroy() {
+    // 컴포넌트가 파괴될 때 타이머 해제
+    clearInterval(this.blogInfoTimer);
   },
   mounted() {
     this.getCurrentMonthsalesData();
     // this.mySize();
-    // this.pageLoad();
+    this.getBlogInfo();
+
+    // 반복 타이머 시작
+    this.blogInfoTimer = setInterval(() => {
+      console.log('abab');
+      this.getBlogInfo();
+    }, 30000);
   },
   computed: {},
 };

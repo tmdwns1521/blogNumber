@@ -115,7 +115,7 @@ export default {
     async signup() {
       console.log("회원가입");
       const data = await this.$axios
-        .post("http://49.247.41.160:3001/api/register", this.input)
+        .post("http://49.247.43.180:5000/api/register", this.input)
         .then((res) => {
           console.log(res);
           window.alert("회원가입 성공");

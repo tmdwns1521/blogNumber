@@ -363,7 +363,7 @@ export default {
             // console.log(item);
             // const data =
             this.$axios
-              .delete("http://49.247.41.160:3001/api/salesData", {
+              .delete("http://49.247.43.180:5000/api/salesData", {
                 data: { id: item, size: this.$store.state.role },
                 headers: {},
               })
@@ -463,7 +463,7 @@ export default {
     },
     async getBlogInfo() {
       try {
-        const blogs = await this.$axios.get("http://49.247.41.160:3001/blog/getBlogs");
+        const blogs = await this.$axios.get("http://49.247.43.180:5000/blog/getBlogs");
         this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
         this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
         this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
@@ -474,7 +474,7 @@ export default {
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }
-      // const NumberBlogs = await this.$axios.get("http://49.247.41.160:3001/blog/getNumberBlogs");
+      // const NumberBlogs = await this.$axios.get("http://49.247.43.180:5000/blog/getNumberBlogs");
       // console.log(NumberBlogs);
     },
     async pageLoad() {
@@ -498,7 +498,7 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        "http://49.247.41.160:3001/blog/getNumberBlogs"
+        "http://49.247.43.180:5000/blog/getNumberBlogs"
       );
       this.onList(data);
     },
@@ -507,7 +507,7 @@ export default {
       const tokenData = JSON.parse(isToken);
 
       const data = await this.$axios.post(
-        "http://49.247.41.160:3001/api/MySize",
+        "http://49.247.43.180:5000/api/MySize",
         { userToken: tokenData }
       );
       // console.log("mySize: ", data.data.Size);

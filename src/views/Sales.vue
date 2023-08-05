@@ -531,11 +531,7 @@ export default {
         dataList.push(datas[i]);
       }
       this.blogsItems = dataList;
-      console.log(this.blogsItems);
 
-      this.salesItems.forEach((el, index) => {
-        this.$set(el, "index", index);
-      });
     },
   },
   beforeDestroy() {

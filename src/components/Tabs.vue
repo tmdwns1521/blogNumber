@@ -304,13 +304,13 @@ export default {
   methods: {
     async downloadTextFile() {
     try {
-      const response = await this.$axios.get('http://localhost:5000/blog/download-text', {
+      const response = await this.$axios.get('http://49.247.43.180:5000/blog/download-text', {
           responseType: 'text', // 텍스트 형식으로 데이터 받기
         });
 
         // 텍스트 데이터를 Blob으로 변환
         const blob = new Blob([response.data], { type: 'text/plain' });
-        const fileName = 'example.txt'; // 다운로드할 파일 이름 설정
+        const fileName = 'download.txt'; // 다운로드할 파일 이름 설정
 
         // 브라우저에서 파일 다운로드하기
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {

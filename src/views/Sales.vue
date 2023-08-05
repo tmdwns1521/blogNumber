@@ -544,10 +544,10 @@ export default {
     this.getBlogInfo();
 
     // 반복 타이머 시작
-    this.blogInfoTimer = setInterval(() => {
-      console.log('abab');
-      this.getBlogInfo();
-    }, 30000);
+    // this.blogInfoTimer = setInterval(() => {
+    //   console.log('abab');
+    //   this.getBlogInfo();
+    // }, 30000);
   },
   computed: {},
 };

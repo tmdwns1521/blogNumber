@@ -343,7 +343,7 @@ export default {
       };
       // const data =
       await this.$axios.post(
-        `${process.env.API_URL}/api/saleAproveData`,
+        `49.247.43.180:5000/api/saleAproveData`,
         form
       );
       // console.log(data);

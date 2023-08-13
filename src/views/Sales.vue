@@ -381,7 +381,7 @@ export default {
             // console.log(item);
             // const data =
             this.$axios
-              .delete(`49.247.43.180:5000/api/salesData`, {
+              .delete(`${process.env.API_URL}/api/salesData`, {
                 data: { id: item, size: this.$store.state.role },
                 headers: {},
               })
@@ -476,12 +476,12 @@ export default {
       });
     },
     async userUpdate(id) {
-      await this.$axios.post(`49.247.43.180:5000/user/userState`, id);
+      await this.$axios.post(`${process.env.API_URL}/user/userState`, id);
       location.reload();
     },
     // eslint-disable-next-line vue/no-dupe-keys
     async userStatus() {
-      const userStatus = await this.$axios.get(`49.247.43.180:5000/user/userStatus`);
+      const userStatus = await this.$axios.get(`${process.env.API_URL}/user/userStatus`);
       this.userInfos = userStatus.data;
     },
     async logout() {
@@ -490,7 +490,7 @@ export default {
     },
     async getBlogInfo() {
       try {
-        const blogs = await this.$axios.get(`49.247.43.180:5000/blog/getBlogs`);
+        const blogs = await this.$axios.get(`${process.env.API_URL}/blog/getBlogs`);
         // this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
         // this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
         // this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
@@ -501,7 +501,7 @@ export default {
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }
-      // const NumberBlogs = await this.$axios.get(`49.247.43.180:5000/blog/getNumberBlogs`);
+      // const NumberBlogs = await this.$axios.get(`${process.env.API_URL}/blog/getNumberBlogs`);
       // console.log(NumberBlogs);
     },
     async pageLoad() {
@@ -513,7 +513,7 @@ export default {
       token = token.replaceAll('"', '');
       // eslint-disable-next-line no-unused-vars
       const data = await this.$axios.post(
-        `49.247.43.180:5000/api/verify-token`, null, {
+        `${process.env.API_URL}/api/verify-token`, null, {
           headers: {
               Authorization: `Bearer ${token}`,
             }
@@ -525,7 +525,7 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        `49.247.43.180:5000/blog/getNumberBlogs`
+        `${process.env.API_URL}/blog/getNumberBlogs`
       );
       this.onList(data);
     },

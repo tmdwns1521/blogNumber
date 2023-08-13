@@ -304,7 +304,7 @@ export default {
   methods: {
     async downloadTextFile() {
     try {
-      const response = await this.$axios.get(`49.247.43.180:5000/blog/download-text`, {
+      const response = await this.$axios.get(`${process.env.API_URL}/blog/download-text`, {
           responseType: 'text', // 텍스트 형식으로 데이터 받기
         });
 

@@ -12,29 +12,47 @@
         <b-col>
           <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
-              <b-col class="text-18 border-end">
-                <strong>전체 블로그</strong>
-                <p class="opacity-50 m-0">
-                  <span>{{ blogInfo.blogs }}</span>
-                </p>
-              </b-col>
-              <b-col class="text-18 border-end">
-                <strong>16년 이전 블로그</strong>
-                <p class="opacity-50 m-0">
-                  <span>{{ blogInfo.checkBLogsOnCount }} / {{ blogInfo.checkBlogsCount }}</span>
-                </p>
-              </b-col>
-              <b-col class="text-18 bordeㅋr-end">
-                <strong>최적화 블로그</strong>
-                <p class="opacity-50 m-0">
-                  <span>{{ blogInfo.OptimizationBlogsOnCount }} / {{ blogInfo.OptimizationBlogsCount }}</span>
-                </p>
-              </b-col>
+<!--              <b-col class="text-18 border-end">-->
+<!--                <strong>전체 블로그</strong>-->
+<!--                <p class="opacity-50 m-0">-->
+<!--                  <span>{{ blogInfo.blogs }}</span>-->
+<!--                </p>-->
+<!--              </b-col>-->
+<!--              <b-col class="text-18 border-end">-->
+<!--                <strong>16년 이전 블로그</strong>-->
+<!--                <p class="opacity-50 m-0">-->
+<!--                  <span>{{ blogInfo.checkBLogsOnCount }} / {{ blogInfo.checkBlogsCount }}</span>-->
+<!--                </p>-->
+<!--              </b-col>-->
+<!--              <b-col class="text-18 bordeㅋr-end">-->
+<!--                <strong>최적화 블로그</strong>-->
+<!--                <p class="opacity-50 m-0">-->
+<!--                  <span>{{ blogInfo.OptimizationBlogsOnCount }} / {{ blogInfo.OptimizationBlogsCount }}</span>-->
+<!--                </p>-->
+<!--              </b-col>-->
               <b-col class="text-18 border-end">
                 <strong>번호 추출 블로그</strong>
                 <p class="opacity-50 m-0">
                   <span>{{ blogInfo.UsedBlogsOnCount }} / {{ blogInfo.UsedBlogsCount }}</span>
                 </p>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+      <b-row class="mb-4">
+        <b-col>
+          <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
+            <b-row class="justify-content-between align-items-center">
+              <b-col class="text-18 border-end" v-for="item in userInfos">
+                <strong>{{item.naverId}}</strong>
+                <p class="opacity-50 m-0">
+                  <span>{{ item.is_block == 0 ? "정상" : "비정상"  }}</span>
+                </p>
+                <p class="opacity-50 m-0">
+                  <span>{{ item.is_use == 0 ? "미사용" : "사용중" }}</span>
+                </p>
+                <b-button @click="userUpdate(item)">수정완료</b-button>
               </b-col>
             </b-row>
           </div>
@@ -276,7 +294,6 @@
     <!-- {{ currentData }}
     {{ newData }} -->
     <Tabs
-      @onRowSelected="onRowSelected"
       @onMonthsalesData="onMonthsalesData"
       @getCurrentMonthsalesData="getCurrentMonthsalesData"
       :blogsItems="blogsItems"
@@ -293,6 +310,7 @@ export default {
   components: { Tabs },
   data() {
     return {
+      userInfos: {},
       blogInfo: {
         OptimizationBlogsCount: 0,
         OptimizationBlogsOnCount: 0,
@@ -363,7 +381,7 @@ export default {
             // console.log(item);
             // const data =
             this.$axios
-              .delete("http://49.247.43.180:5000/api/salesData", {
+              .delete(`${process.env.API_URL}/api/salesData`, {
                 data: { id: item, size: this.$store.state.role },
                 headers: {},
               })
@@ -457,24 +475,33 @@ export default {
         }
       });
     },
+    async userUpdate(id) {
+      await this.$axios.post(`${process.env.API_URL}/user/userState`, id);
+      location.reload();
+    },
+    // eslint-disable-next-line vue/no-dupe-keys
+    async userStatus() {
+      const userStatus = await this.$axios.get(`${process.env.API_URL}/user/userStatus`);
+      this.userInfos = userStatus.data;
+    },
     async logout() {
       localStorage.removeItem('token');
       await this.$router.push('/');
     },
     async getBlogInfo() {
       try {
-        const blogs = await this.$axios.get("http://49.247.43.180:5000/blog/getBlogs");
-        this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
-        this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
-        this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
+        const blogs = await this.$axios.get(`${process.env.API_URL}/blog/getBlogs`);
+        // this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
+        // this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
+        // this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
         this.blogInfo.UsedBlogsCount = blogs.data.UsedBlogsCount.toLocaleString();
         this.blogInfo.UsedBlogsOnCount = blogs.data.UsedBlogsOnCount.toLocaleString();
-        this.blogInfo.checkBLogsOnCount = blogs.data.checkBLogsOnCount.toLocaleString();
-        this.blogInfo.checkBlogsCount = blogs.data.checkBlogsCount.toLocaleString();
+        // this.blogInfo.checkBLogsOnCount = blogs.data.checkBLogsOnCount.toLocaleString();
+        // this.blogInfo.checkBlogsCount = blogs.data.checkBlogsCount.toLocaleString();
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }
-      // const NumberBlogs = await this.$axios.get("http://49.247.43.180:5000/blog/getNumberBlogs");
+      // const NumberBlogs = await this.$axios.get(`${process.env.API_URL}/blog/getNumberBlogs`);
       // console.log(NumberBlogs);
     },
     async pageLoad() {
@@ -486,7 +513,7 @@ export default {
       token = token.replaceAll('"', '');
       // eslint-disable-next-line no-unused-vars
       const data = await this.$axios.post(
-        "http://49.247.38.210:3001/api/verify-token", null, {
+        `${process.env.API_URL}/api/verify-token`, null, {
           headers: {
               Authorization: `Bearer ${token}`,
             }
@@ -498,7 +525,7 @@ export default {
     },
     async getCurrentMonthsalesData() {
       const data = await this.$axios.get(
-        "http://49.247.43.180:5000/blog/getNumberBlogs"
+        `${process.env.API_URL}/blog/getNumberBlogs`
       );
       this.onList(data);
     },
@@ -507,7 +534,7 @@ export default {
       const tokenData = JSON.parse(isToken);
 
       const data = await this.$axios.post(
-        "http://49.247.43.180:5000/api/MySize",
+        `{process.env.API_URL}/api/MySize`,
         { userToken: tokenData }
       );
       // console.log("mySize: ", data.data.Size);
@@ -542,6 +569,7 @@ export default {
     this.getCurrentMonthsalesData();
     // this.mySize();
     this.getBlogInfo();
+    this.userStatus();
 
     // 반복 타이머 시작
     // this.blogInfoTimer = setInterval(() => {

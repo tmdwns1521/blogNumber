@@ -278,11 +278,11 @@ export default {
           label: "블로그 아이디",
           thClass: "table-secondary",
         },
-        {
-          key: "logic",
-          label: "상태",
-          thClass: "table-secondary",
-        },
+        // {
+        //   key: "logic",
+        //   label: "상태",
+        //   thClass: "table-secondary",
+        // },
         {
           key: "number",
           label: "전화번호",
@@ -304,7 +304,7 @@ export default {
   methods: {
     async downloadTextFile() {
     try {
-      const response = await this.$axios.get('http://49.247.43.180:5000/blog/download-text', {
+      const response = await this.$axios.get(`${process.env.API_URL}/blog/download-text`, {
           responseType: 'text', // 텍스트 형식으로 데이터 받기
         });
 

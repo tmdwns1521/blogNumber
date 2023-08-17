@@ -278,14 +278,14 @@ export default {
           label: "블로그 아이디",
           thClass: "table-secondary",
         },
-        // {
-        //   key: "logic",
-        //   label: "상태",
-        //   thClass: "table-secondary",
-        // },
         {
           key: "number",
           label: "전화번호",
+          thClass: "table-secondary",
+        },
+        {
+          key: "logic",
+          label: "상태",
           thClass: "table-secondary",
         },
         // {
@@ -308,7 +308,7 @@ export default {
           responseType: 'text', // 텍스트 형식으로 데이터 받기
         });
 
-        // 텍스트 데이터를 Blob으로 변환
+        // 텍스트 데이터를 Blob으로 변환황
         const blob = new Blob([response.data], { type: 'text/plain' });
         const fileName = 'download.txt'; // 다운로드할 파일 이름 설정
 

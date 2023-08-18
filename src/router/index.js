@@ -94,16 +94,16 @@ router.beforeEach((to, from, next) => {
     }
     next();
   }
-  if (roleSuper) {
-    if (!isSuper) {
-      // console.log(roleSuper)
-      // console.log(isSuper);
-      alert("접근불가");
-      next("/manage");
-      return;
-    }
-    next();
-  }
+  // if (roleSuper) {
+  //   if (!isSuper) {
+  //     // console.log(roleSuper)
+  //     // console.log(isSuper);
+  //     alert("접근불가");
+  //     next("/manage");
+  //     return;
+  //   }
+  //   next();
+  // }
   next();
 });
 

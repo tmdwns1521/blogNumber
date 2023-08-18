@@ -1,241 +1,88 @@
 <template>
-  <div class="order-page">
-    <!-- 주문관리 -->
+  <div class="sales-page">
+    <!-- 매출관리 -->
     <b-row class="justify-content-between align-items-center mb-3">
-      <b-col>
-        <h1 class="text-25 m-0">주문관리</h1>
-      </b-col>
+      <b-btn variant="dark" class="ms-2" @click="logout()"
+                  >로그아웃</b-btn
+                >
     </b-row>
-    <div style="max-width: 1850px" class="mb-4">
-      <b-row>
-        <!-- 승인 설정 -->
+    <div style="max-width: 1850px">
+      <!-- 블로그 URL 추가 -->
+      <b-row class="mb-4">
         <b-col>
-          <b-table
-            small
-            head-variant="dark"
-            bordered
-            selectable
-            select-mode="single"
-            :sticky-header="true"
-            :items="orderItems"
-            :fields="orderFields"
-            @row-selected="onOrderSelected"
-            selected-variant="white"
-            class="dataTable orderTable mb-3"
-            ref="orderTable"
-            show-empty
-            emptyText="데이터 정보가 없습니다."
-          >
-            <template #cell(selected)="{ rowSelected }">
-              <div class="text-center">
-                <font-awesome-icon
-                  v-if="rowSelected"
-                  class="text-primary"
-                  icon="fa-solid fa-check"
-                />
-              </div>
-            </template>
-            <template #cell(ContractNumber)="row">
-              {{ dateFormat1(row.item.ContractNumber) }}
-            </template>
-
-            <template #cell(Design)="row">
-              <div class="text-center">
-                <b-form-checkbox
-                  switch
-                  v-model="row.item.Design"
-                ></b-form-checkbox>
-              </div>
-            </template>
-
-            <template #cell(Traffic)="row">
-              <b-form-group class="text-center">
-                <b-form-checkbox
-                  switch
-                  v-model="row.item.Traffic"
-                ></b-form-checkbox>
-              </b-form-group>
-            </template>
-
-            <template #cell(EtcProduct)="row">
-              <b-form-group class="text-center">
-                <b-form-checkbox
-                  switch
-                  v-model="row.item.EtcProduct"
-                ></b-form-checkbox>
-              </b-form-group>
-            </template>
-          </b-table>
-          <b-row class="justify-content-between align-items-center">
-            <b-col class="text-end">
-              <b-btn variant="dark" @click="approvedData()">승인</b-btn>
-            </b-col>
-          </b-row>
-          <!-- {{ selectData }} -->
-        </b-col>
-        <!-- 데이터 수정 -->
-        <!-- <b-col>
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
-                <b-th>계약번호</b-th>
+                <b-th>영역</b-th>
                 <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
+                  <template>
+                    <b-form-select v-model="blogRankInfo.type" :disabled="!addTag">
+                      <b-form-select-option value=0>VIEW</b-form-select-option>
+                      <b-form-select-option value=1>스마트블록</b-form-select-option>
+                    </b-form-select>
                   </template>
-                  <template v-else>
-                    {{ dateFormat1(currentData.ContractNumber) }}
-                  </template>
+                </b-td>
+                <b-th>업체명</b-th>
+                <b-td>
+                    <b-form-input
+                      v-model="blogRankInfo.company_name" :disabled="!addTag"
+                    ></b-form-input>
                 </b-td>
                 <b-th>담당자</b-th>
                 <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    {{ currentData.manager }}
-                  </template>
-                </b-td>
-                <b-th>대표자</b-th>
-                <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    {{ currentData.owner }}
-                  </template>
+                    <b-form-input
+                      v-model="blogRankInfo.manager" :disabled="!addTag"
+                    ></b-form-input>
                 </b-td>
               </b-tr>
               <b-tr>
-                <b-th>상호명</b-th>
+                <b-th>키워드</b-th>
                 <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    {{ dateFormat1(currentData.businessName) }}
-                  </template>
+                <template>
+                  <b-form-input v-model="blogRankInfo.keyword" :disabled="!addTag"></b-form-input>
+                </template>
                 </b-td>
-                <b-th>계약상품</b-th>
+                <b-th>서비스일자</b-th>
                 <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      :disabled="!updateTag"
-                      v-model="currentData.contractProduct"
-                    ></b-form-input>
-                  </template>
+                <template>
+                  <b-input-group>
+                    <b-button @click="decreaseValue" :disabled="!addTag">-</b-button>
+                    <b-form-input v-model="blogRankInfo.serviceCount" style="text-align: center" :disabled="!addTag"></b-form-input>
+                    <b-button @click="increaseValue" :disabled="!addTag">+</b-button>
+                  </b-input-group>
+                </template>
                 </b-td>
-                <b-th>결제금액</b-th>
+                <b-th>매출</b-th>
                 <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-if="updateTag"
-                      v-model="currentData.AmountOfPayment"
-                    ></b-form-input>
-                    <template v-else>
-                      {{ numberToString(currentData.AmountOfPayment) }}
-                    </template>
-                  </template>
+                <template>
+                  <b-form-input v-model="blogRankInfo.sales" @input="formatChargedPrice" :disabled="!addTag"></b-form-input>
+                </template>
                 </b-td>
               </b-tr>
               <b-tr>
-                <b-th>디자인</b-th>
-                <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
+                  <b-th>블로그URL</b-th>
+                  <b-td>
+                    <template>
+                      <b-textarea v-model="blogRankInfo.blog_url" :disabled="!addTag"></b-textarea>
                   </template>
-                  <template v-else>
-                    <template v-if="!updateTag">
-                      <font-awesome-icon
-                        v-if="currentData.Design"
-                        class="fa-xl text-success"
-                        icon="fa-solid fa-circle-check"
-                      />
-                      <font-awesome-icon
-                        v-else
-                        style="color: #ced4da"
-                        class="fa-xl"
-                        icon="fa-solid fa-circle-xmark"
-                      />
-                    </template>
-                    <template v-else>
-                      <b-form-checkbox
-                        style="justify-content: start"
-                        switch
-                        v-model="currentData.Design"
-                      ></b-form-checkbox>
-                    </template>
-                  </template>
-                </b-td>
-                <b-th>트래픽</b-th>
-                <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    <template v-if="!updateTag">
-                      <font-awesome-icon
-                        v-if="currentData.Traffic"
-                        class="fa-xl text-success"
-                        icon="fa-solid fa-circle-check"
-                      />
-                      <font-awesome-icon
-                        v-else
-                        style="color: #ced4da"
-                        class="fa-xl"
-                        icon="fa-solid fa-circle-xmark"
-                      />
-                    </template>
-                    <template v-else>
-                      <b-form-checkbox
-                        style="justify-content: start"
-                        switch
-                        v-model="currentData.Traffic"
-                      ></b-form-checkbox>
-                    </template>
-                  </template>
-                </b-td>
-                <b-th>기타상품</b-th>
-                <b-td>
-                  <template v-if="isEmpty(currentData)">
-                    {{ empty }}
-                  </template>
-                  <template v-else>
-                    <template v-if="!updateTag">
-                      <font-awesome-icon
-                        v-if="currentData.EtcProduct"
-                        class="fa-xl text-success"
-                        icon="fa-solid fa-circle-check"
-                      />
-                      <font-awesome-icon
-                        v-else
-                        style="color: #ced4da"
-                        class="fa-xl"
-                        icon="fa-solid fa-circle-xmark"
-                      />
-                    </template>
-                    <template v-else>
-                      <b-form-checkbox
-                        style="justify-content: start"
-                        switch
-                        v-model="currentData.EtcProduct"
-                      ></b-form-checkbox>
-                    </template>
-                  </template>
-                </b-td>
-              </b-tr>
+                  </b-td>
+                </b-tr>
+              <!-- 계좌이체 -->
             </b-tbody>
           </b-table-simple>
           <b-row class="justify-content-between align-items-center">
             <b-col class="text-end">
-            
-              <template v-if="updateTag == true">
+              <!-- 신규등록일 때 -->
+              <template v-if="addTag === true">
+                <b-btn variant="dark" class="ms-2" @click="addData()"
+                  >등록완료</b-btn
+                >
+                <b-btn class="ms-2" variant="danger" @click="addCancel()"
+                  >취소</b-btn
+                >
+              </template>
+              <!-- 수정일 때 -->
+              <template v-else-if="updateTag == true">
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
@@ -243,8 +90,11 @@
                   >취소</b-btn
                 >
               </template>
-              
+              <!-- 기본 -->
               <template v-else>
+                <b-btn variant="dark" class="ms-2" @click="addTag = true"
+                  >신규등록</b-btn
+                >
                 <b-btn
                   class="ms-2"
                   @click="updateTag = true"
@@ -255,100 +105,75 @@
                   class="ms-2"
                   variant="danger"
                   :disabled="isEmpty(currentData)"
+                  @click="deleteData(currentData._id)"
                   >삭제</b-btn
                 >
               </template>
             </b-col>
           </b-row>
-        </b-col> -->
+        </b-col>
       </b-row>
     </div>
-    <Tabs
-      @onRowSelected="onRowSelected"
-      :orderItems="orderItems"
-      :salesItems="salesItems"
-      :numberItems="numberItems"
+    <!-- {{ currentData }}
+    {{ newData }} -->
+    <TabsBlogRank
+      @onMonthsalesData="onMonthsalesData"
+      @getCurrentMonthsalesData="getCurrentMonthsalesData"
+      :blogRankItems="blogRankItems"
     />
   </div>
 </template>
 
 <script>
-import Tabs from "@/components/Tabs.vue";
+import TabsBlogRank from "@/components/TabsBlogRank.vue";
 export default {
-  name: "Order",
-  components: { Tabs },
+  name: "Sales",
+  components: { TabsBlogRank },
   data() {
     return {
-      orderFields: [
-        {
-          key: "selected",
-          label: "선택",
-          thClass: "table-secondary",
-        },
-        {
-          key: "ContractNumber",
-          label: "계약번호",
-          thClass: "table-secondary",
-        },
-        {
-          key: "manager",
-          label: "담당자",
-          thClass: "table-secondary",
-        },
-        {
-          key: "owner",
-          label: "대표자",
-          thClass: "table-secondary",
-        },
-        {
-          key: "contractProduct",
-          label: "계약상품",
-          thClass: "table-secondary",
-        },
-        {
-          key: "Design",
-          label: "디자인",
-          thClass: "table-secondary",
-        },
-        {
-          key: "Traffic",
-          label: "트래픽",
-          thClass: "table-secondary",
-        },
-        {
-          key: "EtcProduct",
-          label: "기타상품",
-          thClass: "table-secondary",
-        },
-      ],
-      salesItems: null,
-      orderItems: null,
+      blogRankInfo: {
+        blog_url: '',
+        keyword: '',
+        manager: '',
+        registration_date: new Date().toISOString().slice(0, 19).replace('T', ' '),
+        company_name: '',
+        type: 0,
+        serviceCount: 25,
+        sales: 0,
+      },
+      blogRankItems: null,
       currentData: {},
-      selectData: {},
       updateTag: false,
-      empty: "-",
+      addTag: false,
     };
   },
   methods: {
-    // 승인 완료
-    async approvedData() {
-      let form = {
-        Design: this.selectData.Design,
-        Traffic: this.selectData.Traffic,
-        EtcProduct: this.selectData.EtcProduct,
-        id: this.selectData._id,
-        Term: this.selectData.Term,
-        contractProduct: this.selectData.contractProduct,
-        blogId: this.selectData.blogId,
-      };
-      // const data =
-      await this.$axios.post(
-        `${process.env.API_URL}/api/saleAproveData`,
-        form
+    decreaseValue() {
+      if (this.blogRankInfo.serviceCount > 0) {
+        this.blogRankInfo.serviceCount--;
+      }
+    },
+    increaseValue() {
+      this.blogRankInfo.serviceCount++;
+    },
+    async formatChargedPrice() {
+      if (!this.blogRankInfo.sales) return; // 입력값이 없을 경우 빠른 리턴
+
+      const priceValue = parseFloat(this.blogRankInfo.sales.replace(/,/g, ''));
+      if (!isNaN(priceValue)) {
+        this.blogRankInfo.sales = priceValue.toLocaleString();
+      }
+    },
+    // 신규등록 완료
+    async addData() {
+      await this.$axios.post(`${process.env.API_URL}/blog/blogRankData`,
+          this.blogRankInfo
       );
-      // console.log(data);
-      // window.alert("승인 성공");
-      this.getSalesData();
+      // window.location.reload();
+    },
+    // 신규등록 취소
+    addCancel() {
+      this.addTag = false;
     },
     // 수정 완료
     async updateData() {
@@ -357,43 +182,103 @@ export default {
     },
     // 수정 취소
     updateCancel() {
-      this.salesItems.forEach((el) => {
-        if (this.currentData._id === el._id) {
-          this.currentData = { ...el };
-        }
-      });
+      this.currentData = Object.assign({}, this.cachedData);
+      this.currentData.cardData = Object.assign({}, this.cachedData.cardData);
+
       this.updateTag = false;
     },
-    // selectAllRows() {
-    //   this.$refs.orderTable.selectAllRows();
-    // },
-    // clearSelected() {
-    //   this.$refs.orderTable.clearSelected();
-    // },
     onRowSelected(items) {
+      this.addTag = false;
       items = items[0];
       this.currentData = { ...items };
+
+      this.cachedData = Object.assign({}, this.currentData);
+      this.cachedData.cardData = Object.assign({}, this.currentData.cardData);
+
+      if (
+        !this.currentData.cardData ||
+        this.currentData.cardData.creditCardNumber === ""
+      ) {
+        this.paymentType = "cash";
+      } else {
+        this.paymentType = "card";
+      }
+
+      this.managerPricePredicted = 0;
+      this.managerPriceConfirm = 0;
+      const managerDataList = [];
+      const managerPList = [];
+      const managerCList = [];
+
+      this.salesItems.filter((el) => {
+        if (el.manager === this.currentData.manager) {
+          managerDataList.push(el);
+        }
+      });
+      for (const i of managerDataList) {
+        managerPList.push(i.AmountOfPayment);
+        if (i.Approved === true) {
+          managerCList.push(i.AmountOfPayment);
+        }
+      }
+
+      this.managerPList = managerPList;
+      this.managerCList = managerCList;
+
+      this.managerPList.forEach((item) => {
+        item = parseInt(item);
+        if (isNaN(item) === false) {
+          this.managerPricePredicted += parseInt(item);
+        }
+      });
+      this.managerCList.forEach((item) => {
+        item = parseInt(item);
+        if (isNaN(item) === false) {
+          this.managerPriceConfirm += parseInt(item);
+        }
+      });
     },
-    onOrderSelected(items) {
-      items = items[0];
-      this.selectData = items;
+    async logout() {
+      localStorage.removeItem('token');
+      await this.$router.push('/');
     },
-    async getSalesData() {
-      // pass
+    async pageLoad() {
+      // 저장된 토큰을 가져오는 함수
+      let token = localStorage.getItem('token');
+      if (!token) {
+        await this.$router.push('/');
+      }
+      token = token.replaceAll('"', '');
+      // eslint-disable-next-line no-unused-vars
+      const data = await this.$axios.post(
+        `${process.env.API_URL}/api/verify-token`, null, {
+          headers: {
+              Authorization: `Bearer ${token}`,
+            }
+          }
+      );
+      if (data.data.isValid === false) {
+        await this.$router.push('/');
+      }
+    },
+    async getData() {
+      const data = await this.$axios.get(
+        `${process.env.API_URL}/blog/getBlogRankData`
+      );
+      this.onList(data);
+    },
+
+    onList(data) {
+      const datas = data.data;
+      this.blogRankItems = datas;
+
     },
   },
   mounted() {
-    this.getSalesData();
+    this.getData();
   },
   computed: {},
 };
 </script>
 
-<style lang="scss" scoped>
-.currentTable {
-  th,
-  td {
-    width: initial;
-  }
-}
-</style>
+<style></style>

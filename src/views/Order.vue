@@ -129,8 +129,6 @@
     <!-- {{ currentData }}
     {{ newData }} -->
     <TabsBlogRank
-      @onMonthsalesData="onMonthsalesData"
-      @getCurrentMonthsalesData="getCurrentMonthsalesData"
       :blogRankItems="blogRankItems"
     />
   </div>

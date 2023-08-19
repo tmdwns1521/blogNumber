@@ -128,6 +128,15 @@
             {{ row.item.serviceCount - 25 }}
           </span>
         </template>
+        <!-- 차수 -->
+        <template #cell(gap)="row">
+          <span v-if="row.item.gap > 0">
+            {{ row.item.gap }}
+          </span>
+          <span v-else-if="row.item.gap < 0">
+            {{ row.item.gap }}
+          </span>
+        </template>
 
       </b-table>
     </b-tab>
@@ -180,8 +189,18 @@ export default {
           thClass: "table-secondary",
         },
         {
+          key: "updatedAt",
+          label: "수집일",
+          thClass: "table-secondary",
+        },
+        {
           key: "rank",
           label: "순위",
+          thClass: "table-secondary",
+        },
+        {
+          key: "gap",
+          label: "차수",
           thClass: "table-secondary",
         },
         {

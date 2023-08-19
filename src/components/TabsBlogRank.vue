@@ -252,6 +252,37 @@ export default {
     };
   },
   methods: {
+    async oneMonthAgo() {
+          const today = new Date();
+
+      // 어제 날짜 계산
+      const yesterday = new Date(today);
+      yesterday.setDate(today.getDate() - 1);
+
+      // 30일 전의 날짜 계산
+      const thirtyDaysAgo = new Date(yesterday);
+      thirtyDaysAgo.setDate(yesterday.getDate() - 30);
+
+      // 날짜 형식 변환 함수
+      function formatDate(date) {
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      // 30일 전부터 어제까지의 날짜 출력
+      let currentDate = thirtyDaysAgo;
+      while (currentDate <= yesterday) {
+        this.blogRankFiled.push({
+          key: formatDate(currentDate),
+          label: formatDate(currentDate),
+          thClass: "table-secondary",
+        },)
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+
+    },
     async downloadTextFile() {
     try {
       const response = await this.$axios.get(`${process.env.API_URL}/blog/download-text`, {
@@ -299,7 +330,9 @@ export default {
       this.monthPickerVisible = !this.monthPickerVisible;
     },
   },
-  mounted() {},
+  async mounted() {
+    await this.oneMonthAgo();
+  },
   watch: {
     // eslint-disable-next-line no-unused-vars
     date(n, o) {
@@ -313,4 +346,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>
+
+
+
+
+

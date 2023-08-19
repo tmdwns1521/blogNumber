@@ -282,9 +282,19 @@ export default {
     },
 
     onList(data) {
-      const datas = data.data;
+      data.data.blogs.forEach((item) => {
+        const filterData = data.data.blog_ranks.filter((e) => item.id === e.blog_id);
+        filterData.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+        item.updatedAt = filterData[0]?.updatedAt;
+        item.gap = filterData[0]?.gap;
+      })
+      const datas = data.data.blogs;
       this.blogRankItems = datas;
-
+      data.data.blog_ranks.forEach(item => {
+        const dateStr = item.updatedAt.split(" ")[0];
+        const targetIndex = this.blogRankItems?.findIndex(e => e.id === item.blog_id);
+        this.blogRankItems[targetIndex][dateStr] = item.rank;
+      })
     },
   },
   mounted() {

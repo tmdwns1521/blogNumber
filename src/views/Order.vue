@@ -72,6 +72,12 @@
                     <b-textarea v-model="blogRankInfo.work_detail" :disabled="!addTag"></b-textarea>
                 </template>
                 </b-td>
+                <b-th>스마트블록링크</b-th>
+                <b-td>
+                  <template>
+                    <b-textarea v-model="blogRankInfo.smart_link" :disabled="!addTag"></b-textarea>
+                </template>
+                </b-td>
               </b-tr>
               <!-- 계좌이체 -->
             </b-tbody>
@@ -147,6 +153,7 @@ export default {
         serviceCount: 25,
         sales: 0,
         work_detail: "",
+        smart_link: "",
       },
       blogRankItems: null,
       currentData: {},

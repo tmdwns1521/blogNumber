@@ -301,7 +301,7 @@ export default {
     this.getData();
     setInterval(() => {
         this.getData();
-      }, 10000);
+      }, 30000);
   },
   computed: {},
 };

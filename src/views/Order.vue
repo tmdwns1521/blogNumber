@@ -60,13 +60,19 @@
                 </b-td>
               </b-tr>
               <b-tr>
-                  <b-th>블로그URL</b-th>
-                  <b-td>
-                    <template>
-                      <b-textarea v-model="blogRankInfo.blog_url" :disabled="!addTag"></b-textarea>
-                  </template>
-                  </b-td>
-                </b-tr>
+                <b-th>블로그URL</b-th>
+                <b-td>
+                  <template>
+                    <b-textarea v-model="blogRankInfo.blog_url" :disabled="!addTag"></b-textarea>
+                </template>
+                </b-td>
+                <b-th>작업내용</b-th>
+                <b-td>
+                  <template>
+                    <b-textarea v-model="blogRankInfo.work_detail" :disabled="!addTag"></b-textarea>
+                </template>
+                </b-td>
+              </b-tr>
               <!-- 계좌이체 -->
             </b-tbody>
           </b-table-simple>
@@ -140,6 +146,7 @@ export default {
         type: 0,
         serviceCount: 25,
         sales: 0,
+        work_detail: "",
       },
       blogRankItems: null,
       currentData: {},
@@ -169,6 +176,7 @@ export default {
       await this.$axios.post(`${process.env.API_URL}/blog/blogRankData`,
           this.blogRankInfo
       );
+      await this.getData();
       // window.location.reload();
     },
     // 신규등록 취소

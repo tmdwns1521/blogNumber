@@ -219,6 +219,11 @@ export default {
           label: "담당자",
           thClass: "table-secondary",
         },
+        {
+          key: "work_detail",
+          label: "작업내용",
+          thClass: "table-secondary",
+        },
       ],
       filter: "",
       empty: "",

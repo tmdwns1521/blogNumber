@@ -87,6 +87,9 @@
         :fields="blogRankFiled"
         class="dataTable salesTable"
         :filter="filter"
+        label-sort-asc=""
+        label-sort-desc=""
+        label-sort-clear=""
         ref="selectableTable"
         show-empty
         emptyFilteredText="찾으시는 검색어와 일치하는 정보가 없습니다."
@@ -131,11 +134,53 @@
         <!-- 차수 -->
         <template #cell(gap)="row">
           <span v-if="row.item.gap > 0">
-            {{ row.item.gap }}
+            +{{ row.item.gap }}
           </span>
           <span v-else-if="row.item.gap < 0">
             {{ row.item.gap }}
           </span>
+        </template>
+
+
+        <!-- 랭크 -->
+        <template #cell(rank)="row">
+          <span v-if="row.item.gap > 0" style="color: blue">
+            {{ row.item.rank }}
+          </span>
+          <span v-else-if="row.item.gap < 0" style="color: red">
+            {{ row.item.rank }}
+          </span>
+          <span v-else>
+            {{ row.item.rank }}
+          </span>
+        </template>
+
+        <!-- 블로그URL -->
+        <template #cell(blog_url)="row">
+          <a :href="row.item.blog_url" target="_blank">
+            {{ row.item.blog_url.split('/').pop() }}
+          </a>
+        </template>
+
+        <!-- 카운트 -->
+        <template #cell(count)="row">
+          <template v-if="row.item.serviceCount - 2 <= row.item.count">
+            <span :class="row.item.serviceCount - 2 <= row.item.count ? 'highlightedOrange' : ''">
+              {{ row.item.count }}
+            </span>
+          </template>
+          <template v-else-if="row.item.serviceCount - 5 <= row.item.count">
+            <span :class="row.item.serviceCount - 5 <= row.item.count ? 'highlighted' : ''">
+              {{ row.item.count }}
+            </span>
+          </template>
+          <template v-else>
+            <span>
+              {{ row.item.count }}
+            </span>
+          </template>
+
+
         </template>
 
       </b-table>
@@ -171,76 +216,91 @@ export default {
         {
           key: "registration_date",
           label: "등록날짜",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "type",
           label: "영역",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "company_name",
           label: "업체명",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "keyword",
           label: "키워드",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "updatedAt",
           label: "수집일",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "rank",
           label: "순위",
+          sortable: true,
           thClass: "table-secondary",
         },
         {
           key: "gap",
           label: "차수",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "blog_url",
           label: "링크",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "count",
           label: "카운트",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "sales",
           label: "매출",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "serviceCount",
           label: "보장일수",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "extensionCount",
           label: "연장횟수",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "reissue",
           label: "재발행",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "manager",
           label: "담당자",
+          sortable: false,
           thClass: "table-secondary",
         },
         {
           key: "work_detail",
           label: "작업내용",
+          sortable: false,
           thClass: "table-secondary",
         },
       ],
@@ -249,6 +309,7 @@ export default {
       date: { from: null, to: null, month: null, monthIndex: null, year: null },
       selectedDate: null,
       monthPickerVisible: false,
+      highlightedRowId: 2,
     };
   },
   methods: {
@@ -348,6 +409,12 @@ export default {
 </script>
 
 <style scoped>
+.highlighted {
+  background-color: yellow;
+}
+.highlightedOrange {
+  background-color: orange;
+}
 </style>
 
 

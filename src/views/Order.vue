@@ -137,6 +137,9 @@
               </template>
               <!-- 수정일 때 -->
               <template v-else-if="updateTag === true">
+                <b-btn variant="dark" class="ms-2" @click="addNew()"
+                  >신규등록</b-btn
+                >
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
@@ -146,15 +149,15 @@
               </template>
               <!-- 기본 -->
               <template v-else>
-                <b-btn variant="dark" class="ms-2" @click="addTag = true"
+                <b-btn variant="dark" class="ms-2" @click="addNew()"
                   >신규등록</b-btn
                 >
-                <b-btn
-                  class="ms-2"
-                  @click="updateTag = true"
-                  :disabled="isEmpty(currentData)"
-                  >수정</b-btn
-                >
+<!--                <b-btn-->
+<!--                  class="ms-2"-->
+<!--                  @click="updateTag = true"-->
+<!--                  :disabled="isEmpty(currentData)"-->
+<!--                  >수정</b-btn-->
+<!--                >-->
                 <b-btn
                   class="ms-2"
                   variant="danger"
@@ -203,6 +206,11 @@ export default {
     };
   },
   methods: {
+    addNew() {
+      console.log('new');
+      this.addTag = true;
+      this.currentData = {};
+    },
     decreaseValue() {
       if (this.currentData.length !== 1) {
         if (this.blogRankInfo.serviceCount > 0) {
@@ -243,11 +251,11 @@ export default {
     },
     // 수정 완료
     async updateData() {
-      window.alert("수정 성공");
       this.updateTag = false;
       await this.$axios.post(`${process.env.API_URL}/blog/updateBlogRankData`,
           this.currentData[0]
       );
+      window.alert("수정 성공");
       await this.getData();
     },
     // 수정 취소
@@ -258,11 +266,15 @@ export default {
       this.updateTag = false;
     },
     handleRowSelectedBlog(items) {
-      this.addTag = false;
-      this.updateTag = true;
-      console.log(items);
-      this.currentData = items;
-      console.log(this.currentData);
+      if (items.length > 0) {
+        this.addTag = false;
+        this.updateTag = true;
+        this.currentData = items;
+      } else {
+        this.addTag = false;
+        this.updateTag = true;
+        this.currentData = items;
+      }
     },
     async logout() {
       localStorage.removeItem('token');

@@ -117,7 +117,7 @@
                     <b-textarea v-model="blogRankInfo.smart_link" :disabled="!addTag"></b-textarea>
                   </template>
                   <template v-else>
-                    <b-textarea v-model="currentData[0].smart_link" :disabled="!updateTag"></b-textarea>
+                    <b-textarea v-model="currentData[0].smartlink" :disabled="!updateTag"></b-textarea>
                   </template>
                 </b-td>
               </b-tr>

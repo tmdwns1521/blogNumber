@@ -15,8 +15,14 @@
               <b-tr>
                 <b-th>영역</b-th>
                 <b-td>
-                  <template>
+                  <template v-if="currentData.length !== 1">
                     <b-form-select v-model="blogRankInfo.type" :disabled="!addTag">
+                      <b-form-select-option value=0>VIEW</b-form-select-option>
+                      <b-form-select-option value=1>스마트블록</b-form-select-option>
+                    </b-form-select>
+                  </template>
+                  <template v-else>
+                    <b-form-select v-model="currentData[0].type" :disabled="!updateTag">
                       <b-form-select-option value=0>VIEW</b-form-select-option>
                       <b-form-select-option value=1>스마트블록</b-form-select-option>
                     </b-form-select>
@@ -24,59 +30,95 @@
                 </b-td>
                 <b-th>업체명</b-th>
                 <b-td>
+                  <template v-if="currentData.length !== 1">
                     <b-form-input
                       v-model="blogRankInfo.company_name" :disabled="!addTag"
                     ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="currentData[0].company_name" :disabled="!updateTag"
+                    ></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>담당자</b-th>
                 <b-td>
+                  <template v-if="currentData.length !== 1">
                     <b-form-input
                       v-model="blogRankInfo.manager" :disabled="!addTag"
                     ></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input
+                      v-model="currentData[0].manager" :disabled="!updateTag"
+                    ></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>키워드</b-th>
                 <b-td>
-                <template>
-                  <b-form-input v-model="blogRankInfo.keyword" :disabled="!addTag"></b-form-input>
-                </template>
+                  <template v-if="currentData.length !== 1">
+                    <b-form-input v-model="blogRankInfo.keyword" :disabled="!addTag"></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="currentData[0].keyword" :disabled="!updateTag"></b-form-input>
+                  </template>
                 </b-td>
                 <b-th>서비스일자</b-th>
                 <b-td>
-                <template>
-                  <b-input-group>
-                    <b-button @click="decreaseValue" :disabled="!addTag">-</b-button>
-                    <b-form-input v-model="blogRankInfo.serviceCount" style="text-align: center" :disabled="!addTag"></b-form-input>
-                    <b-button @click="increaseValue" :disabled="!addTag">+</b-button>
-                  </b-input-group>
-                </template>
+                  <template v-if="currentData.length !== 1">
+                    <b-input-group>
+                      <b-button @click="decreaseValue" :disabled="!addTag">-</b-button>
+                      <b-form-input v-model="blogRankInfo.serviceCount" style="text-align: center" :disabled="!addTag"></b-form-input>
+                      <b-button @click="increaseValue" :disabled="!addTag">+</b-button>
+                    </b-input-group>
+                  </template>
+                  <template v-else>
+                    <b-input-group>
+                      <b-button @click="decreaseValue" :disabled="!updateTag">-</b-button>
+                      <b-form-input v-model="currentData[0].serviceCount" style="text-align: center" :disabled="!updateTag"></b-form-input>
+                      <b-button @click="increaseValue" :disabled="!updateTag">+</b-button>
+                    </b-input-group>
+                  </template>
                 </b-td>
                 <b-th>매출</b-th>
                 <b-td>
-                <template>
-                  <b-form-input v-model="blogRankInfo.sales" @input="formatChargedPrice" :disabled="!addTag"></b-form-input>
-                </template>
+                  <template v-if="currentData.length !== 1">
+                    <b-form-input v-model="blogRankInfo.sales" @input="formatChargedPrice" :disabled="!addTag"></b-form-input>
+                  </template>
+                  <template v-else>
+                    <b-form-input v-model="currentData[0].sales" @input="formatChargedPrice" :disabled="!updateTag"></b-form-input>
+                  </template>
                 </b-td>
               </b-tr>
               <b-tr>
                 <b-th>블로그URL</b-th>
                 <b-td>
-                  <template>
+                  <template v-if="currentData.length !== 1">
                     <b-textarea v-model="blogRankInfo.blog_url" :disabled="!addTag"></b-textarea>
-                </template>
+                  </template>
+                  <template v-else>
+                    <b-textarea v-model="currentData[0].blog_url" :disabled="!updateTag"></b-textarea>
+                  </template>
                 </b-td>
                 <b-th>작업내용</b-th>
                 <b-td>
-                  <template>
+                  <template v-if="currentData.length !== 1">
                     <b-textarea v-model="blogRankInfo.work_detail" :disabled="!addTag"></b-textarea>
-                </template>
+                  </template>
+                  <template v-else>
+                    <b-textarea v-model="currentData[0].work_detail" :disabled="!updateTag"></b-textarea>
+                  </template>
                 </b-td>
                 <b-th>스마트블록링크</b-th>
                 <b-td>
-                  <template>
+                  <template v-if="currentData.length !== 1">
                     <b-textarea v-model="blogRankInfo.smart_link" :disabled="!addTag"></b-textarea>
-                </template>
+                  </template>
+                  <template v-else>
+                    <b-textarea v-model="currentData[0].smart_link" :disabled="!updateTag"></b-textarea>
+                  </template>
                 </b-td>
               </b-tr>
               <!-- 계좌이체 -->
@@ -94,7 +136,7 @@
                 >
               </template>
               <!-- 수정일 때 -->
-              <template v-else-if="updateTag == true">
+              <template v-else-if="updateTag === true">
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
@@ -130,6 +172,7 @@
     {{ newData }} -->
     <TabsBlogRank
       :blogRankItems="blogRankItems"
+      @onRowSelectedBlog="handleRowSelectedBlog"
     />
   </div>
 </template>
@@ -161,12 +204,22 @@ export default {
   },
   methods: {
     decreaseValue() {
-      if (this.blogRankInfo.serviceCount > 0) {
-        this.blogRankInfo.serviceCount--;
+      if (this.currentData.length !== 1) {
+        if (this.blogRankInfo.serviceCount > 0) {
+          this.blogRankInfo.serviceCount--;
+        }
+      } else {
+        if (this.currentData[0].serviceCount > 0) {
+          this.currentData[0].serviceCount--;
+        }
       }
     },
     increaseValue() {
-      this.blogRankInfo.serviceCount++;
+      if (this.currentData.length !== 1) {
+        this.blogRankInfo.serviceCount++;
+      } else {
+        this.currentData[0].serviceCount++;
+      }
     },
     async formatChargedPrice() {
       if (!this.blogRankInfo.sales) return; // 입력값이 없을 경우 빠른 리턴
@@ -192,6 +245,10 @@ export default {
     async updateData() {
       window.alert("수정 성공");
       this.updateTag = false;
+      await this.$axios.post(`${process.env.API_URL}/blog/updateBlogRankData`,
+          this.currentData[0]
+      );
+      await this.getData();
     },
     // 수정 취소
     updateCancel() {
@@ -200,56 +257,12 @@ export default {
 
       this.updateTag = false;
     },
-    onRowSelected(items) {
+    handleRowSelectedBlog(items) {
       this.addTag = false;
-      items = items[0];
-      this.currentData = { ...items };
-
-      this.cachedData = Object.assign({}, this.currentData);
-      this.cachedData.cardData = Object.assign({}, this.currentData.cardData);
-
-      if (
-        !this.currentData.cardData ||
-        this.currentData.cardData.creditCardNumber === ""
-      ) {
-        this.paymentType = "cash";
-      } else {
-        this.paymentType = "card";
-      }
-
-      this.managerPricePredicted = 0;
-      this.managerPriceConfirm = 0;
-      const managerDataList = [];
-      const managerPList = [];
-      const managerCList = [];
-
-      this.salesItems.filter((el) => {
-        if (el.manager === this.currentData.manager) {
-          managerDataList.push(el);
-        }
-      });
-      for (const i of managerDataList) {
-        managerPList.push(i.AmountOfPayment);
-        if (i.Approved === true) {
-          managerCList.push(i.AmountOfPayment);
-        }
-      }
-
-      this.managerPList = managerPList;
-      this.managerCList = managerCList;
-
-      this.managerPList.forEach((item) => {
-        item = parseInt(item);
-        if (isNaN(item) === false) {
-          this.managerPricePredicted += parseInt(item);
-        }
-      });
-      this.managerCList.forEach((item) => {
-        item = parseInt(item);
-        if (isNaN(item) === false) {
-          this.managerPriceConfirm += parseInt(item);
-        }
-      });
+      this.updateTag = true;
+      console.log(items);
+      this.currentData = items;
+      console.log(this.currentData);
     },
     async logout() {
       localStorage.removeItem('token');

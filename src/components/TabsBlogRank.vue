@@ -81,7 +81,7 @@
         hover
         selectable
         select-mode="single"
-        @row-selected="onRowSelected"
+        @row-selected="onRowSelectedBlog"
         :sticky-header="true"
         :items="blogRankItems"
         :fields="blogRankFiled"
@@ -253,7 +253,7 @@ export default {
   },
   methods: {
     async oneMonthAgo() {
-          const today = new Date();
+        const today = new Date();
 
       // 어제 날짜 계산
       const yesterday = new Date(today);
@@ -308,8 +308,9 @@ export default {
         console.error('다운로드 링크를 가져오는데 실패했습니다.', error);
       }
     },
-    onRowSelected(items) {
-      this.$emit("onRowSelected", items);
+    onRowSelectedBlog(items) {
+      console.log(items);
+      this.$emit("onRowSelectedBlog", items);
     },
     async showDate() {
       // pass

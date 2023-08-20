@@ -143,6 +143,19 @@
                 <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
+                <b-btn
+                  class="ms-2"
+                  variant="danger"
+                  @click="extend()"
+                  v-if="is_extend"
+                  >연장하기</b-btn
+                >
+                <b-btn
+                  class="ms-2"
+                  variant="danger"
+                  @click="remove()"
+                  >삭제</b-btn
+                >
                 <b-btn class="ms-2" variant="danger" @click="updateCancel()"
                   >취소</b-btn
                 >
@@ -203,9 +216,30 @@ export default {
       currentData: {},
       updateTag: false,
       addTag: false,
+      is_extend: false,
     };
   },
   methods: {
+    async extend() {
+      const extendCheck = confirm("연장 하시겠습니까?");
+      if (extendCheck) {
+        await this.$axios.post(`${process.env.API_URL}/blog/extendBlogRankData`,
+          this.currentData[0]
+        );
+        await this.getData();
+        alert('연장이 완료되었습니다.');
+      }
+    },
+    async remove() {
+      const removeCheck = confirm("삭제 하시겠습니까?");
+      if (removeCheck) {
+        await this.$axios.post(`${process.env.API_URL}/blog/removeBlogRankData`,
+          this.currentData[0]
+        );
+        await this.getData();
+        alert('삭제가 완료되었습니다.');
+      }
+    },
     addNew() {
       console.log('new');
       this.addTag = true;
@@ -266,6 +300,7 @@ export default {
       this.updateTag = false;
     },
     handleRowSelectedBlog(items) {
+      this.is_extend = items[0].count >= items[0].serviceCount;
       if (items.length > 0) {
         this.addTag = false;
         this.updateTag = true;

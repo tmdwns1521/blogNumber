@@ -299,9 +299,6 @@ export default {
   },
   mounted() {
     this.getData();
-    setInterval(() => {
-        this.getData();
-      }, 30000);
   },
   computed: {},
 };

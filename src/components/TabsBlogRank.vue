@@ -141,21 +141,34 @@
           </span>
         </template>
 
+        <!--  check   -->
+        <template #cell(checkDeposit)="row">
+          <b-check @change="checkDeposit(row)" class="text-center mt-2" :checked="row.item.checkDeposit === 1"></b-check>
+        </template>
+
 
         <!-- 랭크 -->
         <template #cell(rank)="row">
           <template v-if="row.item.type === 0">
             <span v-if="row.item.rank >= 6" style="background-color: red; color: white;">
-              {{ row.item.rank }}
+              {{ row.item.rank }}위
             </span>
-            <span v-else> {{ row.item.rank }} </span>
+            <span v-else> {{ row.item.rank }}위 </span>
           </template>
           <template v-else>
             <span v-if="row.item.rank >= 4" style="background-color: red; color: white;">
-              {{ row.item.rank }}
+              {{ row.item.rank }}위
             </span>
-            <span v-else> {{ row.item.rank }} </span>
+            <span v-else> {{ row.item.rank }}위 </span>
           </template>
+        </template>
+
+
+        <!-- 등록날짜 -->
+        <template #cell(registration_date)="row">
+          <span>
+            {{ row.item.registration_date.split(' ')[0] }}
+          </span>
         </template>
 
         <!-- 블로그URL -->
@@ -195,7 +208,8 @@
 
 <script>
 import { MonthPicker } from "vue-month-picker";
-
+// eslint-disable-next-line no-unused-vars
+import VueClipboard from 'vue-clipboard2';
 export default {
   name: "Tabs",
   props: ["currentData", "blogRankItems", "couponItems", "numberItems"],
@@ -215,6 +229,11 @@ export default {
           variant: "secondary",
           thClass: "",
           // filterByFormatted: true,
+        },
+        {
+          key: "checkDeposit",
+          label: "입금확인",
+          thClass: "table-secondary",
         },
         {
           key: "registration_date",
@@ -279,13 +298,13 @@ export default {
         {
           key: "serviceCount",
           label: "보장일수",
-          sortable: false,
+          sortable: true,
           thClass: "table-secondary",
         },
         {
           key: "extensionCount",
           label: "연장횟수",
-          sortable: false,
+          sortable: true,
           thClass: "table-secondary",
         },
         {
@@ -316,6 +335,19 @@ export default {
     };
   },
   methods: {
+    async checkDeposit(row) {
+      if (row.item.checkDeposit === 0) {
+        await this.$axios.post(`${process.env.API_URL}/blog/checkDeposit`, {
+          id: row.item.id,
+          checkDeposit: 1,
+        });
+      } else {
+        await this.$axios.post(`${process.env.API_URL}/blog/checkDeposit`, {
+          id: row.item.id,
+          checkDeposit: 0,
+        });
+      }
+    },
     async oneMonthAgo() {
         const today = new Date();
 
@@ -374,6 +406,8 @@ export default {
     },
     onRowSelectedBlog(items) {
       console.log(items);
+      const textToCopy = `키워드 : ${items[0].keyword} \n순위 : ${items[0].rank}위 \n카운트 : ${items[0].count} \n링크 : ${items[0].blog_url.split(',').pop()}`;
+      this.$copyText(textToCopy);
       this.$emit("onRowSelectedBlog", items);
     },
     async showDate() {

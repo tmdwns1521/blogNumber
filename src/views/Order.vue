@@ -183,9 +183,13 @@
           </b-row>
         </b-col>
       </b-row>
+      <b-col class="text-center">
+        <b-button @click="rankingCheck">순위 체크</b-button>
+        <div style="padding-top: 5px; font-size: 25px;">관리 매출 : {{salesTotal.toLocaleString()}}</div>
+        <div style="padding-top: 5px; font-size: 20px;">당월 매출 : {{confirmSalesTotal.toLocaleString()}}</div>
+      </b-col>
     </div>
-    <!-- {{ currentData }}
-    {{ newData }} -->
+
     <TabsBlogRank
       :blogRankItems="blogRankItems"
       @onRowSelectedBlog="handleRowSelectedBlog"
@@ -200,6 +204,8 @@ export default {
   components: { TabsBlogRank },
   data() {
     return {
+      salesTotal: 0,
+      confirmSalesTotal: 0,
       blogRankInfo: {
         blog_url: '',
         keyword: '',
@@ -220,6 +226,9 @@ export default {
     };
   },
   methods: {
+    async rankingCheck() {
+      await this.$axios.get(`${process.env.API_URL}/blog/rankingCheck`);
+    },
     async extend() {
       const extendCheck = confirm("연장 하시겠습니까?");
       if (extendCheck) {
@@ -343,6 +352,10 @@ export default {
 
     onList(data) {
       data.data.blogs.forEach((item) => {
+        this.salesTotal += item.sales;
+        if (item.checkDeposit === 1) {
+          this.confirmSalesTotal += item.sales;
+        }
         const filterData = data.data.blog_ranks.filter((e) => item.id === e.blog_id);
         filterData.sort((a,b) => new Date(b.updatedAt) - new Date(a.updatedAt));
         item.updatedAt = filterData[0]?.updatedAt;

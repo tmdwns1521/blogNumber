@@ -144,15 +144,18 @@
 
         <!-- 랭크 -->
         <template #cell(rank)="row">
-          <span v-if="row.item.gap > 0" style="color: blue">
-            {{ row.item.rank }}
-          </span>
-          <span v-else-if="row.item.gap < 0" style="color: red">
-            {{ row.item.rank }}
-          </span>
-          <span v-else>
-            {{ row.item.rank }}
-          </span>
+          <template v-if="row.item.type === 0">
+            <span v-if="row.item.rank >= 6" style="background-color: red; color: white;">
+              {{ row.item.rank }}
+            </span>
+            <span v-else> {{ row.item.rank }} </span>
+          </template>
+          <template v-else>
+            <span v-if="row.item.rank >= 4" style="background-color: red; color: white;">
+              {{ row.item.rank }}
+            </span>
+            <span v-else> {{ row.item.rank }} </span>
+          </template>
         </template>
 
         <!-- 블로그URL -->
@@ -264,7 +267,7 @@ export default {
         {
           key: "count",
           label: "카운트",
-          sortable: false,
+          sortable: true,
           thClass: "table-secondary",
         },
         {
@@ -411,9 +414,11 @@ export default {
 <style scoped>
 .highlighted {
   background-color: yellow;
+  color: brown;
 }
 .highlightedOrange {
   background-color: orange;
+  color: white;
 }
 </style>
 

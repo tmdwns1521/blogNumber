@@ -351,6 +351,8 @@ export default {
     },
 
     onList(data) {
+      this.salesTotal = 0;
+      this.confirmSalesTotal = 0;
       data.data.blogs.forEach((item) => {
         this.salesTotal += item.sales;
         if (item.checkDeposit === 1) {

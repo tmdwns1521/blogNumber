@@ -105,18 +105,18 @@
           <span v-if="row.item.type === 0">
             VIEW
           </span>
-          <span v-else>스마트블록</span>
+          <span v-else>스블</span>
         </template>
         <!-- 링크 -->
         <template #cell(blog_url)="row">
           <span>
-            {{ row.item.blog_url.split(',').pop() }}
+            {{ row.item.blog_url?.split(',').pop() }}
           </span>
         </template>
         <!-- 재발행 -->
         <template #cell(reissue)="row">
           <span>
-            {{ row.item.blog_url.split(',').length - 1 }}
+            {{ row.item.blog_url?.split(',').length - 1 }}
           </span>
         </template>
         <!-- 매출 -->
@@ -163,18 +163,25 @@
           </template>
         </template>
 
+        <!-- 수집일 -->
+        <template #cell(updatedAt)="row">
+          <span>
+            {{ row.item.updatedAt?.split(' ')[1]?.split(':').slice(0,2).join(':') }}
+          </span>
+        </template>
+
 
         <!-- 등록날짜 -->
         <template #cell(registration_date)="row">
           <span>
-            {{ row.item.registration_date.split(' ')[0] }}
+            {{ row.item.registration_date?.split(' ')[0]?.split('-').slice(1,3).join('') }}
           </span>
         </template>
 
         <!-- 블로그URL -->
         <template #cell(blog_url)="row">
-          <a :href="row.item.blog_url" target="_blank">
-            {{ row.item.blog_url.split('/').pop() }}
+          <a :href="row.item.blog_url?.split(',').pop()" target="_blank">
+            {{ row.item.blog_url?.split('/').pop() }}
           </a>
         </template>
 
@@ -232,7 +239,7 @@ export default {
         },
         {
           key: "checkDeposit",
-          label: "입금확인",
+          label: "입금",
           thClass: "table-secondary",
         },
         {
@@ -302,7 +309,7 @@ export default {
           thClass: "table-secondary",
         },
         {
-          key: "extensionCount",
+          key: "extend_cnt",
           label: "연장횟수",
           sortable: true,
           thClass: "table-secondary",
@@ -406,7 +413,7 @@ export default {
     },
     onRowSelectedBlog(items) {
       console.log(items);
-      const textToCopy = `키워드 : ${items[0].keyword} \n순위 : ${items[0].rank}위 \n카운트 : ${items[0].count} \n링크 : ${items[0].blog_url.split(',').pop()}`;
+      const textToCopy = `키워드 : ${items[0].keyword} \n순위 : ${items[0].rank}위 \n카운트 : ${items[0].count} \n링크 : ${items[0].blog_url?.split(',').pop()}`;
       this.$copyText(textToCopy);
       this.$emit("onRowSelectedBlog", items);
     },

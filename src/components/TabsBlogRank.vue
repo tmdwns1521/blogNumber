@@ -98,7 +98,7 @@
 
         <!-- No -->
         <template #cell(index)="row">
-          {{ row.item.index + 1 }}
+          {{ row.item.index }}
         </template>
         <!-- 영역 -->
         <template #cell(type)="row">
@@ -367,23 +367,23 @@ export default {
       thirtyDaysAgo.setDate(yesterday.getDate() - 30);
 
       // 날짜 형식 변환 함수
-      function formatDate(date) {
-        const year = date.getFullYear();
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const day = date.getDate().toString().padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      }
+      // function formatDate(date) {
+      //   const year = date.getFullYear();
+      //   const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      //   const day = date.getDate().toString().padStart(2, '0');
+      //   return `${year}-${month}-${day}`;
+      // }
 
       // 30일 전부터 어제까지의 날짜 출력
-      let currentDate = thirtyDaysAgo;
-      while (currentDate <= yesterday) {
-        this.blogRankFiled.push({
-          key: formatDate(currentDate),
-          label: formatDate(currentDate),
-          thClass: "table-secondary",
-        },)
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
+      // let currentDate = thirtyDaysAgo;
+      // while (currentDate <= yesterday) {
+      //   this.blogRankFiled.push({
+      //     key: formatDate(currentDate),
+      //     label: formatDate(currentDate),
+      //     thClass: "table-secondary",
+      //   },)
+      //   currentDate.setDate(currentDate.getDate() + 1);
+      // }
 
     },
     async downloadTextFile() {

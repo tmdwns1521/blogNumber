@@ -285,6 +285,9 @@ export default {
       })
       const datas = data.data.blogs;
       this.blogRankItems = datas;
+      this.blogRankItems.forEach((item, idx) => {
+        item.index = idx + 1;
+      })
       data.data.blog_ranks.forEach(item => {
         const dateStr = item.updatedAt.split(" ")[0];
         const targetIndex = this.blogRankItems?.findIndex(e => e.id === item.blog_id);

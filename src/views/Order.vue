@@ -13,49 +13,6 @@
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
-                <b-th>영역</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-form-select v-model="blogRankInfo.type" :disabled="!addTag">
-                      <b-form-select-option value=0>VIEW</b-form-select-option>
-                      <b-form-select-option value=1>스마트블록</b-form-select-option>
-                    </b-form-select>
-                  </template>
-                  <template v-else>
-                    <b-form-select v-model="currentData[0].type" :disabled="!updateTag">
-                      <b-form-select-option value=0>VIEW</b-form-select-option>
-                      <b-form-select-option value=1>스마트블록</b-form-select-option>
-                    </b-form-select>
-                  </template>
-                </b-td>
-                <b-th>업체명</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-form-input
-                      v-model="blogRankInfo.company_name" :disabled="!addTag"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="currentData[0].company_name" :disabled="!updateTag"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-                <b-th>담당자</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-form-input
-                      v-model="blogRankInfo.manager" :disabled="!addTag"
-                    ></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input
-                      v-model="currentData[0].manager" :disabled="!updateTag"
-                    ></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
                 <b-th>키워드</b-th>
                 <b-td>
                   <template v-if="currentData.length !== 1">
@@ -65,34 +22,6 @@
                     <b-form-input v-model="currentData[0].keyword" :disabled="!updateTag"></b-form-input>
                   </template>
                 </b-td>
-                <b-th>서비스일자</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-input-group>
-                      <b-button @click="decreaseValue" :disabled="!addTag">-</b-button>
-                      <b-form-input v-model="blogRankInfo.serviceCount" style="text-align: center" :disabled="!addTag"></b-form-input>
-                      <b-button @click="increaseValue" :disabled="!addTag">+</b-button>
-                    </b-input-group>
-                  </template>
-                  <template v-else>
-                    <b-input-group>
-                      <b-button @click="decreaseValue" :disabled="!updateTag">-</b-button>
-                      <b-form-input v-model="currentData[0].serviceCount" style="text-align: center" :disabled="!updateTag"></b-form-input>
-                      <b-button @click="increaseValue" :disabled="!updateTag">+</b-button>
-                    </b-input-group>
-                  </template>
-                </b-td>
-                <b-th>매출</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-form-input v-model="blogRankInfo.sales" @input="formatChargedPrice" :disabled="!addTag"></b-form-input>
-                  </template>
-                  <template v-else>
-                    <b-form-input v-model="currentData[0].sales" @input="formatChargedPrice" :disabled="!updateTag"></b-form-input>
-                  </template>
-                </b-td>
-              </b-tr>
-              <b-tr>
                 <b-th>블로그URL</b-th>
                 <b-td>
                   <template v-if="currentData.length !== 1">
@@ -109,15 +38,6 @@
                   </template>
                   <template v-else>
                     <b-textarea v-model="currentData[0].work_detail" :disabled="!updateTag"></b-textarea>
-                  </template>
-                </b-td>
-                <b-th>스마트블록링크</b-th>
-                <b-td>
-                  <template v-if="currentData.length !== 1">
-                    <b-textarea v-model="blogRankInfo.smart_link" :disabled="!addTag"></b-textarea>
-                  </template>
-                  <template v-else>
-                    <b-textarea v-model="currentData[0].smartlink" :disabled="!updateTag"></b-textarea>
                   </template>
                 </b-td>
               </b-tr>
@@ -185,8 +105,8 @@
       </b-row>
       <b-col class="text-center">
         <b-button @click="rankingCheck">순위 체크</b-button>
-        <div style="padding-top: 5px; font-size: 25px;">관리 매출 : {{salesTotal.toLocaleString()}}</div>
-        <div style="padding-top: 5px; font-size: 20px;">당월 매출 : {{confirmSalesTotal.toLocaleString()}}</div>
+<!--        <div style="padding-top: 5px; font-size: 25px;">관리 매출 : {{salesTotal.toLocaleString()}}</div>-->
+<!--        <div style="padding-top: 5px; font-size: 20px;">당월 매출 : {{confirmSalesTotal.toLocaleString()}}</div>-->
       </b-col>
     </div>
 

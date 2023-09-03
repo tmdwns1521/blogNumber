@@ -13,6 +13,21 @@
           <b-table-simple small bordered fixed class="currentTable">
             <b-tbody>
               <b-tr>
+                <b-th>영역</b-th>
+                <b-td>
+                  <template v-if="currentData.length !== 1">
+                    <b-form-select v-model="blogRankInfo.type" :disabled="!addTag">
+                      <b-form-select-option value=0>VIEW</b-form-select-option>
+                      <b-form-select-option value=1>스마트블록</b-form-select-option>
+                    </b-form-select>
+                  </template>
+                  <template v-else>
+                    <b-form-select v-model="currentData[0].type" :disabled="!updateTag">
+                      <b-form-select-option value=0>VIEW</b-form-select-option>
+                      <b-form-select-option value=1>스마트블록</b-form-select-option>
+                    </b-form-select>
+                  </template>
+                </b-td>
                 <b-th>키워드</b-th>
                 <b-td>
                   <template v-if="currentData.length !== 1">

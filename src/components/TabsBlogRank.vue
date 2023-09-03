@@ -248,12 +248,12 @@ export default {
         //   sortable: false,
         //   thClass: "table-secondary",
         // },
-        // {
-        //   key: "type",
-        //   label: "영역",
-        //   sortable: false,
-        //   thClass: "table-secondary",
-        // },
+        {
+          key: "type",
+          label: "영역",
+          sortable: false,
+          thClass: "table-secondary",
+        },
         // {
         //   key: "company_name",
         //   label: "업체명",

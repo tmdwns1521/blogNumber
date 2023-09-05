@@ -46,6 +46,15 @@
                     <b-textarea v-model="currentData[0].blog_url" :disabled="!updateTag"></b-textarea>
                   </template>
                 </b-td>
+                <b-th>스마트블록링크</b-th>
+                <b-td>
+                  <template v-if="currentData.length !== 1">
+                    <b-textarea v-model="blogRankInfo.smart_link" :disabled="!addTag"></b-textarea>
+                  </template>
+                  <template v-else>
+                    <b-textarea v-model="currentData[0].smartlink" :disabled="!updateTag"></b-textarea>
+                  </template>
+                </b-td>
                 <b-th>작업내용</b-th>
                 <b-td>
                   <template v-if="currentData.length !== 1">

@@ -9,6 +9,7 @@ import Manage from "@/layouts/Manage.vue";
 import Home from "@/views/Home.vue";
 import Sales from "@/views/Sales.vue";
 import Order from "@/views/Order.vue";
+import Place from "@/views/Place.vue";
 import Number from "@/views/Number.vue";
 import Login from "@/views/Login.vue";
 import Signup from "@/views/Signup.vue";
@@ -55,6 +56,12 @@ const routes = [
         path: "order",
         name: "Order",
         component: Order,
+        meta: { requiresAuth: true, roleSuper: "A" },
+      },
+      {
+        path: "place",
+        name: "Place",
+        component: Place,
         meta: { requiresAuth: true, roleSuper: "A" },
       },
       {

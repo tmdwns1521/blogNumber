@@ -272,12 +272,12 @@ export default {
           sortable: false,
           thClass: "table-secondary",
         },
-        // {
-        //   key: "updatedAt",
-        //   label: "수집일",
-        //   sortable: false,
-        //   thClass: "table-secondary",
-        // },
+        {
+          key: "update_at",
+          label: "수집일",
+          sortable: false,
+          thClass: "table-secondary",
+        },
         {
           key: "rank",
           label: "순위",

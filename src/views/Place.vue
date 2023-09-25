@@ -171,7 +171,7 @@ export default {
     async remove() {
       const removeCheck = confirm("삭제 하시겠습니까?");
       if (removeCheck) {
-        await this.$axios.post(`${process.env.API_URL}/blog/removeBlogRankData`,
+        await this.$axios.post(`${process.env.API_URL}/blog/removePlaceRankData`,
           this.currentData[0]
         );
         await this.getData();

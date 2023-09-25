@@ -269,7 +269,7 @@ export default {
         {
           key: "placeNumber",
           label: "지도번호",
-          sortable: false,
+          sortable: true,
           thClass: "table-secondary",
         },
         {

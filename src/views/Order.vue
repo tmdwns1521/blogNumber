@@ -288,6 +288,7 @@ export default {
       }
     },
     async getData() {
+      console.log('ji');
       const data = await this.$axios.get(
         `${process.env.API_URL}/blog/getBlogRankData`
       );

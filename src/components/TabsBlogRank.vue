@@ -185,6 +185,13 @@
           </a>
         </template>
 
+        <!-- 순위체크 -->
+        <template #cell(individual_rank)="row">
+          <b-button @click="blogRanking(row)" :disabled="row?.item?.isChecking">
+            {{ row?.item?.isChecking ? '체크중' : '순위체크' }}
+          </b-button>
+        </template>
+
         <!-- 카운트 -->
         <template #cell(count)="row">
           <template v-if="row.item.serviceCount - 2 <= row.item.count">
@@ -273,6 +280,11 @@ export default {
           thClass: "table-secondary",
         },
         {
+          key: "individual_rank",
+          label: "순위체크",
+          thClass: "table-secondary",
+        },
+        {
           key: "rank",
           label: "순위",
           sortable: true,
@@ -342,6 +354,24 @@ export default {
     };
   },
   methods: {
+    async blogRanking(row){
+      // 해당 row에 대한 체크 중 상태를 토글합니다.
+      this.$set(row.item, 'isChecking', true);
+      try {
+        const result = await this.$axios.post(`${process.env.API_URL}/blog/individual-rank`, row.item);
+
+        let { updated_at, ranking } = result.data;
+        // 성공적으로 체크를 마치면 체크 중 상태를 해제합니다.
+        this.$set(row.item, 'isChecking', false);
+        this.$set(row.item, 'rank', ranking);
+        this.$set(row.item, 'updatedAt', updated_at);
+        console.log(row.item);
+      } catch (error) {
+        console.error("체크 중 에러 발생:", error);
+        // 에러가 발생하면 체크 중 상태를 해제합니다.
+        this.$set(row.item, 'isChecking', false);
+      }
+    },
     async checkDeposit(row) {
       if (row.item.checkDeposit === 0) {
         await this.$axios.post(`${process.env.API_URL}/blog/checkDeposit`, {
@@ -412,7 +442,6 @@ export default {
       }
     },
     onRowSelectedBlog(items) {
-      console.log(items);
       const textToCopy = `키워드 : ${items[0].keyword} \n순위 : ${items[0].rank}위 \n카운트 : ${items[0].count} \n링크 : ${items[0].blog_url?.split(',').pop()}`;
       this.$copyText(textToCopy);
       this.$emit("onRowSelectedBlog", items);
@@ -422,7 +451,7 @@ export default {
       // this.$emit("onMonthsalesData", data);
     },
     getSalesData() {
-      this.$emit("getSalesData");
+      this.$emit("getData");
     },
     getCurrentMonthsalesData() {
       this.$emit("getCurrentMonthsalesData");

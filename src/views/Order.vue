@@ -291,6 +291,7 @@ export default {
       const data = await this.$axios.get(
         `${process.env.API_URL}/blog/getBlogRankData`
       );
+      console.log(data);
       this.onList(data);
     },
 

@@ -81,7 +81,6 @@
         hover
         selectable
         select-mode="single"
-        @row-selected="onRowSelectedBlog"
         :sticky-header="true"
         :items="blogRankItems"
         :fields="blogRankFiled"
@@ -194,24 +193,16 @@
 
         <!-- 카운트 -->
         <template #cell(count)="row">
-          <template v-if="row.item.serviceCount - 2 <= row.item.count">
-            <span :class="row.item.serviceCount - 2 <= row.item.count ? 'highlightedOrange' : ''">
-              {{ row.item.count }}
-            </span>
-          </template>
-          <template v-else-if="row.item.serviceCount - 5 <= row.item.count">
-            <span :class="row.item.serviceCount - 5 <= row.item.count ? 'highlighted' : ''">
-              {{ row.item.count }}
-            </span>
-          </template>
-          <template v-else>
-            <span>
-              {{ row.item.count }}
-            </span>
-          </template>
-
-
+          <button @click="decrement(row)">-</button>
+          <span style="padding: 5px;">{{ row.item.count }}</span>
+          <button @click="increment(row)">+</button>
         </template>
+
+        <!-- 복사 -->
+        <template #cell(copyData)="row">
+          <b-button @click="onRowSelectedBlog(row)">복사하기</b-button>
+        </template>
+        
 
       </b-table>
     </b-tab>
@@ -249,12 +240,12 @@ export default {
         //   label: "입금",
         //   thClass: "table-secondary",
         // },
-        // {
-        //   key: "registration_date",
-        //   label: "등록날짜",
-        //   sortable: false,
-        //   thClass: "table-secondary",
-        // },
+        {
+          key: "copyData",
+          label: "복사",
+          sortable: false,
+          thClass: "table-secondary",
+        },
         {
           key: "type",
           label: "영역",
@@ -293,6 +284,12 @@ export default {
         {
           key: "gap",
           label: "차수",
+          sortable: false,
+          thClass: "table-secondary",
+        },
+        {
+          key: "count",
+          label: "카운트",
           sortable: false,
           thClass: "table-secondary",
         },
@@ -354,6 +351,25 @@ export default {
     };
   },
   methods: {
+    async decrement(row) {
+      const { count, id } = row.item;
+      if (count === 0) return false;
+      const data = {
+        id,
+        count: count - 1,
+      }
+      await this.$axios.post(`${process.env.API_URL}/blog/countUpdate`, data);
+      this.$set(row.item, 'count', data.count);
+    },
+    async increment(row) {
+      const { count, id } = row.item;
+      const data = {
+        id,
+        count: count + 1,
+      }
+      await this.$axios.post(`${process.env.API_URL}/blog/countUpdate`, data);
+      this.$set(row.item, 'count', data.count);
+    },
     async blogRanking(row){
       // 해당 row에 대한 체크 중 상태를 토글합니다.
       this.$set(row.item, 'isChecking', true);
@@ -365,7 +381,6 @@ export default {
         this.$set(row.item, 'isChecking', false);
         this.$set(row.item, 'rank', ranking);
         this.$set(row.item, 'updatedAt', updated_at);
-        console.log(row.item);
       } catch (error) {
         console.error("체크 중 에러 발생:", error);
         // 에러가 발생하면 체크 중 상태를 해제합니다.
@@ -442,9 +457,10 @@ export default {
       }
     },
     onRowSelectedBlog(items) {
-      const textToCopy = `키워드 : ${items[0].keyword} \n순위 : ${items[0].rank}위 \n카운트 : ${items[0].count} \n링크 : ${items[0].blog_url?.split(',').pop()}`;
+      // b-table에 추가되면됨
+      // @row-selected="onRowSelectedBlog"
+      const textToCopy = `키워드 : ${items.item.keyword} \n순위 : ${items.item.rank}위 \n카운트 : ${items.item.count} \n링크 : ${items.item.blog_url?.split(',').pop()}`;
       this.$copyText(textToCopy);
-      this.$emit("onRowSelectedBlog", items);
     },
     async showDate() {
       // pass

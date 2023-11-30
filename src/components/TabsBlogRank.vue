@@ -80,6 +80,7 @@
         responsive
         hover
         selectable
+        @row-selected="onRowSelectedItems"
         select-mode="single"
         :sticky-header="true"
         :items="blogRankItems"
@@ -458,10 +459,14 @@ export default {
     },
     onRowSelectedBlog(items) {
       // b-table에 추가되면됨
-      // @row-selected="onRowSelectedBlog"
+      //
       const textToCopy = `키워드 : ${items.item.keyword} \n순위 : ${items.item.rank}위 \n카운트 : ${items.item.count} \n링크 : ${items.item.blog_url?.split(',').pop()}`;
       this.$copyText(textToCopy);
     },
+    onRowSelectedItems(items) {
+      this.$emit("onRowSelectedBlog", items);
+    },
+
     async showDate() {
       // pass
       // this.$emit("onMonthsalesData", data);

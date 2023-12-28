@@ -4,7 +4,7 @@
       <div class="justify-content-between align-items-center mb-3 d-flex">
         <div class="d-flex">
           <h2 class="fw-900 m-0">수집 현황</h2>
-          <b-button style="margin-left: 15px;" @click="downloadTextFile">다운로드</b-button>
+          <!-- <b-button style="margin-left: 15px;" @click="downloadTextFile">다운로드</b-button> -->
         </div>
         <b-row class="justify-content-end align-items-center">
           <!-- 달력 검색 -->
@@ -106,141 +106,7 @@
 
         <!-- No -->
         <template #cell(index)="row">
-          {{ row.item.index + 1 }}
-        </template>
-        <!-- 계약번호 -->
-        <template #cell(ContractNumber)="row">
-          <span>
-            {{ dateFormat1(row.item.ContractNumber) }}
-          </span>
-        </template>
-        <!-- 실시간트래픽 -->
-        <template #cell(trafficDataTodayCount)="row">
-          <span>
-            {{
-              row.item.trafficData
-                ? isNegative(row.item.trafficData.today_remain_count)
-                : empty
-            }}
-          </span>
-        </template>
-        <!-- 디자인 -->
-        <template #cell(Design)="row">
-          <div class="text-center">
-            <font-awesome-icon
-              v-if="row.item.Design"
-              class="fa-xl text-success"
-              icon="fa-solid fa-circle-check"
-            />
-            <font-awesome-icon
-              v-else
-              style="color: #ced4da"
-              class="fa-xl"
-              icon="fa-solid fa-circle-xmark"
-            />
-          </div>
-        </template>
-        <!-- 트래픽 -->
-        <template #cell(Traffic)="row">
-          <div class="text-center">
-            <font-awesome-icon
-              v-if="row.item.Traffic"
-              class="fa-xl text-success"
-              icon="fa-solid fa-circle-check"
-            />
-            <font-awesome-icon
-              v-else
-              style="color: #ced4da"
-              class="fa-xl"
-              icon="fa-solid fa-circle-xmark"
-            />
-          </div>
-        </template>
-        <!-- 확인 -->
-        <template #cell(Approved)="row">
-          <div class="text-center">
-            <font-awesome-icon
-              v-if="row.item.Approved"
-              class="fa-xl text-success"
-              icon="fa-solid fa-circle-check"
-            />
-            <font-awesome-icon
-              v-else
-              style="color: #ced4da"
-              class="fa-xl"
-              icon="fa-solid fa-circle-xmark"
-            />
-          </div>
-        </template>
-        <!-- 결제금액 -->
-        <template #cell(AmountOfPayment)="row">
-          <span>
-            {{
-              row.item.AmountOfPayment
-                ? numberToString(row.item.AmountOfPayment)
-                : empty
-            }}
-          </span>
-        </template>
-        <!-- 이메일 -->
-        <template #cell(email)="row">
-          <span>
-            {{ row.item.blogId ? row.item.blogId + "@naver.com" : empty }}
-          </span>
-        </template>
-        <!-- 주소 -->
-        <!-- <template #head(address)="data">
-          <div @click="isEllipsis = !isEllipsis" class="cursor-pointer">
-            {{ data.label }}
-          </div>
-        </template> -->
-        <template #cell(address)="row">
-          <div>
-            {{ row.item.address ? row.item.address : empty }}
-          </div>
-        </template>
-        <!-- URL -->
-        <!-- <template #head(url)="data">
-          <div @click="isEllipsis = !isEllipsis" class="cursor-pointer">
-            {{ data.label }}
-          </div>
-        </template> -->
-        <template #cell(url)="row">
-          <a
-            v-if="row.item.blogId"
-            :class="{ ellipsis: isEllipsis }"
-            :href="'https://m.blog.naver.com/' + row.item.blogId"
-            target="_blank"
-            >
-            {{ "https://blog.naver.com/" + row.item.blogId }}
-          </a>
-          <span v-else>{{ empty }}</span>
-        </template>
-        <!-- 결제일 -->
-        <template #cell(payDate)="row">
-          <span>
-            {{ dateFormat2(row.item.ContractNumber) }}
-          </span>
-        </template>
-        <!-- 시작일 -->
-        <template #cell(trafficDataCreated)="row">
-          <span>
-            {{
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.start_date)
-                : empty
-            }}
-          </span>
-        </template>
-        <!-- 종료일 -->
-        <template #cell(trafficDataExpiration)="row">
-          <span>
-            {{
-              row.item.trafficData
-                ? dateFormat2(row.item.trafficData.cexpiration_date)
-                : empty
-            }}
-          </span>
+          {{ row.index + 1 }}
         </template>
       </b-table>
     </b-tab>
@@ -271,7 +137,6 @@ export default {
           // sortable: true,
           variant: "secondary",
           thClass: "",
-          // filterByFormatted: true,
         },
         {
           key: "blog_id",

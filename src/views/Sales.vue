@@ -12,35 +12,41 @@
         <b-col>
           <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
-<!--              <b-col class="text-18 border-end">-->
-<!--                <strong>전체 블로그</strong>-->
-<!--                <p class="opacity-50 m-0">-->
-<!--                  <span>{{ blogInfo.blogs }}</span>-->
-<!--                </p>-->
-<!--              </b-col>-->
-<!--              <b-col class="text-18 border-end">-->
-<!--                <strong>16년 이전 블로그</strong>-->
-<!--                <p class="opacity-50 m-0">-->
-<!--                  <span>{{ blogInfo.checkBLogsOnCount }} / {{ blogInfo.checkBlogsCount }}</span>-->
-<!--                </p>-->
-<!--              </b-col>-->
-<!--              <b-col class="text-18 bordeㅋr-end">-->
-<!--                <strong>최적화 블로그</strong>-->
-<!--                <p class="opacity-50 m-0">-->
-<!--                  <span>{{ blogInfo.OptimizationBlogsOnCount }} / {{ blogInfo.OptimizationBlogsCount }}</span>-->
-<!--                </p>-->
-<!--              </b-col>-->
+             <!-- <b-col class="text-18 border-end">
+               <strong>전체 블로그</strong>
+               <p class="opacity-50 m-0">
+                 <span>{{ blogInfo.blogs }}</span>
+               </p>
+             </b-col> -->
+             <b-col class="text-18 border-end">
+               <strong>16년 이전 블로그 개수</strong>
+               <p class="opacity-50 m-0">
+                 <span>{{ blogInfo.checkBlogOnCount.toLocaleString() }} / {{ blogInfo.blogsCount.toLocaleString() }}</span>
+               </p>
+             </b-col>
+             <b-col class="text-18 border-end">
+               <strong>최적화 블로그 개수</strong>
+               <p class="opacity-50 m-0">
+                 <span>{{ blogInfo.checkOptimizationValidOnCount.toLocaleString() }} / {{ blogInfo.checkOptimizationValidCount.toLocaleString() }}</span>
+               </p>
+             </b-col>
               <b-col class="text-18 border-end">
-                <strong>번호 추출 블로그</strong>
+                <strong>번호 추출 블로그 개수</strong>
                 <p class="opacity-50 m-0">
-                  <span>{{ blogInfo.UsedBlogsOnCount }} / {{ blogInfo.UsedBlogsCount }}</span>
+                  <span>{{ blogInfo.checkCafeValidOnCount.toLocaleString() }} / {{ blogInfo.checkCafeValidCount.toLocaleString() }}</span>
+                </p>
+              </b-col>
+              <b-col class="text-18 border-end">
+                <strong>마케팅 가능 번호 개수</strong>
+                <p class="opacity-50 m-0">
+                  <span>{{ blogInfo.checkCafeNumberOn.length.toLocaleString() }}</span>
                 </p>
               </b-col>
             </b-row>
           </div>
         </b-col>
       </b-row>
-      <b-row class="mb-4">
+      <!-- <b-row class="mb-4">
         <b-col>
           <div class="text-center h-100 bg-white border p-4" style="border-radius: 10px">
             <b-row class="justify-content-between align-items-center">
@@ -57,239 +63,7 @@
             </b-row>
           </div>
         </b-col>
-      </b-row>
-<!--      <b-row class="mb-4">-->
-<!--        <b-col>-->
-<!--          <b-form-select v-model="chargePrice" class="mb-3"-->
-<!--            ><b-form-select-option value="10000"-->
-<!--              >10,000</b-form-select-option-->
-<!--            >-->
-<!--            <b-form-select-option value="30000"-->
-<!--              >30,000</b-form-select-option-->
-<!--            ><b-form-select-option value="50000"-->
-<!--              >50,000</b-form-select-option-->
-<!--            ><b-form-select-option value="100000"-->
-<!--              >100,000</b-form-select-option-->
-<!--            ></b-form-select-->
-<!--          >-->
-<!--          <b-form-textarea class="mb-3" v-model="couponDatas" placeholder="BABABABABA123456(비번)000000-->
-<!--BABABABABA123456(비번)000000-->
-<!--BABABABABA123456(비번)000000-->
-<!--BABABABABA123456(비번)000000"></b-form-textarea>-->
-<!--          <b-row class="justify-content-between align-items-center">-->
-<!--            <b-col class="text-end">-->
-<!--              <b-btn variant="dark" class="ms-2" @click="addData()">-->
-<!--                등록완료-->
-<!--              </b-btn>-->
-<!--            </b-col>-->
-<!--          </b-row>-->
-<!--        </b-col>-->
-<!--      </b-row>-->
-      <!-- 확인/수정/등록 데이터정보 -->
-<!--      <b-row class="mb-4">-->
-<!--        <b-col>-->
-<!--          <b-table-simple small bordered fixed class="currentTable">-->
-<!--            <b-tbody>-->
-<!--              <b-tr>-->
-<!--                <b-th>시리얼 넘버</b-th>-->
-<!--                <b-td>-->
-<!--                  <template v-if="!addTag">-->
-<!--                    <b-form-input-->
-<!--                      v-if="isEmpty(currentData)"-->
-<!--                      disabled-->
-<!--                      :value="empty"-->
-<!--                    ></b-form-input>-->
-<!--                    <b-form-input-->
-<!--                      v-else-->
-<!--                      :disabled="!updateTag"-->
-<!--                      v-model="couponData.serialNum"-->
-<!--                    ></b-form-input>-->
-<!--                  </template>-->
-<!--                  <template v-else>-->
-<!--                    <b-form-input-->
-<!--                      v-model="couponData.serialNum"-->
-<!--                    ></b-form-input> </template-->
-<!--                ></b-td>-->
-<!--                <b-th>가격</b-th>-->
-<!--                <b-td>-->
-<!--                  <template v-if="!addTag">-->
-<!--                    <b-form-input-->
-<!--                      v-if="isEmpty(currentData)"-->
-<!--                      disabled-->
-<!--                      :value="empty"-->
-<!--                    ></b-form-input>-->
-<!--                    <b-form-input-->
-<!--                      v-else-->
-<!--                      :disabled="!updateTag"-->
-<!--                      v-model="couponData.serialPrice"-->
-<!--                      @change="formatAfreecaPrice"-->
-<!--                    ></b-form-input>-->
-<!--                  </template>-->
-<!--                  <template v-else>-->
-<!--                    <b-form-input-->
-<!--                      v-model="couponData.serialPrice"-->
-<!--                      @change="formatAfreecaPrice"-->
-<!--                    ></b-form-input> </template-->
-<!--                ></b-td>-->
-<!--                <b-th>비밀번호</b-th>-->
-<!--                <b-td>-->
-<!--                  <template v-if="!addTag">-->
-<!--                    <b-form-input-->
-<!--                      v-if="isEmpty(currentData)"-->
-<!--                      disabled-->
-<!--                      :value="empty"-->
-<!--                    ></b-form-input>-->
-<!--                    <b-form-input-->
-<!--                      v-else-->
-<!--                      :disabled="!updateTag"-->
-<!--                      v-model="couponData.serialPassword"-->
-<!--                    ></b-form-input>-->
-<!--                  </template>-->
-<!--                  <template v-else>-->
-<!--                    <b-form-input-->
-<!--                      v-model="couponData.serialPassword"-->
-<!--                    ></b-form-input> </template-->
-<!--                ></b-td>-->
-<!--              </b-tr>-->
-<!--            </b-tbody>-->
-<!--          </b-table-simple>-->
-<!--          <b-row class="justify-content-between align-items-center">-->
-<!--            <b-col class="text-end">-->
-<!--              &lt;!&ndash; 신규등록일 때 &ndash;&gt;-->
-<!--              <template v-if="addTag == true">-->
-<!--                <b-btn variant="dark" class="ms-2" @click="addData()"-->
-<!--                  >등록완료</b-btn-->
-<!--                >-->
-<!--                <b-btn class="ms-2" variant="danger" @click="addCancel()"-->
-<!--                  >취소</b-btn-->
-<!--                >-->
-<!--              </template>-->
-<!--              &lt;!&ndash; 수정일 때 &ndash;&gt;-->
-<!--              <template v-else-if="updateTag == true">-->
-<!--                <b-btn variant="dark" class="ms-2" @click="updateData()"-->
-<!--                  >수정완료</b-btn-->
-<!--                >-->
-<!--                <b-btn class="ms-2" variant="danger" @click="updateCancel()"-->
-<!--                  >취소</b-btn-->
-<!--                >-->
-<!--              </template>-->
-<!--              &lt;!&ndash; 기본 &ndash;&gt;-->
-<!--              <template v-else>-->
-<!--                <b-btn variant="dark" class="ms-2" @click="addTag = true"-->
-<!--                  >신규등록</b-btn-->
-<!--                >-->
-<!--                <b-btn-->
-<!--                  class="ms-2"-->
-<!--                  @click="updateTag = true"-->
-<!--                  :disabled="isEmpty(currentData)"-->
-<!--                  >수정</b-btn-->
-<!--                >-->
-<!--                <b-btn-->
-<!--                  class="ms-2"-->
-<!--                  variant="danger"-->
-<!--                  :disabled="isEmpty(currentData)"-->
-<!--                  @click="deleteData(currentData._id)"-->
-<!--                  >삭제</b-btn-->
-<!--                >-->
-<!--              </template>-->
-<!--            </b-col>-->
-<!--          </b-row>-->
-<!--        </b-col>-->
-<!--      </b-row>-->
-<!--      <b-row class="mb-4">-->
-<!--        <b-col>-->
-<!--          <b-table-simple small bordered fixed class="currentTable">-->
-<!--            <b-tbody>-->
-<!--              <b-tr>-->
-<!--                <b-th>PlatForm</b-th>-->
-<!--                <b-td>-->
-<!--                    <b-form-select v-model="paymentType"-->
-<!--                      ><b-form-select-option value="AB"-->
-<!--                        >아프리카</b-form-select-option-->
-<!--                      >-->
-<!--                      <b-form-select-option value="CL"-->
-<!--                        >컬쳐랜드</b-form-select-option-->
-<!--                      ><b-form-select-option value="BL"-->
-<!--                        >북앤라이프</b-form-select-option-->
-<!--                      ><b-form-select-option value="HM"-->
-<!--                        >해피머니</b-form-select-option-->
-<!--                      ></b-form-select-->
-<!--                    >-->
-<!--                </b-td>-->
-<!--                <b-th>AF ID</b-th>-->
-<!--                <b-td>-->
-<!--                    <b-form-input-->
-<!--                      v-model="newData.afId"-->
-<!--                    ></b-form-input>-->
-<!--                </b-td>-->
-<!--                <b-th>AF PW</b-th>-->
-<!--                <b-td>-->
-<!--                    <b-form-input-->
-<!--                      v-model="newData.afPw"-->
-<!--                    ></b-form-input>-->
-<!--                </b-td>-->
-<!--              </b-tr>-->
-<!--                <b-tr>-->
-<!--                  <b-th>ID</b-th>-->
-<!--                  <b-td>-->
-<!--                    <template v-if="paymentType === 'AB'">-->
-<!--                    <b-form-input-->
-<!--                      v-if="isEmpty(currentData)"-->
-<!--                      disabled-->
-<!--                      :value="empty"-->
-<!--                    ></b-form-input>-->
-<!--                    <b-form-input-->
-<!--                      v-else-->
-<!--                      :disabled="!updateTag"-->
-<!--                      v-model="newData.platformId"-->
-<!--                    ></b-form-input>-->
-<!--                  </template>-->
-<!--                  <template v-else>-->
-<!--                    <b-form-input-->
-<!--                      v-model="newData.platformId"-->
-<!--                    ></b-form-input> </template-->
-<!--                    >-->
-<!--                  </b-td>-->
-<!--                  <b-th>PW</b-th>-->
-<!--                  <b-td>-->
-<!--                    <template v-if="paymentType === 'AB'">-->
-<!--                    <b-form-input-->
-<!--                      v-if="isEmpty(currentData)"-->
-<!--                      disabled-->
-<!--                      :value="empty"-->
-<!--                    ></b-form-input>-->
-<!--                    <b-form-input-->
-<!--                      v-else-->
-<!--                      :disabled="!updateTag"-->
-<!--                      v-model="newData.platformPw"-->
-<!--                    ></b-form-input>-->
-<!--                  </template>-->
-<!--                  <template v-else>-->
-<!--                    <b-form-input-->
-<!--                      v-model="newData.platformPw"-->
-<!--                    ></b-form-input> </template-->
-<!--                >-->
-<!--                  </b-td>-->
-<!--                  <b-th>PRICE</b-th>-->
-<!--                  <b-td>-->
-<!--                    <b-form-input-->
-<!--                      v-model="newData.chargedPrice"-->
-<!--                      @change="formatChargedPrice"-->
-<!--                    ></b-form-input>-->
-<!--                  </b-td>-->
-<!--                </b-tr>-->
-<!--              &lt;!&ndash; 계좌이체 &ndash;&gt;-->
-<!--            </b-tbody>-->
-<!--          </b-table-simple>-->
-<!--          <b-row class="justify-content-between align-items-center">-->
-<!--            <b-col class="text-end">-->
-<!--              <b-btn variant="dark" class="ms-2" @click="chaging()"-->
-<!--                >충전하기</b-btn-->
-<!--              >-->
-<!--            </b-col>-->
-<!--          </b-row>-->
-<!--        </b-col>-->
-<!--      </b-row>-->
+      </b-row> -->
     </div>
     <!-- {{ currentData }}
     {{ newData }} -->
@@ -312,13 +86,13 @@ export default {
     return {
       userInfos: {},
       blogInfo: {
-        OptimizationBlogsCount: 0,
-        OptimizationBlogsOnCount: 0,
-        UsedBlogsCount: 0,
-        UsedBlogsOnCount: 0,
-        blogs: 0,
-        checkBLogsOnCount: 0,
-        checkBlogsCount: 0
+        blogsCount: 0,
+				checkBlogOnCount: 0,
+				checkOptimizationValidCount: 0,
+				checkOptimizationValidOnCount: 0,
+				checkCafeValidCount: 0,
+				checkCafeValidOnCount: 0,
+				checkCafeNumberOn: []
       },
       chargePrice: 10000,
       blogsItems: null,
@@ -491,13 +265,8 @@ export default {
     async getBlogInfo() {
       try {
         const blogs = await this.$axios.get(`${process.env.API_URL}/blog/getBlogs`);
-        // this.blogInfo.blogs = blogs.data.blogs.toLocaleString();
-        // this.blogInfo.OptimizationBlogsCount = blogs.data.OptimizationBlogsCount.toLocaleString();
-        // this.blogInfo.OptimizationBlogsOnCount = blogs.data.OptimizationBlogsOnCount.toLocaleString();
-        this.blogInfo.UsedBlogsCount = blogs.data.UsedBlogsCount.toLocaleString();
-        this.blogInfo.UsedBlogsOnCount = blogs.data.UsedBlogsOnCount.toLocaleString();
-        // this.blogInfo.checkBLogsOnCount = blogs.data.checkBLogsOnCount.toLocaleString();
-        // this.blogInfo.checkBlogsCount = blogs.data.checkBlogsCount.toLocaleString();
+        this.blogInfo = blogs?.data;
+        this.blogsItems = blogs?.data?.checkCafeNumberOn;
       } catch (e) {
         console.error("Error fetching blogs:", e);
       }

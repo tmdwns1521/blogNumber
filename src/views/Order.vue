@@ -253,8 +253,8 @@ export default {
       this.updateTag = false;
     },
     handleRowSelectedBlog(items) {
-      this.is_extend = items[0].count >= items[0].serviceCount;
-      if (items.length > 0) {
+      this.is_extend = items[0]?.count >= items[0]?.serviceCount;
+      if (items?.length > 0) {
         this.addTag = false;
         this.updateTag = true;
         this.currentData = items;

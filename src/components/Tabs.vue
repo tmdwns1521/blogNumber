@@ -4,7 +4,8 @@
       <div class="justify-content-between align-items-center mb-3 d-flex">
         <div class="d-flex">
           <h2 class="fw-900 m-0">수집 현황</h2>
-          <!-- <b-button style="margin-left: 15px;" @click="downloadTextFile">다운로드</b-button> -->
+           <b-button style="margin-left: 15px;" @click="downloadTextFile" v-if="isDownload">다운로드</b-button>
+          <b-button style="margin-left: 15px;" v-else>다운받는중...</b-button>
         </div>
         <b-row class="justify-content-end align-items-center">
           <!-- 달력 검색 -->
@@ -127,6 +128,7 @@ export default {
   },
   data() {
     return {
+      isDownload: true,
       downloadLink: null,
       isEllipsis: false,
       blogfields: [
@@ -168,26 +170,29 @@ export default {
   },
   methods: {
     async downloadTextFile() {
-    try {
-      const response = await this.$axios.get(`${process.env.API_URL}/blog/download-text`, {
-          responseType: 'text', // 텍스트 형식으로 데이터 받기
-        });
+      this.isDownload = false;
+      try {
+        const response = await this.$axios.get(`${process.env.API_URL}/blog/download-text`, {
+            responseType: 'text', // 텍스트 형식으로 데이터 받기
+          });
 
-        // 텍스트 데이터를 Blob으로 변환황
-        const blob = new Blob([response.data], { type: 'text/plain' });
-        const fileName = 'download.txt'; // 다운로드할 파일 이름 설정
+          // 텍스트 데이터를 Blob으로 변환황
+          const blob = new Blob([response.data], { type: 'text/plain' });
+          const fileName = 'download.txt'; // 다운로드할 파일 이름 설정
 
-        // 브라우저에서 파일 다운로드하기
-        if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-          // Internet Explorer 용 처리
-          window.navigator.msSaveOrOpenBlob(blob, fileName);
-        } else {
-          // 그 외 브라우저
-          const link = document.createElement('a');
-          link.href = window.URL.createObjectURL(blob);
-          link.download = fileName;
-          link.click();
-        }
+          // 브라우저에서 파일 다운로드하기
+          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            // Internet Explorer 용 처리
+            window.navigator.msSaveOrOpenBlob(blob, fileName);
+          } else {
+            // 그 외 브라우저
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+          }
+          this.isDownload = true;
+          window.location.reload();
       } catch (error) {
         console.error('다운로드 링크를 가져오는데 실패했습니다.', error);
       }

@@ -6,7 +6,6 @@ import Default from "@/layouts/Default.vue";
 import Manage from "@/layouts/Manage.vue";
 
 // Views(Pages)
-import Home from "@/views/Home.vue";
 import Sales from "@/views/Sales.vue";
 import Order from "@/views/Order.vue";
 import Place from "@/views/Place.vue";

@@ -321,6 +321,7 @@ export default {
     },
   },
   mounted() {
+    document.title = '블로그 분석'
     this.getData();
   },
   computed: {},

@@ -306,6 +306,7 @@ export default {
     },
   },
   mounted() {
+    document.title = '지도 분석'
     this.getData();
   },
   computed: {},

@@ -335,6 +335,7 @@ export default {
     clearInterval(this.blogInfoTimer);
   },
   mounted() {
+    document.title = '영업 DB'
     this.getCurrentMonthsalesData();
     // this.mySize();
     this.getBlogInfo();

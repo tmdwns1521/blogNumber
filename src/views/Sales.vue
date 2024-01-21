@@ -1,11 +1,11 @@
 <template>
   <div class="sales-page">
     <!-- 매출관리 -->
-    <b-row class="justify-content-between align-items-center mb-3">
+    <!-- <b-row class="justify-content-between align-items-center mb-3">
       <b-btn variant="dark" class="ms-2" @click="logout()"
                   >로그아웃</b-btn
                 >
-    </b-row>
+    </b-row> -->
     <div style="max-width: 1850px">
       <!--  매출정보 -->
       <b-row class="mb-4">

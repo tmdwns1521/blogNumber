@@ -1,12 +1,12 @@
 <template>
   <div class="sales-page">
     <!-- 매출관리 -->
-    <b-row class="justify-content-between align-items-center mb-3">
+    <!-- <b-row class="justify-content-between align-items-center mb-3">
       <b-btn variant="dark" class="ms-2" @click="logout()"
                   >로그아웃</b-btn
                 >
-    </b-row>
-    <div style="max-width: 1850px">
+    </b-row> -->
+    <div style="max-width: 1850px; position: sticky; top: 0px; z-index: 99; background-color: #f8f9fa;">
       <!-- 블로그 URL 추가 -->
       <b-row class="mb-4">
         <b-col>
@@ -113,7 +113,8 @@
         </b-col>
       </b-row>
       <b-col class="text-center">
-        <b-button @click="rankingCheck">순위 체크</b-button>
+        <b-button @click="rankingCheck" v-if="is_checking">순위 체크</b-button>
+        <b-button v-else>순위 체크중 ...</b-button>
 <!--        <div style="padding-top: 5px; font-size: 25px;">관리 매출 : {{salesTotal.toLocaleString()}}</div>-->
 <!--        <div style="padding-top: 5px; font-size: 20px;">당월 매출 : {{confirmSalesTotal.toLocaleString()}}</div>-->
       </b-col>
@@ -133,6 +134,7 @@ export default {
   components: { TabsPlaceRank },
   data() {
     return {
+      is_checking: true,
       salesTotal: 0,
       confirmSalesTotal: 0,
       placeRankInfo: {
@@ -156,7 +158,10 @@ export default {
   },
   methods: {
     async rankingCheck() {
+      this.is_checking = false;
       await this.$axios.get(`${process.env.API_URL}/blog/placeRankingCheck`);
+      this.is_checking = true;
+      window.location.reload();
     },
     async extend() {
       const extendCheck = confirm("연장 하시겠습니까?");

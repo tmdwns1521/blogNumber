@@ -187,7 +187,7 @@
 
         <!-- 순위체크 -->
         <template #cell(individual_rank)="row">
-          <b-button @click="blogRanking(row)" :disabled="row?.item?.isChecking">
+          <b-button @click="blogRanking(row)" :disabled="row?.item?.isChecking" style="height: 30px; padding: 0;">
             {{ row?.item?.isChecking ? '체크중' : '순위체크' }}
           </b-button>
         </template>
@@ -201,7 +201,7 @@
 
         <!-- 복사 -->
         <template #cell(copyData)="row">
-          <b-button @click="onRowSelectedBlog(row)">복사하기</b-button>
+          <b-button @click="onRowSelectedBlog(row)" style="height: 30px; padding: 0;">복사하기</b-button>
         </template>
         
 
@@ -250,7 +250,7 @@ export default {
         {
           key: "type",
           label: "영역",
-          sortable: false,
+          sortable: true,
           thClass: "table-secondary",
         },
         // {

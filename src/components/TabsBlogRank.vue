@@ -236,11 +236,11 @@ export default {
           thClass: "",
           // filterByFormatted: true,
         },
-        // {
-        //   key: "checkDeposit",
-        //   label: "입금",
-        //   thClass: "table-secondary",
-        // },
+        {
+          key: "checkDeposit",
+          label: "입금",
+          thClass: "table-secondary",
+        },
         {
           key: "copyData",
           label: "복사",
@@ -307,12 +307,6 @@ export default {
         //   thClass: "table-secondary",
         // },
         // {
-        //   key: "sales",
-        //   label: "매출",
-        //   sortable: false,
-        //   thClass: "table-secondary",
-        // },
-        // {
         //   key: "serviceCount",
         //   label: "보장일수",
         //   sortable: true,
@@ -339,6 +333,12 @@ export default {
         {
           key: "work_detail",
           label: "작업내용",
+          sortable: false,
+          thClass: "table-secondary",
+        },
+        {
+          key: "sales",
+          label: "매출",
           sortable: false,
           thClass: "table-secondary",
         },

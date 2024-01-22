@@ -64,6 +64,15 @@
                     <b-textarea v-model="currentData[0].work_detail" :disabled="!updateTag"></b-textarea>
                   </template>
                 </b-td>
+                <b-th>매출</b-th>
+                <b-td>
+                  <template v-if="currentData.length !== 1">
+                    <b-input @input="salesChange()" v-model="blogRankInfo.sales" :disabled="!addTag" ></b-input>
+                  </template>
+                  <template v-else>
+                    <b-input @input="salesChange()" v-model="currentData[0].sales" :disabled="!updateTag"></b-input>
+                  </template>
+                </b-td>
               </b-tr>
               <!-- 계좌이체 -->
             </b-tbody>
@@ -72,6 +81,9 @@
             <b-col class="text-start">
               <b-button @click="rankingCheck" v-if="is_checking">순위 체크</b-button>
               <b-button v-else>순위 체크중 ...</b-button>
+            </b-col>
+            <b-col class="text-center">
+              <td>총 금액 : {{ salesTotal.toLocaleString() }}원 | 입금 금액 : {{ confirmSalesTotal.toLocaleString() }}원</td>
             </b-col>
             <b-col class="text-end">
               <!-- 신규등록일 때 -->
@@ -170,6 +182,13 @@ export default {
     };
   },
   methods: {
+    async salesChange() {
+      if (this.currentData[0].sales) {
+        this.currentData[0].sales = Number(this.currentData[0].sales.replaceAll(',', '')).toLocaleString();
+        return false;
+      }
+      this.blogRankInfo.sales = Number(this.blogRankInfo.sales.replaceAll(',', '')).toLocaleString();
+    },
     async rankingCheck() {
       this.is_checking = false;
       await this.$axios.get(`${process.env.API_URL}/blog/rankingCheck`);
@@ -197,7 +216,6 @@ export default {
       }
     },
     addNew() {
-      console.log('new');
       this.addTag = true;
       this.currentData = {};
     },

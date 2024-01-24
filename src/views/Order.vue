@@ -148,6 +148,7 @@
     <TabsBlogRank
       :blogRankItems="blogRankItems"
       @onRowSelectedBlog="handleRowSelectedBlog"
+      @onRowSelectedItems="handleRowSelectedItems"
     />
   </div>
 </template>
@@ -272,6 +273,14 @@ export default {
       this.currentData.cardData = Object.assign({}, this.cachedData.cardData);
 
       this.updateTag = false;
+    },
+    handleRowSelectedItems(items) {
+      if (items?.length <= 0) {
+        return false;
+      }
+      this.addTag = false;
+      this.updateTag = true;
+      this.currentData = items;
     },
     handleRowSelectedBlog(items) {
       this.is_extend = items[0]?.count >= items[0]?.serviceCount;

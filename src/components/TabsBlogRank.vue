@@ -464,7 +464,7 @@ export default {
       this.$copyText(textToCopy);
     },
     onRowSelectedItems(items) {
-      this.$emit("onRowSelectedBlog", items);
+      this.$emit("onRowSelectedItems", items);
     },
 
     async showDate() {

@@ -100,7 +100,7 @@
                 <b-btn variant="dark" class="ms-2" @click="addNew()"
                   >신규등록</b-btn
                 >
-                <b-btn variant="dark" class="ms-2" @click="updateData()"
+                                <b-btn variant="dark" class="ms-2" @click="updateData()"
                   >수정완료</b-btn
                 >
                 <b-btn
@@ -258,7 +258,7 @@ export default {
     addCancel() {
       this.addTag = false;
     },
-    // 수정 완료
+        // 수정 완료
     async updateData() {
       this.updateTag = false;
       await this.$axios.post(`${process.env.API_URL}/blog/updateBlogRankData`,

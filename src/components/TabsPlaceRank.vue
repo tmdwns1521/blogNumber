@@ -164,9 +164,9 @@
         </template>
 
         <!-- 수집일 -->
-        <template #cell(updatedAt)="row">
+        <template #cell(update_at)="row">
           <span>
-            {{ row.item.updatedAt?.split(' ')[1]?.split(':').slice(0,2).join(':') }}
+            {{ row.item.update_at.split(' ')[1] }}
           </span>
         </template>
 
@@ -183,6 +183,13 @@
           <a :href="row.item.blog_url?.split(',').pop()" target="_blank">
             {{ row.item.blog_url?.split('/').pop() }}
           </a>
+        </template>
+
+        <!-- 순위체크 -->
+        <template #cell(individual_rank)="row">
+          <b-button @click="placeRanking(row)" :disabled="row?.item?.isChecking" style="height: 30px; padding: 0;">
+            {{ row?.item?.isChecking ? '체크중' : '순위체크' }}
+          </b-button>
         </template>
 
         <!-- 카운트 -->
@@ -279,6 +286,11 @@ export default {
           thClass: "table-secondary",
         },
         {
+          key: "individual_rank",
+          label: "순위체크",
+          thClass: "table-secondary",
+        },
+        {
           key: "rank",
           label: "순위",
           sortable: true,
@@ -312,6 +324,23 @@ export default {
     };
   },
   methods: {
+    async placeRanking(row){
+      // 해당 row에 대한 체크 중 상태를 토글합니다.
+      this.$set(row.item, 'isChecking', true);
+      try {
+        const result = await this.$axios.post(`${process.env.API_URL}/blog/individual-place`, row.item);
+
+        let { updated_at, ranking } = result.data;
+        // 성공적으로 체크를 마치면 체크 중 상태를 해제합니다.
+        this.$set(row.item, 'isChecking', false);
+        this.$set(row.item, 'rank', ranking);
+        this.$set(row.item, 'updatedAt', updated_at);
+      } catch (error) {
+        console.error("체크 중 에러 발생:", error);
+        // 에러가 발생하면 체크 중 상태를 해제합니다.
+        this.$set(row.item, 'isChecking', false);
+      }
+    },
     async checkDeposit(row) {
       if (row.item.checkDeposit === 0) {
         await this.$axios.post(`${process.env.API_URL}/blog/checkDeposit`, {

@@ -154,12 +154,24 @@
               {{ row.item.rank }}위
             </span>
             <span v-else> {{ row.item.rank }}위 </span>
+            <template v-if="Number(row.item.rank) - Number(row.item.prev_rank) > 0">
+              <span style="margin-left: 15px;">-{{ Math.abs(Number(row.item.rank) - Number(row.item.prev_rank)) }}</span>
+            </template>
+            <template v-else>
+              <span style="margin-left: 15px;">+{{ Math.abs(Number(row.item.rank) - Number(row.item.prev_rank)) }}</span>
+            </template>
           </template>
           <template v-else>
             <span v-if="row.item.rank >= 4" style="background-color: red; color: white;">
               {{ row.item.rank }}위
             </span>
             <span v-else> {{ row.item.rank }}위 </span>
+            <template v-if="Number(row.item.rank) - Number(row.item.prev_rank) > 0">
+              <span style="margin-left: 15px;">-{{ Math.abs(Number(row.item.rank) - Number(row.item.prev_rank)) }}</span>
+            </template>
+            <template v-else>
+              <span style="margin-left: 15px;">+{{ Math.abs(Number(row.item.rank) - Number(row.item.prev_rank)) }}</span>
+            </template>
           </template>
         </template>
 

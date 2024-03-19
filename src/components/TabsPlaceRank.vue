@@ -178,7 +178,7 @@
         <!-- 수집일 -->
         <template #cell(update_at)="row">
           <span>
-            {{ row.item.update_at.split(' ')[1] }}
+            {{ row.item.update_at.split(' ')[0] }}
           </span>
         </template>
 
